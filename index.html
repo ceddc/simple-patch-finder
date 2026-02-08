@@ -1,0 +1,2069 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ArcGIS Patches (Esri Patch Finder) | ArcGIS Server, Portal, Pro</title>
+    <meta
+      name="description"
+      content="Search and filter official Esri/ArcGIS patches by product, version, release date, and type. Fast patch finder with direct links to Esri support pages."
+    />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://ceddc.github.io/simple-patch-finder/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ceddc.github.io/simple-patch-finder/" />
+    <meta property="og:title" content="ArcGIS Patches (Esri Patch Finder)" />
+    <meta
+      property="og:description"
+      content="Search and filter official Esri/ArcGIS patches by product, version, release date, and type."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="ArcGIS Patches (Esri Patch Finder)" />
+    <meta
+      name="twitter:description"
+      content="Search and filter official Esri/ArcGIS patches by product, version, release date, and type."
+    />
+    <meta name="theme-color" content="#2c7be5" />
+    <meta
+      name="keywords"
+      content="arcgis patches, esri patches, arcgis server patches, portal for arcgis patches, arcgis pro patches, arcgis patch finder"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Simple Patch Finder",
+        "url": "https://ceddc.github.io/simple-patch-finder/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ceddc.github.io/simple-patch-finder/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SRT1WQLTTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-SRT1WQLTTY");
+    </script>
+    <link rel="icon" href="data:," />
+
+    <!--
+      Calcite (primary UI)
+      Workaround: Calcite 5.0.0 calcite-icon has an IntersectionObserver disconnect race on navigation.
+      Disabling IntersectionObserver forces eager icon loading and avoids page errors on reload.
+    -->
+    <script>
+      // Workaround: Calcite 5.0.0 calcite-icon has an IntersectionObserver disconnect race on navigation.
+      // This shim makes observations synchronous and prevents async callbacks after teardown.
+      // It intentionally treats everything as "intersecting".
+      (() => {
+        const RealIO = window.IntersectionObserver;
+        if (typeof RealIO !== "function") return;
+        class SyncIntersectionObserver {
+          constructor(callback) {
+            this._callback = callback;
+            this._elements = new Set();
+          }
+          observe(el) {
+            this._elements.add(el);
+            try {
+              this._callback([{ isIntersecting: true, target: el }], this);
+            } catch {
+              // ignore
+            }
+          }
+          unobserve(el) {
+            this._elements.delete(el);
+          }
+          disconnect() {
+            this._elements.clear();
+          }
+          takeRecords() {
+            return [];
+          }
+        }
+        window.IntersectionObserver = SyncIntersectionObserver;
+      })();
+    </script>
+    <script type="module" src="https://js.arcgis.com/calcite-components/5.0"></script>
+
+    <!-- High-performance grid (sorting + local pagination) -->
+    <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator.min.css" />
+    <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js" defer></script>
+
+    <style>
+      :root {
+        --bs-accent: #2c7be5;
+        --bs-accent-2: #00619b;
+        --bs-glass: rgba(255, 255, 255, 0.72);
+        --bs-border: rgba(44, 123, 229, 0.16);
+        --bs-shadow: 0 18px 44px rgba(20, 36, 66, 0.12), 0 2px 10px rgba(20, 36, 66, 0.06);
+
+        --calcite-color-brand: var(--bs-accent);
+        --calcite-color-brand-hover: #1f66c7;
+        --calcite-color-brand-press: #184e99;
+      }
+
+      .accent-2 {
+        --calcite-color-brand: var(--bs-accent-2);
+        --calcite-color-brand-hover: var(--calcite-color-status-info-hover, #004874);
+        --calcite-color-brand-press: var(--calcite-color-status-info-press, #00304d);
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(1200px 720px at 12% 6%, rgba(44, 123, 229, 0.14), transparent 55%),
+          radial-gradient(900px 640px at 88% 22%, rgba(0, 122, 194, 0.12), transparent 52%),
+          linear-gradient(180deg, #f9fbff 0%, #f6f7fb 45%, #f2f6fb 100%);
+      }
+
+      .shell {
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .top-nav {
+        --calcite-navigation-background-color: color-mix(in srgb, var(--bs-glass) 92%, #fff);
+        --calcite-navigation-border-color: var(--bs-border);
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        gap: 10px;
+        padding-left: 10px;
+        user-select: text;
+        min-width: 0;
+      }
+
+      .nav-emoji {
+        font-size: 28px;
+        line-height: 1;
+        user-select: none;
+        flex: 0 0 auto;
+      }
+
+      .nav-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .nav-title-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .nav-title {
+        font-size: 16px;
+        font-weight: var(--calcite-font-weight-medium, 500);
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .nav-official {
+        font-size: 12px;
+        color: var(--calcite-color-text-3);
+        white-space: nowrap;
+      }
+
+      .nav-warn {
+        color: var(--calcite-color-status-warning);
+        margin-right: 6px;
+        transform: translateY(1px);
+      }
+
+      .gh-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .gh-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--calcite-color-text-2);
+      }
+
+      .results-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px;
+        border-radius: 12px;
+        border: 1px solid color-mix(in srgb, var(--bs-border) 80%, transparent);
+        background: color-mix(in srgb, var(--bs-glass) 90%, #fff);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 6px 18px rgba(20, 36, 66, 0.08);
+      }
+
+      .app-body {
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+
+      .glass-surface {
+        background: var(--bs-glass);
+        border: 1px solid var(--bs-border);
+        border-radius: 14px;
+        backdrop-filter: blur(14px);
+        box-shadow: var(--bs-shadow);
+      }
+
+      .content {
+        padding: 12px 14px 14px;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .main-grid {
+        height: 100%;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+
+      .filters-card {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .results-card {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .results-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .results-meta .hint {
+        flex: 0 0 auto;
+      }
+
+      .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .meta-row .hint {
+        flex: 0 0 auto;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        color: rgba(0, 0, 0, 0.62);
+        line-height: 1.2;
+      }
+
+      .actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .status {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 0 12px;
+        flex-wrap: wrap;
+      }
+
+      .status-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .hint {
+        font-size: var(--calcite-font-size-sm, 12px);
+        color: var(--calcite-color-text-2);
+        line-height: 1.2;
+      }
+
+      .table-wrap {
+        padding: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-height: 0;
+      }
+
+      #grid {
+        flex: 1;
+        min-height: 0;
+      }
+
+      /* Collapsible footer content (About + FAQ) */
+      .help-block {
+        margin-top: 8px;
+        --calcite-block-icon-color: var(--calcite-color-status-success);
+      }
+
+      .help-block-body {
+        max-height: 220px;
+        overflow: auto;
+        padding: 10px;
+        display: grid;
+        gap: 12px;
+      }
+
+      /* Tabulator styling: align with Calcite surfaces/borders */
+      .tabulator {
+        font-family: var(--calcite-font-family, system-ui);
+        background: var(--calcite-color-foreground-1);
+        border: 1px solid var(--calcite-color-border-1);
+        border-radius: var(--calcite-border-radius, 4px);
+        box-shadow: none;
+      }
+
+      .tabulator .tabulator-header {
+        background: var(--calcite-color-foreground-2);
+        border-bottom: 1px solid var(--calcite-color-border-1);
+        color: var(--calcite-color-text-1);
+      }
+
+      .tabulator .tabulator-header .tabulator-col {
+        background: transparent;
+        border-right: 1px solid var(--calcite-color-border-1);
+      }
+
+      /* Tabulator header typography: closer to Calcite */
+      .tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+        padding: 10px 10px;
+      }
+
+      .tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+        font-size: 14px;
+        font-weight: var(--calcite-font-weight-medium, 500);
+        line-height: 1.1;
+      }
+
+      .tabulator .tabulator-row {
+        background: transparent;
+        color: var(--calcite-color-text-1);
+        border-bottom: 1px solid var(--calcite-color-border-1);
+      }
+
+      .tabulator .tabulator-row:hover {
+        background: color-mix(in srgb, var(--calcite-color-brand) 6%, var(--calcite-color-foreground-1));
+      }
+
+      .tabulator .tabulator-cell {
+        border-right: 1px solid var(--calcite-color-border-1);
+      }
+
+      .tabulator a {
+        color: var(--calcite-color-brand);
+        text-decoration: underline;
+        text-decoration-color: color-mix(in srgb, var(--calcite-color-brand) 35%, transparent);
+        text-underline-offset: 2px;
+      }
+
+      .tabulator .tabulator-footer {
+        background: var(--calcite-color-foreground-2);
+        border-top: 1px solid var(--calcite-color-border-1);
+        color: var(--calcite-color-text-2);
+      }
+
+      /* Tabulator pagination: make it feel Calcite-like */
+      .tabulator .tabulator-footer .tabulator-paginator {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 8px;
+      }
+
+      .tabulator .tabulator-footer .tabulator-page {
+        font-family: inherit;
+        font-size: 13px;
+        line-height: 1;
+        border-radius: var(--calcite-border-radius, 4px);
+        border: 1px solid var(--calcite-color-border-1);
+        background: var(--calcite-color-foreground-1);
+        color: var(--calcite-color-text-1);
+        padding: 6px 10px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .tabulator .tabulator-footer .tabulator-page:hover {
+        background: var(--calcite-color-foreground-2);
+      }
+
+      .tabulator .tabulator-footer .tabulator-page.active {
+        background: color-mix(in srgb, var(--calcite-color-brand) 16%, var(--calcite-color-foreground-1));
+        border-color: color-mix(in srgb, var(--calcite-color-brand) 55%, var(--calcite-color-border-1));
+        color: var(--calcite-color-brand);
+        font-weight: var(--calcite-font-weight-medium, 600);
+      }
+
+      .tabulator .tabulator-footer .tabulator-page:focus-visible {
+        outline: 2px solid var(--calcite-color-brand);
+        outline-offset: 2px;
+      }
+
+      @media (max-width: 900px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      calcite-shell-panel {
+        --calcite-shell-panel-min-width: 340px;
+      }
+
+      .filters {
+        padding: 8px 10px 10px;
+      }
+
+      .filters-grid {
+        display: grid;
+        gap: 8px;
+      }
+
+      /* Make combobox selection chips a bit more vibrant */
+      #f-products,
+      #f-versions,
+      #f-platforms,
+      #f-types {
+        /* Calcite Chip CSS vars: solid brand tag look */
+        --calcite-chip-background-color: var(--calcite-color-brand);
+        --calcite-chip-border-color: var(--calcite-color-brand);
+        --calcite-chip-text-color: var(--calcite-color-text-inverse);
+        --calcite-chip-icon-color: var(--calcite-color-text-inverse);
+        --calcite-chip-close-icon-color: var(--calcite-color-text-inverse);
+      }
+
+      /* Critical chips: bold + visual using Calcite Chip CSS vars */
+      .crit-chip {
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .crit-label {
+        display: inline-flex;
+        align-items: center;
+        line-height: 1;
+        font-weight: var(--calcite-font-weight-medium, 500);
+      }
+
+      .crit-ico {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        margin-right: 3px;
+        transform: scale(1.04);
+        transform-origin: center;
+      }
+
+      .crit-ico-security {
+        color: var(--calcite-color-status-warning);
+      }
+
+      .crit-ico-critical {
+        color: var(--calcite-color-status-danger);
+      }
+
+      .crit-ico-standard {
+        color: var(--calcite-color-status-info);
+      }
+
+      .crit-chip--security {
+        --calcite-chip-background-color: var(--calcite-color-foreground-1);
+        --calcite-chip-border-color: var(--calcite-color-status-warning);
+        --calcite-chip-text-color: var(--calcite-color-text-1);
+      }
+
+      .crit-chip--critical {
+        --calcite-chip-background-color: var(--calcite-color-foreground-1);
+        --calcite-chip-border-color: var(--calcite-color-status-danger);
+        --calcite-chip-text-color: var(--calcite-color-text-1);
+      }
+
+      .crit-chip--standard {
+        --calcite-chip-background-color: var(--calcite-color-foreground-1);
+        --calcite-chip-border-color: var(--calcite-color-status-info);
+        --calcite-chip-text-color: var(--calcite-color-text-1);
+      }
+
+      calcite-button.patch-link-btn {
+        white-space: nowrap;
+      }
+
+      /* Patch dialog formatting */
+      .dlg-wrap {
+        display: grid;
+        gap: 10px;
+      }
+
+      .dlg-summary {
+        border: 1px solid var(--calcite-color-border-1);
+        border-radius: 12px;
+        background: color-mix(in srgb, var(--calcite-color-foreground-1) 80%, #fff);
+        box-shadow: 0 10px 30px rgba(20, 36, 66, 0.08);
+        padding: 10px;
+      }
+
+      .dlg-summary-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .dlg-critical {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .dlg-facts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 650px) {
+        .dlg-facts {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .dlg-fact {
+        padding: 8px;
+        border-radius: 10px;
+        background: var(--calcite-color-foreground-2);
+        border: 1px solid var(--calcite-color-border-1);
+      }
+
+      .dlg-fact .k {
+        font-size: 12px;
+        color: var(--calcite-color-text-3);
+        margin-bottom: 2px;
+      }
+
+      .dlg-fact .v {
+        font-weight: var(--calcite-font-weight-medium, 600);
+      }
+
+      .dlg-section {
+        border: 1px solid var(--calcite-color-border-1);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--calcite-color-foreground-1);
+      }
+
+      .dlg-section-header {
+        padding: 10px 10px 8px;
+        background: var(--calcite-color-foreground-2);
+        border-bottom: 1px solid var(--calcite-color-border-1);
+        font-weight: var(--calcite-font-weight-medium, 600);
+      }
+
+      .dlg-section-body {
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .about-wrap {
+        display: grid;
+        gap: 12px;
+      }
+
+      .about-h {
+        font-size: var(--calcite-font-size-sm, 12px);
+        color: var(--calcite-color-text-3);
+        font-weight: var(--calcite-font-weight-medium, 500);
+        letter-spacing: 0.02em;
+        margin-bottom: 4px;
+      }
+
+      .about-b {
+        color: var(--calcite-color-text-1);
+        line-height: var(--calcite-font-line-height-relative-snug, 1.375);
+      }
+
+      .about-b .dim {
+        color: var(--calcite-color-text-2);
+      }
+
+      .about-list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--calcite-color-text-2);
+      }
+
+      .about-list li {
+        margin: 4px 0;
+      }
+
+      /* Version sort indicator is driven by Tabulator's built-in arrow.
+         We keep Tabulator sorting on "asc" for custom comparator stability, then sync aria-sort manually. */
+
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      @media (max-width: 900px) {
+        .two {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .mono {
+        font-family: var(--calcite-font-family-code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+      }
+
+      .clickable-row {
+        cursor: pointer;
+      }
+
+      .patch-name {
+        display: grid;
+        gap: 2px;
+      }
+
+      .patch-name > div:first-child {
+        font-weight: 550;
+      }
+
+      .patch-meta {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.62);
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .dim {
+        color: rgba(0, 0, 0, 0.62);
+      }
+
+      .url-full {
+        font-family: var(--calcite-font-family-code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace);
+        white-space: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.35;
+      }
+
+      .url-full calcite-link {
+        display: inline;
+      }
+
+    </style>
+  </head>
+
+  <body class="calcite-mode-light">
+    <calcite-shell class="shell">
+      <calcite-navigation slot="header" label="Simple Patch Finder" class="top-nav">
+        <div slot="logo" class="nav-brand" aria-label="Simple Patch Finder">
+          <div class="nav-emoji" aria-hidden="true">🗺️</div>
+          <div class="nav-text">
+            <div class="nav-title-row">
+              <div class="nav-title">Simple Patch Finder</div>
+            </div>
+            <div class="nav-official">
+              <calcite-icon class="nav-warn" icon="exclamation-mark-triangle" scale="s"></calcite-icon>
+              Vibe-coded proof-of-concept (unofficial).
+              Official website:
+              <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">support.esri.com</calcite-link>
+            </div>
+          </div>
+        </div>
+
+      </calcite-navigation>
+
+      <calcite-alert id="share-alert" slot="alerts" kind="success" icon="check-circle" scale="m" auto-close auto-close-duration="4000">
+        <div slot="title">Share link ready</div>
+        <div slot="message">
+          <calcite-link id="share-link" href="#" target="_self"></calcite-link>
+        </div>
+      </calcite-alert>
+
+      <div class="app-body">
+
+        <div class="content">
+          <div class="main-grid">
+          <div id="filters-card" class="filters-card glass-surface">
+            <calcite-panel heading="Filters" description="Narrow down patches" style="background: transparent">
+              <div class="filters">
+                <div class="filters-grid">
+                  <calcite-input-text
+                    id="f-q"
+                    label-text="Search"
+                    placeholder="Name, QFE ID, filename..."
+                    clearable
+                    scale="m"
+                  ></calcite-input-text>
+
+                  <calcite-combobox
+                    id="f-products"
+                    label="Product"
+                    label-text="Product"
+                    selection-mode="multiple"
+                    placeholder="Choose products"
+                    selection-display="all"
+                    overlay-positioning="fixed"
+                    scale="m"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
+                    id="f-versions"
+                    label="Version"
+                    label-text="Version"
+                    selection-mode="multiple"
+                    placeholder="Choose versions"
+                    selection-display="fit"
+                    overlay-positioning="fixed"
+                    scale="s"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
+                    id="f-platforms"
+                    label="Platform"
+                    label-text="Platform"
+                    selection-mode="multiple"
+                    placeholder="Choose platforms"
+                    selection-display="fit"
+                    overlay-positioning="fixed"
+                    scale="s"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
+                    id="f-types"
+                    label="File type"
+                    label-text="File type"
+                    selection-mode="multiple"
+                    placeholder="msp, tar, exe..."
+                    selection-display="fit"
+                    overlay-positioning="fixed"
+                    scale="s"
+                  ></calcite-combobox>
+
+                  <div>
+                    <calcite-label layout="inline" scale="s">Criticality</calcite-label>
+                    <calcite-segmented-control id="f-critical" scale="s">
+                      <calcite-segmented-control-item value="all" checked>All</calcite-segmented-control-item>
+                      <calcite-segmented-control-item value="security">Security</calcite-segmented-control-item>
+                      <calcite-segmented-control-item value="critical">Critical</calcite-segmented-control-item>
+                    </calcite-segmented-control>
+                  </div>
+
+                  <div class="two">
+                    <calcite-input-date-picker id="f-from" label-text="From" scale="s"></calcite-input-date-picker>
+                    <calcite-input-date-picker id="f-to" label-text="To" scale="s"></calcite-input-date-picker>
+                  </div>
+                </div>
+              </div>
+            </calcite-panel>
+          </div>
+
+          <calcite-panel
+            class="results-card"
+            heading="Patches"
+            description=""
+            style="--calcite-panel-background-color: var(--bs-glass); --calcite-panel-border-color: var(--bs-border); --calcite-panel-header-background-color: color-mix(in srgb, var(--bs-glass) 80%, #fff); --calcite-panel-space: 8px"
+          >
+            <div slot="header-actions-end" class="results-meta">
+              <div class="hint" id="text-count">Loading...</div>
+              <div class="results-actions">
+                <calcite-button
+                  id="btn-reset"
+                  appearance="outline-fill"
+                  kind="brand"
+                  scale="s"
+                  icon-start="reset"
+                  label="Reset filters"
+                >
+                  Reset
+                </calcite-button>
+                <calcite-button
+                  id="btn-share"
+                  appearance="outline-fill"
+                  kind="brand"
+                  scale="s"
+                  icon-start="link"
+                  label="Copy share link"
+                >
+                  Share
+                </calcite-button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <div id="grid" aria-label="ArcGIS patches grid"></div>
+
+              <calcite-block class="help-block" heading="About & Help" collapsible icon-start="information">
+                <div class="help-block-body">
+                  <div>
+                    <div class="about-h">Why This Exists</div>
+                    <div class="about-b">
+                      I wanted a faster way to find the right ArcGIS patch and jump to the official Esri page.
+                      This tool keeps it simple: a searchable patch list with a few practical filters.
+                      Use the official patch page for full details and downloads.
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="about-h">How To Use</div>
+                    <ul class="about-list">
+                      <li>Search by name, version, QFE, or filename.</li>
+                      <li>Filter by product, platform, file type, criticality, and date.</li>
+                      <li>Use the Patch page link to open the official Esri entry (when you have connectivity).</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="about-h">Official Esri Website</div>
+                    <div class="about-b url-full">
+                      <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">https://support.esri.com/</calcite-link>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="about-h">Data Workflow</div>
+                    <ul class="about-list">
+                      <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> daily (the same dataset used by Esri patch notification tools).</li>
+                      <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="about-h">FAQ</div>
+                    <ol class="about-list">
+                      <li><strong>Where does the data come from?</strong> The upstream <span class="mono">patches.json</span> dataset published by Esri.</li>
+                      <li><strong>Does this replace Esri Support?</strong> No. Use the Patch page link for the official entry.</li>
+                      <li><strong>How do I find the right patch?</strong> Filter by product + version, then check the official patch page for prerequisites and applicability.</li>
+                    </ol>
+                  </div>
+
+                  <div>
+                    <div class="about-h">Feedback</div>
+                    <div class="dim">Please open an issue in the repository.</div>
+                    <div class="url-full" style="margin-top: 6px">
+                      <calcite-link href="https://github.com/ceddc/simple-patch-finder" target="_blank" rel="noopener noreferrer">
+                        <span class="gh-link">
+                          <span class="gh-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+                              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+                            </svg>
+                          </span>
+                          ceddc/simple-patch-finder
+                        </span>
+                      </calcite-link>
+                    </div>
+                  </div>
+                </div>
+              </calcite-block>
+            </div>
+          </calcite-panel>
+          </div>
+        </div>
+      </div>
+
+      <calcite-dialog slot="dialogs" id="dlg" heading="Patch" width-scale="m" placement="center" modal>
+        <div id="dlg-body"></div>
+      </calcite-dialog>
+
+
+    </calcite-shell>
+
+    <script type="module">
+      // Simple Patch Finder
+      //
+      // High-level flow:
+      // - Load `./patches.json` (same-origin)
+      // - Normalize upstream schema into a flat array of patch rows
+      // - Derive filter option lists (value + count)
+      // - Hydrate filters from URL query params (shareable links)
+      // - Apply filters client-side and render with Tabulator
+      const els = {
+        grid: document.getElementById("grid"),
+        textCount: document.getElementById("text-count"),
+        dlg: document.getElementById("dlg"),
+        dlgBody: document.getElementById("dlg-body"),
+
+        shareAlert: document.getElementById("share-alert"),
+        shareLink: document.getElementById("share-link"),
+
+        filtersCard: document.getElementById("filters-card"),
+
+        fQ: document.getElementById("f-q"),
+        fProducts: document.getElementById("f-products"),
+        fVersions: document.getElementById("f-versions"),
+        fPlatforms: document.getElementById("f-platforms"),
+        fTypes: document.getElementById("f-types"),
+        fCritical: document.getElementById("f-critical"),
+        fFrom: document.getElementById("f-from"),
+        fTo: document.getElementById("f-to"),
+
+        btnShare: document.getElementById("btn-share"),
+        btnReset: document.getElementById("btn-reset"),
+      };
+
+      const PAGE_SIZE = 25;
+
+      let grid = null;
+      let gridInitTries = 0;
+      let gridBuilt = false;
+      let pendingGridData = null;
+
+      let datasetEpoch = 0;
+      let lastApplyKey = "";
+
+      let versionSortMode = "asc";
+
+      const state = {
+        // `all` is the normalized dataset.
+        // `filtered` is the derived list used to render the grid.
+        all: [],
+        filtered: [],
+        options: {
+          products: [],
+          versions: [],
+          platforms: [],
+          types: [],
+        },
+        filters: {
+          // Multi-select filters are stored as Sets for fast membership checks.
+          q: "",
+          products: new Set(),
+          versions: new Set(),
+          platforms: new Set(),
+          types: new Set(),
+          critical: "all",
+          from: "",
+          to: "",
+        },
+      };
+
+      function encodeList(values) {
+        // Encode multi-selects into a single query param value.
+        // We use a delimiter ('|') so URLs stay compact and stable.
+        return Array.from(values || [])
+          .map((v) => encodeURIComponent(String(v)))
+          .join("|");
+      }
+
+      function decodeList(s) {
+        if (!s) return [];
+        return String(s)
+          .split("|")
+          .map((v) => {
+            try {
+              return decodeURIComponent(v);
+            } catch {
+              return v;
+            }
+          })
+          .map((v) => String(v).trim())
+          .filter(Boolean);
+      }
+
+      function serializeFiltersToParams() {
+        const f = state.filters;
+        const params = new URLSearchParams();
+        if (f.q) params.set("q", f.q);
+        if (f.products.size) params.set("p", encodeList(f.products));
+        if (f.versions.size) params.set("v", encodeList(f.versions));
+        if (f.platforms.size) params.set("os", encodeList(f.platforms));
+        if (f.types.size) params.set("t", encodeList(f.types));
+        if (f.critical && f.critical !== "all") params.set("c", f.critical);
+        if (f.from) params.set("from", f.from);
+        if (f.to) params.set("to", f.to);
+        return params;
+      }
+
+      function buildShareUrl() {
+        const params = serializeFiltersToParams();
+        const base = `${location.origin}${location.pathname}`;
+        const qs = params.toString();
+        return qs ? `${base}?${qs}` : base;
+      }
+
+      function syncLocationToFilters() {
+        // Keep the address bar in sync with current filters (shareable URL), without navigation.
+        // Only include non-default filters to keep URLs short and stable.
+        const params = serializeFiltersToParams();
+        const qs = params.toString();
+        const desired = `${location.pathname}${qs ? `?${qs}` : ""}${location.hash || ""}`;
+        const current = `${location.pathname}${location.search}${location.hash || ""}`;
+        if (desired === current) return;
+        if (desired === lastSyncedLocation) return;
+        try {
+          history.replaceState({}, "", desired);
+          lastSyncedLocation = desired;
+        } catch {
+          // ignore
+        }
+      }
+
+      function hydrateFiltersFromLocation() {
+        // Hydrate filter state from query params (supports shareable URLs).
+        const params = new URLSearchParams(location.search);
+        const q = String(params.get("q") || "").trim();
+        const products = new Set(decodeList(params.get("p")));
+        const versions = new Set(decodeList(params.get("v")));
+        const platforms = new Set(decodeList(params.get("os")));
+        const types = new Set(decodeList(params.get("t")));
+        const critical = String(params.get("c") || "all").trim() || "all";
+        const from = String(params.get("from") || "").trim();
+        const to = String(params.get("to") || "").trim();
+
+        state.filters.q = q;
+        state.filters.products = products;
+        state.filters.versions = versions;
+        state.filters.platforms = platforms;
+        state.filters.types = types;
+        state.filters.critical = ["all", "security", "critical"].includes(critical) ? critical : "all";
+        state.filters.from = from;
+        state.filters.to = to;
+      }
+
+      function setStatusText(text) {
+        els.textCount.textContent = text;
+      }
+
+      function parseReleaseDateMs(mmddyyyy) {
+        if (!mmddyyyy || typeof mmddyyyy !== "string") return 0;
+        const m = mmddyyyy.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        if (!m) return 0;
+        const mm = Number(m[1]);
+        const dd = Number(m[2]);
+        const yyyy = Number(m[3]);
+        const d = new Date(Date.UTC(yyyy, mm - 1, dd));
+        const t = d.getTime();
+        return Number.isFinite(t) ? t : 0;
+      }
+
+      function isoDateToMs(iso) {
+        if (!iso || typeof iso !== "string") return 0;
+        const d = new Date(iso + "T00:00:00Z");
+        const t = d.getTime();
+        return Number.isFinite(t) ? t : 0;
+      }
+
+      function getExt(url) {
+        const u = String(url || "").split("?")[0];
+        const last = u.split("/").pop() || "";
+        const i = last.lastIndexOf(".");
+        if (i <= 0) return "";
+        return last.slice(i + 1).toLowerCase();
+      }
+
+      function filenameFromUrl(url) {
+        const u = String(url || "").split("?")[0];
+        return u.split("/").pop() || url;
+      }
+
+      function tokenizeCsv(s) {
+        return String(s || "")
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
+      }
+
+      function classifyCritical(raw) {
+        const v = String(raw ?? "").trim().toLowerCase();
+        if (v === "security") return "security";
+        if (v === "true") return "critical";
+        return "standard";
+      }
+
+      function parseEsriEraVersion(versionStr) {
+        const raw = String(versionStr || "").trim();
+        if (!raw) return { kind: "other", raw };
+
+        // Special bucket: 9.x/9.X (non-numeric minor)
+        if (/^9\.[xX]\b/.test(raw)) {
+          return { kind: "9x", raw, major: 9, minor: -1, patch: -1 };
+        }
+
+        // Numeric versions: only treat major 9-12 as "Esri era" versions.
+        const m = raw.match(/^(\d+)\.(\d+)(?:\.(\d+))?$/);
+        if (m) {
+          const major = Number(m[1]);
+          const minor = Number(m[2]);
+          const patch = m[3] != null ? Number(m[3]) : 0;
+          if (
+            Number.isFinite(major) &&
+            Number.isFinite(minor) &&
+            Number.isFinite(patch) &&
+            major >= 9 &&
+            major <= 12
+          ) {
+            return { kind: "num", raw, major, minor, patch };
+          }
+        }
+
+        return { kind: "other", raw };
+      }
+
+      function compareEsriEraVersions(a, b, dir) {
+        // Esri-era ordering: numeric 9-12 versions come first, then 9.x, then everything else.
+        // Bucket precedence stays fixed regardless of sort direction.
+        const A = parseEsriEraVersion(a);
+        const B = parseEsriEraVersion(b);
+
+        // Bucket precedence stays fixed regardless of sort direction:
+        // numeric (9-12) > 9.x > other
+        const rank = (v) => (v.kind === "num" ? 2 : v.kind === "9x" ? 1 : 0);
+        const rA = rank(A);
+        const rB = rank(B);
+        if (rA !== rB) return rB - rA;
+
+        const isAsc = dir === "asc";
+
+        if (A.kind === "num" && B.kind === "num") {
+          if (A.major !== B.major) return isAsc ? A.major - B.major : B.major - A.major;
+          if (A.minor !== B.minor) return isAsc ? A.minor - B.minor : B.minor - A.minor;
+          return isAsc ? A.patch - B.patch : B.patch - A.patch;
+        }
+
+        // Keep string buckets stable and predictable.
+        if (A.raw === B.raw) return 0;
+        return isAsc ? A.raw.localeCompare(B.raw) : B.raw.localeCompare(A.raw);
+      }
+
+      function compareEsriEraVersionsDesc(a, b) {
+        return compareEsriEraVersions(a, b, "desc");
+      }
+
+      function normalizeDataset(data) {
+        // Flatten Esri's JSON into a row-per-patch array.
+        // Upstream groups patches under Product[] entries keyed by `version`.
+        const groups = Array.isArray(data?.Product) ? data.Product : [];
+        const patches = [];
+
+        for (const g of groups) {
+          const version = String(g?.version ?? "").trim();
+          const list = Array.isArray(g?.patches) ? g.patches : [];
+          for (const p of list) {
+            const name = String(p?.Name ?? "");
+            const qfeId = String(p?.QFE_ID ?? "");
+            const productsRaw = String(p?.Products ?? "");
+            const platformRaw = String(p?.Platform ?? "");
+            const releaseDateText = String(p?.ReleaseDate ?? "");
+            const releaseDateMs = parseReleaseDateMs(releaseDateText);
+            const criticalKind = classifyCritical(p?.Critical);
+
+              const patchFiles = Array.isArray(p?.PatchFiles) ? p.PatchFiles : [];
+              const files = patchFiles.map((url) => {
+                const filename = filenameFromUrl(url);
+                const fileVersion = inferFileVersionFromUrl(url) || "";
+                return { url: String(url), filename, ext: getExt(url), fileVersion };
+              });
+
+            const typeSet = new Set(files.map((f) => f.ext).filter(Boolean));
+            const productsTokens = tokenizeCsv(productsRaw);
+            const platformTokens = tokenizeCsv(platformRaw);
+
+            const md5 = Array.isArray(p?.MD5sums) ? p.MD5sums : [];
+            const sha256 = Array.isArray(p?.SHA256sums) ? p.SHA256sums : [];
+
+            const searchBlob = (
+              [
+                name,
+                qfeId,
+                version,
+                productsRaw,
+                platformRaw,
+                releaseDateText,
+                files.map((f) => f.filename).join(" "),
+              ].join(" | ")
+            ).toLowerCase();
+
+            const productsClamp = clampTextTokens(productsTokens, 2);
+            const productsDisplay = productsClamp.more ? `${productsClamp.text} +${productsClamp.more}` : productsClamp.text;
+
+            patches.push({
+              name,
+              qfeId,
+              version,
+              productsRaw,
+              productsTokens,
+              productsDisplay,
+              platformRaw,
+              platformTokens,
+              releaseDateText,
+              releaseDateMs,
+              criticalRaw: p?.Critical,
+              criticalKind,
+              criticalDisplay: criticalLabel(criticalKind).label,
+              patchPageUrl: String(p?.url ?? ""),
+              files,
+              types: Array.from(typeSet),
+              md5,
+              sha256,
+              searchBlob,
+            });
+          }
+        }
+
+        patches.sort((a, b) => {
+          if (b.releaseDateMs !== a.releaseDateMs) return b.releaseDateMs - a.releaseDateMs;
+          const n = a.name.localeCompare(b.name);
+          if (n !== 0) return n;
+          return a.qfeId.localeCompare(b.qfeId);
+        });
+
+        return patches;
+      }
+
+      function buildOptions(patches) {
+        // Build filter option lists (value + count), derived from the dataset.
+        const productCounts = new Map();
+        const versionCounts = new Map();
+        const platformCounts = new Map();
+        const typeCounts = new Map();
+
+        for (const p of patches) {
+          versionCounts.set(p.version, (versionCounts.get(p.version) || 0) + 1);
+          for (const t of p.productsTokens) productCounts.set(t, (productCounts.get(t) || 0) + 1);
+          for (const t of p.platformTokens) platformCounts.set(t, (platformCounts.get(t) || 0) + 1);
+          for (const t of p.types) typeCounts.set(t, (typeCounts.get(t) || 0) + 1);
+        }
+
+        function toSortedList(m) {
+          return Array.from(m.entries())
+            .filter(([k]) => k)
+            .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+            .map(([value, count]) => ({ value, count }));
+        }
+
+        const versions = Array.from(versionCounts.entries())
+          .filter(([k]) => k)
+          .sort((a, b) => {
+            const v = compareEsriEraVersionsDesc(a[0], b[0]);
+            if (v !== 0) return v;
+            // Stable tie-breaker: show the more common version first.
+            return b[1] - a[1];
+          })
+          .map(([value, count]) => ({ value, count }));
+
+        return {
+          products: toSortedList(productCounts),
+          versions,
+          platforms: toSortedList(platformCounts),
+          types: toSortedList(typeCounts),
+        };
+      }
+
+      function setComboboxItems(el, items) {
+        el.innerHTML = "";
+        for (const it of items) {
+          const item = document.createElement("calcite-combobox-item");
+          item.value = it.value;
+          item.heading = it.value;
+          item.description = `${it.count} patches`;
+          el.appendChild(item);
+        }
+      }
+
+      function readSelectedSet(comboboxEl) {
+        const v = comboboxEl.value;
+        if (Array.isArray(v)) return new Set(v.map(String).filter(Boolean));
+        if (typeof v === "string" && v) return new Set([v]);
+        // Fallback
+        const selected = comboboxEl.selectedItems || [];
+        return new Set(selected.map((i) => i.value).filter(Boolean));
+      }
+
+      function clearCombobox(comboboxEl) {
+        comboboxEl.value = [];
+        if ("filterText" in comboboxEl) comboboxEl.filterText = "";
+      }
+
+      function setComboboxValues(comboboxEl, values) {
+        comboboxEl.value = Array.from(values || []);
+        if ("filterText" in comboboxEl) comboboxEl.filterText = "";
+      }
+
+      function setCriticalUI(value) {
+        const items = els.fCritical.querySelectorAll("calcite-segmented-control-item");
+        for (const it of items) it.checked = it.value === value;
+      }
+
+      function applyFiltersToUI() {
+        els.fQ.value = state.filters.q;
+        setComboboxValues(els.fProducts, state.filters.products);
+        setComboboxValues(els.fVersions, state.filters.versions);
+        setComboboxValues(els.fPlatforms, state.filters.platforms);
+        setComboboxValues(els.fTypes, state.filters.types);
+        setCriticalUI(state.filters.critical);
+        els.fFrom.value = state.filters.from;
+        els.fTo.value = state.filters.to;
+      }
+
+      function criticalLabel(kind) {
+        if (kind === "security") return { label: "Security", icon: "lock", chipClass: "crit-chip--security" };
+        if (kind === "critical") return { label: "Critical", icon: "exclamation-mark-triangle", chipClass: "crit-chip--critical" };
+        return { label: "Standard", icon: "circle", chipClass: "crit-chip--standard" };
+      }
+
+      function inferFileVersionFromUrl(url) {
+        const u = String(url || "");
+        const name = filenameFromUrl(u);
+        const candidates = new Set();
+
+        // Prefer explicit separators: 11.4, 11_4, 10-9-1, etc.
+        const s = `${u} ${name}`;
+        const sepRe = /\b(9|10|11|12)[._-](\d{1,2})(?:[._-](\d{1,2}))?\b/g;
+        for (const m of s.matchAll(sepRe)) {
+          const major = m[1];
+          const minor = m[2];
+          const patch = m[3];
+          candidates.add(patch ? `${major}.${minor}.${patch}` : `${major}.${minor}`);
+        }
+
+        // Some ArcGIS filenames encode versions as digits: ArcGIS-111 -> 11.1, ArcGIS-114 -> 11.4, ArcGIS-1091 -> 10.9.1.
+        // Restrict to the ArcGIS prefix to avoid misreading unrelated numeric tokens.
+        const arcRe = /\barcgis[-_]?((?:9|10|11|12)(?:\d)(?:\d)?)\b/i;
+        const arc = name.match(arcRe);
+        if (arc && arc[1]) {
+          const digits = arc[1];
+          const m3 = digits.match(/^(9|10|11|12)(\d)(\d)?$/);
+          if (m3) {
+            const major = m3[1];
+            const minor = m3[2];
+            const patch = m3[3];
+            candidates.add(patch ? `${major}.${minor}.${patch}` : `${major}.${minor}`);
+          }
+        }
+
+        if (!candidates.size) return "";
+
+        // Pick the newest-looking candidate to keep ordering consistent.
+        const list = Array.from(candidates);
+        list.sort((a, b) => compareEsriEraVersionsDesc(a, b));
+        return list[0] || "";
+      }
+
+      function clampTextTokens(tokens, max) {
+        if (!tokens.length) return { text: "", more: 0 };
+        if (tokens.length <= max) return { text: tokens.join(", "), more: 0 };
+        return { text: tokens.slice(0, max).join(", "), more: tokens.length - max };
+      }
+
+      function anyTokenSelected(tokens, selectedSet) {
+        if (!selectedSet || !selectedSet.size) return true;
+        for (const t of tokens || []) {
+          if (selectedSet.has(t)) return true;
+        }
+        return false;
+      }
+
+      function passesFiltersWithContext(p, qLower, fromMs, toMs) {
+        const f = state.filters;
+
+        if (qLower) {
+          if (!p.searchBlob.includes(qLower)) return false;
+        }
+
+        if (f.critical !== "all" && p.criticalKind !== f.critical) return false;
+
+        if (!anyTokenSelected(p.productsTokens, f.products)) return false;
+
+        if (f.versions.size && !f.versions.has(p.version)) return false;
+
+        if (!anyTokenSelected(p.platformTokens, f.platforms)) return false;
+
+        if (!anyTokenSelected(p.types, f.types)) return false;
+
+        if (fromMs && p.releaseDateMs && p.releaseDateMs < fromMs) return false;
+        // Inclusive end-date (treat "To" as end of day, local UI value is YYYY-MM-DD).
+        if (toMs && p.releaseDateMs && p.releaseDateMs > toMs + 24 * 60 * 60 * 1000 - 1) return false;
+
+        return true;
+      }
+
+      function stableKeyFromSet(s) {
+        return Array.from(s || [])
+          .map(String)
+          .sort((a, b) => a.localeCompare(b))
+          .join("\u001f");
+      }
+
+      function computeApplyKey() {
+        // A stable signature of the current filter state.
+        // Used to avoid recomputing and re-rendering when nothing materially changed.
+        const f = state.filters;
+        return [
+          datasetEpoch,
+          String(f.q || "").trim().toLowerCase(),
+          stableKeyFromSet(f.products),
+          stableKeyFromSet(f.versions),
+          stableKeyFromSet(f.platforms),
+          stableKeyFromSet(f.types),
+          String(f.critical || "all"),
+          String(f.from || ""),
+          String(f.to || ""),
+        ].join("|");
+      }
+
+      function hasActiveFilters() {
+        const f = state.filters;
+        return Boolean(
+          (f.q && f.q.trim()) ||
+            f.products.size ||
+            f.versions.size ||
+            f.platforms.size ||
+            f.types.size ||
+            (f.critical && f.critical !== "all") ||
+            f.from ||
+            f.to
+        );
+      }
+
+      function applyAndRender() {
+        const key = computeApplyKey();
+        if (key === lastApplyKey) return;
+        lastApplyKey = key;
+
+        const qLower = String(state.filters.q || "").trim().toLowerCase();
+        const fromMs = state.filters.from ? isoDateToMs(state.filters.from) : 0;
+        const toMs = state.filters.to ? isoDateToMs(state.filters.to) : 0;
+
+        state.filtered = state.all.filter((p) => passesFiltersWithContext(p, qLower, fromMs, toMs));
+        renderGrid();
+
+        // When filters change, reset pagination so the user doesn't land on an empty page.
+        try {
+          if (gridBuilt && grid && typeof grid.setPage === "function") grid.setPage(1);
+        } catch {
+          // ignore
+        }
+
+        const total = state.all.length;
+        const shown = state.filtered.length;
+        els.textCount.textContent = hasActiveFilters()
+          ? `${shown.toLocaleString()} / ${total.toLocaleString()} patches`
+          : `${total.toLocaleString()} patches`;
+
+        syncLocationToFilters();
+      }
+
+      function openPatch(p) {
+        if (!p) return;
+        renderDialog(p);
+        els.dlg.open = true;
+      }
+
+
+      function ensureGrid() {
+        if (grid) return true;
+        // Wait for Tabulator CDN script.
+        // eslint-disable-next-line no-undef
+        if (typeof Tabulator === "undefined") {
+          gridInitTries += 1;
+          if (gridInitTries > 200) return false;
+          setTimeout(() => {
+            ensureGrid();
+          }, 25);
+          return false;
+        }
+        // eslint-disable-next-line no-undef
+        grid = new Tabulator(els.grid, {
+          height: "100%",
+          layout: "fitColumns",
+          autoResize: false,
+          reactiveData: false,
+          index: "_id",
+          pagination: "local",
+          paginationSize: PAGE_SIZE,
+          paginationSizeSelector: false,
+          sortMode: "local",
+          data: [],
+          placeholder: "No results",
+          initialSort: [{ column: "releaseDateMs", dir: "desc" }],
+          columns: [
+            {
+              title: "Patch",
+              field: "name",
+              sorter: "string",
+              widthGrow: 7,
+              minWidth: 340,
+              formatter: (cell) => {
+                const d = cell.getRow().getData();
+                const name = escapeHtml(d.name || "(untitled patch)");
+                const qfe = escapeHtml(d.qfeId || "");
+                const rel = escapeHtml(d.releaseDateText || "");
+                return `<div class="patch-name"><div>${name}</div><div class="patch-meta"><span class="mono">${qfe}</span><span>${rel}</span></div></div>`;
+              },
+            },
+            {
+              title: "Products",
+              field: "productsDisplay",
+              sorter: "string",
+              widthGrow: 2,
+              minWidth: 200,
+              tooltip: (e, cell) => (cell.getRow().getData().productsTokens || []).join(", "),
+            },
+            {
+              title: "Version",
+              field: "version",
+              width: 110,
+              widthShrink: 1,
+              // We enforce bucket precedence regardless of sort direction.
+              // We also avoid Tabulator's internal inversion by always sorting "asc"
+              // while switching our comparator direction.
+              sorter: (a, b) => compareEsriEraVersions(a, b, versionSortMode),
+              headerClick: (e, column) => {
+                e.stopPropagation();
+                versionSortMode = versionSortMode === "desc" ? "asc" : "desc";
+                const colEl = column.getElement?.();
+                // Keep Tabulator's dir fixed; our sorter uses versionSortMode.
+                column.getTable().setSort([{ column: "version", dir: "asc" }]);
+
+                // Sync the built-in Tabulator arrow to our effective sort direction.
+                // Tabulator will set aria-sort based on its internal sort (always asc here),
+                // so we override after it updates.
+                if (colEl) {
+                  requestAnimationFrame(() => {
+                    colEl.setAttribute("aria-sort", versionSortMode === "asc" ? "ascending" : "descending");
+
+                    // Clear sort state visuals on other headers.
+                    const headers = colEl.closest(".tabulator-header");
+                    headers?.querySelectorAll(".tabulator-col").forEach((n) => {
+                      if (n !== colEl && (n.getAttribute("aria-sort") === "ascending" || n.getAttribute("aria-sort") === "descending")) {
+                        n.setAttribute("aria-sort", "none");
+                      }
+                    });
+                  });
+                }
+              },
+            },
+            {
+              title: "Platform",
+              field: "platformRaw",
+              sorter: "string",
+              width: 150,
+              widthShrink: 1,
+              formatter: (cell) => {
+                const d = cell.getRow().getData();
+                return escapeHtml((d.platformTokens || []).join(", "));
+              },
+            },
+            {
+              title: "Release",
+              field: "releaseDateMs",
+              sorter: "number",
+              width: 110,
+              widthShrink: 1,
+              formatter: (cell) => escapeHtml(cell.getRow().getData().releaseDateText || ""),
+            },
+            {
+              title: "Critical",
+              field: "criticalDisplay",
+              sorter: "string",
+              width: 130,
+              widthShrink: 1,
+              formatter: (cell) => {
+                const d = cell.getRow().getData();
+                const kind = String(d.criticalKind || "standard");
+                const label = escapeHtml(String(d.criticalDisplay || ""));
+                if (kind === "security") {
+                  return `<calcite-chip class="crit-chip crit-chip--security" kind="neutral" appearance="outline" scale="s"><calcite-icon preload class="crit-ico crit-ico-security" icon="lock" scale="s"></calcite-icon><span class="crit-label">${label}</span></calcite-chip>`;
+                }
+                if (kind === "critical") {
+                  return `<calcite-chip class="crit-chip crit-chip--critical" kind="neutral" appearance="outline" scale="s"><calcite-icon preload class="crit-ico crit-ico-critical" icon="exclamation-mark-triangle" scale="s"></calcite-icon><span class="crit-label">${label}</span></calcite-chip>`;
+                }
+                return `<calcite-chip class="crit-chip crit-chip--standard" kind="neutral" appearance="outline" scale="s"><calcite-icon preload class="crit-ico crit-ico-standard" icon="circle" scale="s"></calcite-icon><span class="crit-label">${label}</span></calcite-chip>`;
+              },
+            },
+            {
+              title: "Links",
+              field: "patchPageUrl",
+              width: 150,
+              widthShrink: 1,
+              hozAlign: "left",
+              headerSort: false,
+              formatter: (cell) => {
+                const d = cell.getRow().getData();
+                const rawUrl = String(d.patchPageUrl || "").trim();
+                if (!rawUrl) return `<span class="dim">&mdash;</span>`;
+                const url = escapeAttr(rawUrl);
+                return `<calcite-button class="patch-link-btn accent-2" appearance="outline" kind="brand" scale="s" icon-end="launch" href="${url}" target="_blank" rel="noopener noreferrer" label="Open patch page">Patch page</calcite-button>`;
+              },
+              cellClick: (e) => {
+                // Don't trigger rowClick when interacting with links.
+                e.stopPropagation();
+              },
+            },
+          ],
+        });
+
+        grid.on("rowClick", (e, row) => {
+          const path = e.composedPath?.() || [];
+          const clickedLinkish = path.some((n) => {
+            if (!(n instanceof HTMLElement)) return false;
+            return n.matches?.("a, calcite-button, button");
+          });
+          if (clickedLinkish) return;
+          openPatch(row.getData());
+        });
+
+        grid.on("tableBuilt", () => {
+          gridBuilt = true;
+
+          // Initial visual state for Version header.
+          try {
+            const versionCol = grid.getColumn("version");
+            const el = versionCol?.getElement?.();
+            if (el) el.setAttribute("aria-sort", versionSortMode === "asc" ? "ascending" : "descending");
+          } catch {
+            // Ignore; header will still work via click handling.
+          }
+
+          if (pendingGridData) {
+            grid.setData(pendingGridData);
+            pendingGridData = null;
+          }
+        });
+
+        return true;
+      }
+
+      // Prevent occasional teardown errors on navigation/reload.
+      window.addEventListener("beforeunload", () => {
+        try {
+          if (grid && typeof grid.destroy === "function") grid.destroy();
+        } catch {
+          // ignore
+        }
+      });
+
+      function renderGrid() {
+        if (!ensureGrid()) {
+          // Grid not ready yet; try again shortly.
+          setTimeout(renderGrid, 25);
+          return;
+        }
+
+        if (!gridBuilt) {
+          pendingGridData = state.filtered;
+          return;
+        }
+
+        // replaceData is faster than rebuilding the table.
+        grid.replaceData(state.filtered);
+      }
+
+      function renderDialog(p) {
+        els.dlg.heading = p.name || "Patch";
+        const crit = criticalLabel(p.criticalKind);
+
+        const products = p.productsTokens.length ? p.productsTokens.join(", ") : p.productsRaw;
+        const platforms = p.platformTokens.length ? p.platformTokens.join(", ") : p.platformRaw;
+
+        const md5Text = (p.md5 || []).join("\n");
+        const shaText = (p.sha256 || []).join("\n");
+
+        const filesSorted = (p.files || []).slice().sort((a, b) => {
+          const av = a.fileVersion || "";
+          const bv = b.fileVersion || "";
+          const isA = av && av === p.version;
+          const isB = bv && bv === p.version;
+          if (isA !== isB) return isA ? -1 : 1;
+          const cmp = compareEsriEraVersionsDesc(av || p.version || "", bv || p.version || "");
+          if (cmp !== 0) return cmp;
+          return String(a.filename || "").localeCompare(String(b.filename || ""));
+        });
+
+        const fileRowsHtml = filesSorted
+          .map((f) => {
+            const v = escapeHtml(f.fileVersion || p.version || "");
+            return (
+              `<calcite-table-row>
+                <calcite-table-cell>${v}</calcite-table-cell>
+                <calcite-table-cell>${escapeHtml(f.filename)}</calcite-table-cell>
+                <calcite-table-cell>
+                  <div class="url-full">
+                    <calcite-link href="${escapeAttr(f.url)}" target="_blank" rel="noopener">${escapeHtml(f.url)}</calcite-link>
+                  </div>
+                </calcite-table-cell>
+              </calcite-table-row>`
+            );
+          })
+          .join("");
+
+        els.dlgBody.innerHTML = `
+          <div class="dlg-wrap">
+            <div class="dlg-summary">
+              <div class="dlg-summary-title">
+                <div class="dlg-critical"></div>
+              </div>
+
+              <div class="dlg-facts">
+                <div class="dlg-fact">
+                  <div class="k">Version</div>
+                  <div class="v">${escapeHtml(p.version || "")}</div>
+                  <div style="margin-top: 6px">
+                    <calcite-chip
+                      class="crit-chip ${crit.chipClass}"
+                      scale="s"
+                      kind="neutral"
+                      appearance="outline"
+                    ><calcite-icon preload class="crit-ico ${
+                      crit.label === "Security"
+                        ? "crit-ico-security"
+                        : crit.label === "Critical"
+                          ? "crit-ico-critical"
+                          : "crit-ico-standard"
+                    }" icon="${escapeAttr(crit.icon)}" scale="s"></calcite-icon><span class="crit-label">${escapeHtml(crit.label)}</span></calcite-chip>
+                  </div>
+                </div>
+                <div class="dlg-fact"><div class="k">Release</div><div class="v">${escapeHtml(p.releaseDateText || "")}</div></div>
+                <div class="dlg-fact"><div class="k">QFE</div><div class="v mono">${p.qfeId ? escapeHtml(p.qfeId) : "&mdash;"}</div></div>
+                <div class="dlg-fact"><div class="k">Platform</div><div class="v">${escapeHtml(platforms || "")}</div></div>
+              </div>
+            </div>
+
+            <div class="dlg-section">
+              <div class="dlg-section-header">Context</div>
+              <div class="dlg-section-body">
+                <div>
+                  <div class="dim" style="margin-bottom: 4px">Products</div>
+                  <div>${escapeHtml(products || "")}</div>
+                </div>
+
+                <div>
+                  <div class="dim" style="margin-bottom: 4px">Patch page</div>
+                  ${
+                    p.patchPageUrl
+                      ? `<div class="url-full"><calcite-link href="${escapeAttr(p.patchPageUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.patchPageUrl)}</calcite-link></div>`
+                      : `<div class="dim">&mdash;</div>`
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="dlg-section">
+              <div class="dlg-section-header">Files</div>
+              <div class="dlg-section-body">
+                ${
+                  p.files.length
+                    ? `<calcite-table caption="Patch files" bordered striped>
+                        <calcite-table-row slot="table-header">
+                          <calcite-table-header heading="Version"></calcite-table-header>
+                          <calcite-table-header heading="File"></calcite-table-header>
+                          <calcite-table-header heading="Link"></calcite-table-header>
+                        </calcite-table-row>
+                        ${fileRowsHtml}
+                      </calcite-table>`
+                    : `<div class="dim">No PatchFiles listed.</div>`
+                }
+              </div>
+            </div>
+
+            ${(p.md5 && p.md5.length) || (p.sha256 && p.sha256.length)
+              ? `
+              <div class="dlg-section">
+                <div class="dlg-section-header">Checksums</div>
+                <div class="dlg-section-body">
+                  ${p.sha256 && p.sha256.length ? `<div class="mono" style="white-space: pre-wrap">${escapeHtml(shaText)}</div>` : ""}
+                  ${p.md5 && p.md5.length ? `<div class="mono" style="white-space: pre-wrap">${escapeHtml(md5Text)}</div>` : ""}
+                </div>
+              </div>`
+              : ""}
+          </div>
+        `;
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function escapeAttr(s) {
+        // Keep it simple; used only for href values.
+        return escapeHtml(s).replaceAll("`", "");
+      }
+
+      function resetFilters() {
+        state.filters.q = "";
+        state.filters.products = new Set();
+        state.filters.versions = new Set();
+        state.filters.platforms = new Set();
+        state.filters.types = new Set();
+        state.filters.critical = "all";
+        state.filters.from = "";
+        state.filters.to = "";
+
+        applyFiltersToUI();
+        scheduleApply();
+      }
+
+      let qTimer = null;
+      let shareBtnTimer = null;
+      let shareBtnDefaultText = null;
+      let shareBtnDefaultIcon = null;
+      let applyPending = false;
+      let lastSyncedLocation = "";
+      function scheduleApply() {
+        if (applyPending) return;
+        applyPending = true;
+        requestAnimationFrame(() => {
+          applyPending = false;
+          applyAndRender();
+        });
+      }
+
+      function wireEvents() {
+        // Capture default share button state once.
+        if (shareBtnDefaultText == null) shareBtnDefaultText = String(els.btnShare.textContent || "").trim() || "Share";
+        if (shareBtnDefaultIcon == null) shareBtnDefaultIcon = els.btnShare.getAttribute("icon-start") || "link";
+
+        const onQueryInput = () => {
+          if (qTimer) clearTimeout(qTimer);
+          qTimer = setTimeout(() => {
+            state.filters.q = String(els.fQ.value || "").trim();
+            scheduleApply();
+          }, 350);
+        };
+
+        const syncQueryAfterUiClear = () => {
+          // Calcite's clear button can clear the visible value without dispatching `input`.
+          // Read the value after the click/keydown cycle and apply if it changed.
+          setTimeout(() => {
+            const next = String(els.fQ.value || "").trim();
+            if (next !== state.filters.q) {
+              state.filters.q = next;
+              scheduleApply();
+            }
+          }, 0);
+        };
+
+        // Calcite emits custom events for clearable/value changes; listen to both.
+        els.fQ.addEventListener("input", onQueryInput);
+        els.fQ.addEventListener("calciteInputInput", onQueryInput);
+        els.fQ.addEventListener("calciteInputChange", onQueryInput);
+        els.fQ.addEventListener("click", (e) => {
+          const path = e.composedPath?.() || [];
+          const clickedClear = path.some((n) => n instanceof HTMLElement && n.classList?.contains("clear-button"));
+          if (clickedClear) syncQueryAfterUiClear();
+        });
+        els.fQ.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") syncQueryAfterUiClear();
+        });
+
+        function onCombobox() {
+          state.filters.products = readSelectedSet(els.fProducts);
+          state.filters.versions = readSelectedSet(els.fVersions);
+          state.filters.platforms = readSelectedSet(els.fPlatforms);
+          state.filters.types = readSelectedSet(els.fTypes);
+          scheduleApply();
+        }
+
+        for (const el of [els.fProducts, els.fVersions, els.fPlatforms, els.fTypes]) {
+          el.addEventListener("calciteComboboxChange", onCombobox);
+        }
+
+        els.fCritical.addEventListener("calciteSegmentedControlChange", () => {
+          const selected = els.fCritical.selectedItem;
+          state.filters.critical = String(selected?.value || "all");
+          scheduleApply();
+        });
+
+        function onDate() {
+          state.filters.from = String(els.fFrom.value || "");
+          state.filters.to = String(els.fTo.value || "");
+          scheduleApply();
+        }
+
+        els.fFrom.addEventListener("calciteInputDatePickerChange", onDate);
+        els.fTo.addEventListener("calciteInputDatePickerChange", onDate);
+
+        els.btnShare.addEventListener("click", async () => {
+          const url = buildShareUrl();
+          els.shareLink.href = url;
+          els.shareLink.textContent = url;
+          const titleEl = els.shareAlert.querySelector('[slot="title"]');
+          const msgEl = els.shareAlert.querySelector('[slot="message"]');
+
+          const setShareButtonState = (state) => {
+            if (shareBtnTimer) {
+              clearTimeout(shareBtnTimer);
+              shareBtnTimer = null;
+            }
+            if (state === "copied") {
+              els.btnShare.setAttribute("icon-start", "check");
+              els.btnShare.textContent = "Copied";
+              shareBtnTimer = setTimeout(() => {
+                els.btnShare.setAttribute("icon-start", shareBtnDefaultIcon || "link");
+                els.btnShare.textContent = shareBtnDefaultText || "Share";
+                shareBtnTimer = null;
+              }, 2200);
+              return;
+            }
+            els.btnShare.setAttribute("icon-start", shareBtnDefaultIcon || "link");
+            els.btnShare.textContent = shareBtnDefaultText || "Share";
+          };
+
+          const copyToClipboard = async (text) => {
+            try {
+              if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+                await navigator.clipboard.writeText(text);
+                return true;
+              }
+            } catch {
+              // fall through to execCommand fallback
+            }
+
+            try {
+              const ta = document.createElement("textarea");
+              ta.value = text;
+              ta.setAttribute("readonly", "");
+              ta.style.position = "fixed";
+              ta.style.left = "-9999px";
+              ta.style.top = "0";
+              document.body.appendChild(ta);
+              ta.select();
+              const ok = document.execCommand && document.execCommand("copy");
+              document.body.removeChild(ta);
+              return !!ok;
+            } catch {
+              return false;
+            }
+          };
+
+          try {
+            const ok = await copyToClipboard(url);
+            if (!ok) throw new Error("copy failed");
+            els.shareAlert.kind = "success";
+            els.shareAlert.icon = "check-circle";
+            if (titleEl) titleEl.textContent = "Copied";
+            setShareButtonState("copied");
+            if (msgEl) {
+              const hint = msgEl.querySelector(".share-hint");
+              if (hint) hint.remove();
+              const span = document.createElement("span");
+              span.className = "share-hint";
+              span.textContent = "Share link copied. ";
+              msgEl.prepend(span);
+            }
+          } catch {
+            // Clipboard can fail in some environments; the alert still shows the URL.
+            els.shareAlert.kind = "info";
+            els.shareAlert.icon = "information";
+            if (titleEl) titleEl.textContent = "Share link";
+            setShareButtonState("default");
+          }
+          els.shareAlert.open = true;
+        });
+
+        els.btnReset.addEventListener("click", resetFilters);
+
+      }
+
+      async function loadDataset() {
+        setStatusText("Loading...");
+        try {
+          const res = await fetch("./patches.json", { cache: "no-store" });
+          if (!res.ok) throw new Error(`HTTP ${res.status} loading ./patches.json`);
+          const data = await res.json();
+          state.all = normalizeDataset(data);
+          state.options = buildOptions(state.all);
+          datasetEpoch += 1;
+          lastApplyKey = "";
+
+          setComboboxItems(els.fProducts, state.options.products);
+          setComboboxItems(els.fVersions, state.options.versions);
+          setComboboxItems(els.fPlatforms, state.options.platforms);
+          setComboboxItems(els.fTypes, state.options.types);
+
+          window.__spf = {
+            versionsOrdered: state.options.versions.map((v) => v.value),
+            compareEsriEraVersions,
+          };
+
+          // Ensure UI reflects any URL-hydrated filter state.
+          applyFiltersToUI();
+
+          // applyAndRender sets the count text.
+          applyAndRender();
+        } catch (err) {
+          setStatusText("Missing patches.json");
+          // keep current status text
+          // Clear table body rows.
+          state.all = [];
+          state.filtered = [];
+          if (grid) grid.replaceData([]);
+          if (grid) grid.setOptions({ placeholder: "Missing ./patches.json (see About)" });
+          console.error(err);
+        }
+      }
+
+      hydrateFiltersFromLocation();
+      wireEvents();
+
+      loadDataset();
+    </script>
+  </body>
+</html>

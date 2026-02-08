@@ -2,12 +2,6 @@
 
 Live demo: https://ceddc.github.io/simple-patch-finder/
 
-## Vibe-coded note
-
-This project was vibe-coded with OpenCode and Codex 5.3 at basically "level 0". I did not read much code upfront; I mostly guided the agent and pointed at specific changes.
-
-Could I have coded it myself? Probably. But it would have taken longer with no clear idea upfront of how long, and I have little interest in coding tables, filters, and JSON parsing. It is not the kind of coding I find fun. Even after thinking about this for months, I likely would never have started.
-
 Single-page patch finder for ArcGIS/Esri patches.
 
 - Fast patch list
@@ -17,6 +11,12 @@ Single-page patch finder for ArcGIS/Esri patches.
 This project is intentionally buildless (one `index.html`) and uses CDN-loaded dependencies:
 - Calcite Design System (primary UI)
 - Tabulator (table/grid UI, sorting, local pagination)
+
+## Vibe-coded note
+
+This project was vibe-coded with OpenCode and Codex 5.3 at basically "level 0". I did not read much code upfront; I mostly guided the agent and pointed at specific changes.
+
+Could I have coded it myself? Probably. But it would have taken longer with no clear idea upfront of how long, and I have little interest in coding tables, filters, and JSON parsing. It is not the kind of coding I find fun. Even after thinking about this for months, I likely would never have started.
 
 ## Quick start
 

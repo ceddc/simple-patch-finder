@@ -12,10 +12,10 @@ This project is intentionally buildless (one `index.html`) and uses CDN-loaded w
 
 ## Quick start
 
-1) Fetch the patches dataset next to the HTML:
+1) Download the patches dataset next to the HTML:
 
 ```bash
-./scripts/fetch_patches.sh
+curl -fsSL "https://downloads.esri.com/patch_notification/patches.json" -o patches.json
 ```
 
 2) Serve locally (required for `fetch()` to work):
@@ -53,5 +53,4 @@ To publish the site:
 
 ## Repo notes
 
-- `patches.json` can be refreshed locally with `./scripts/fetch_patches.sh`.
-- `patches.json` is also refreshed daily by GitHub Actions (see `.github/workflows/update-dataset.yml`).
+- `patches.json` is refreshed daily by GitHub Actions (see `.github/workflows/update-dataset.yml`).

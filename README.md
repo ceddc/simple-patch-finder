@@ -6,6 +6,8 @@ Single-page patch finder for ArcGIS/Esri patches.
 
 - Fast patch list
 - Practical filters
+- Shareable filtered URLs
+- Custom version ordering
 - Direct links to the official Esri patch pages
 
 This project is intentionally buildless (one `index.html`) and uses CDN-loaded dependencies:

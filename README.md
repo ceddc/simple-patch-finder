@@ -14,6 +14,12 @@ This project is intentionally buildless (one `index.html`) and uses CDN-loaded d
 - Calcite Design System (primary UI) - docs: https://developers.arcgis.com/calcite-design-system/ - repo: https://github.com/Esri/calcite-design-system
 - Tabulator (table/grid UI, sorting, local pagination) - repo: https://github.com/olifolkerd/tabulator
 
+Implementation notes:
+
+- Single JS file: `js/app.js`
+- Calcite-first UI (web components)
+- No external JavaScript APIs beyond the table/grid library
+
 ## Vibe-coded note
 
 This project was vibe-coded with OpenCode and Codex 5.3 at basically "level 0". I did not read much code upfront; I mostly guided the agent and pointed at specific changes.

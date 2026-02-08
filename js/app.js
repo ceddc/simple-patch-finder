@@ -59,6 +59,7 @@ const els = {
 
   btnShare: document.getElementById("btn-share"),
   btnReset: document.getElementById("btn-reset"),
+  btnResetFilters: document.getElementById("btn-reset-filters"),
 };
 
 const PAGE_SIZE = 25;
@@ -1202,6 +1203,7 @@ function wireEvents() {
   });
 
   els.btnReset.addEventListener("click", resetFilters);
+  if (els.btnResetFilters) els.btnResetFilters.addEventListener("click", resetFilters);
 
 }
 

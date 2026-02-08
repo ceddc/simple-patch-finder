@@ -9,8 +9,8 @@ Single-page patch finder for ArcGIS/Esri patches.
 - Direct links to the official Esri patch pages
 
 This project is intentionally buildless (one `index.html`) and uses CDN-loaded dependencies:
-- Calcite Design System (primary UI)
-- Tabulator (table/grid UI, sorting, local pagination)
+- Calcite Design System (primary UI) - docs: https://developers.arcgis.com/calcite-design-system/ - repo: https://github.com/Esri/calcite-design-system
+- Tabulator (table/grid UI, sorting, local pagination) - repo: https://github.com/olifolkerd/tabulator
 
 ## Vibe-coded note
 

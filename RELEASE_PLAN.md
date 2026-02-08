@@ -63,6 +63,111 @@ Upstream schema shape (at time of writing):
   - checks newest-first ordering
   - applies a filter and asserts results change
 
+## Design process (suggested iteration loop)
+
+Aim for a dense, desktop-first layout that still works on small screens.
+
+- Visual direction:
+  - Calcite-first web components in light mode
+  - subtle glass surfaces with a blue brand accent
+  - "app-like" header actions (reset/share/about)
+- Iteration loop (each step ends with a quick review + console check):
+  - UI skeleton -> data load -> filters -> performance -> polish -> share links
+
+Suggested milestones:
+
+- Milestone A: Static layout + dialogs (no data)
+- Milestone B: Load + normalize dataset; show count; newest-first ordering
+- Milestone C: Filters + option lists + reset correctness
+- Milestone D: Fast grid + local pagination
+- Milestone E: Patch details dialog (files + checksums)
+- Milestone F: Shareable URLs (serialize + hydrate)
+- Milestone G: Custom version ordering (dropdown + grid)
+- Milestone H: Smoke tests + docs
+
+## Functional spec (how the UI behaves)
+
+- Dataset normalization:
+  - flatten grouped products/versions into one row per patch
+  - tokenize comma-separated `Products` and `Platform`
+  - parse `ReleaseDate` (`MM/DD/YYYY`) to `releaseDateMs` for sorting
+  - derive file metadata from `PatchFiles[]` (filename, extension)
+  - build a lowercase `searchBlob` for fast substring search
+- Filters (all ANDed together):
+  - text search across name, QFE, version, products/platform strings, release date text, filenames
+  - multi-select: product tokens, version, platform tokens, file type (extension)
+  - criticality: All / Security / Critical
+  - release date range: From/To (inclusive end date)
+- Results:
+  - default order: newest first
+  - local pagination (page size 25 is a good default)
+  - link clicks (patch page) must not trigger row-click behavior
+- Patch details:
+  - modal dialog with scannable hierarchy (facts, links, files, checksums)
+
+## URL sharing (serialize + hydrate)
+
+- Encode current filter state into query params.
+- Use compact keys (example mapping):
+  - `q` (text), `p` (products), `v` (versions), `os` (platforms), `t` (types), `c` (critical), `from`, `to`
+- Multi-select encoding:
+  - store the full list in a single param using a delimiter (e.g. `|`) and `encodeURIComponent`
+- On page load:
+  - hydrate filter state from `location.search`
+  - apply values to UI controls
+  - render results
+- Keep the address bar in sync via `history.replaceState` (no navigation).
+
+## Version ordering (custom comparator)
+
+The dataset "version" labels are not semver. Implement a predictable ordering:
+
+- Numeric versions with major 9-12 are ranked above everything else.
+- Special bucket for `9.x` / `9.X`.
+- Everything else is “OTHER” and stays at the bottom.
+- Bucket precedence stays fixed regardless of sort direction; only within-bucket order flips.
+
+Apply this ordering consistently:
+
+- Version filter dropdown ordering
+- Results grid Version column sorting (including repeated header clicks)
+
+## Performance + correctness checklist
+
+- Single source of truth for filter state (use Sets for multi-selects).
+- Coalesce filter application (debounce for text; schedule work via `requestAnimationFrame`).
+- Skip redundant work using a stable filter signature/key.
+- Update the grid with a replace operation (avoid rebuilding large DOM trees).
+- Ensure reset/clear paths keep UI controls and internal state in sync.
+
+## Implementation inventory (conceptual modules)
+
+These are the core building blocks you will implement (names are illustrative):
+
+- Dataset:
+  - load + normalize (`normalizeDataset`)
+  - parsing helpers (release date parsing, CSV tokenization)
+  - file helpers (extension, filename parsing; optional file-version inference)
+- Filters:
+  - predicate evaluation (`passesFilters...`)
+  - option derivation (value + count)
+  - apply scheduling + stable apply key
+- Share URLs:
+  - serialize + hydrate multi-select state
+- Sorting:
+  - custom version comparator with bucket rules
+- UI:
+  - grid (virtualized + local pagination)
+  - modal details dialog
+  - safe HTML escaping for any string injected into templates
+
+## Known pitfalls (practical notes)
+
+- `ReleaseDate` parsing is strict; non-matching values should degrade gracefully (treat as 0 and avoid crashes).
+- `Critical` is not boolean; normalize string values (`security`, `true`, etc.).
+- Missing `PatchFiles`, missing checksums, or missing patch page URLs should not break rendering.
+- Some web-component libraries can emit console warnings/errors on reload; keep the console clean and treat warnings as regressions in tests.
+
 ## Data source
 
 - Upstream JSON: `https://downloads.esri.com/patch_notification/patches.json`

@@ -379,55 +379,28 @@
       /* Critical chips: bold + visual using Calcite Chip CSS vars */
       .crit-chip {
         white-space: nowrap;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .crit-label {
-        display: inline-flex;
-        align-items: center;
-        line-height: 1;
         font-weight: var(--calcite-font-weight-medium, 500);
-      }
-
-      .crit-ico {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-        margin-right: 3px;
-        transform: scale(1.04);
-        transform-origin: center;
-      }
-
-      .crit-ico-security {
-        color: var(--calcite-color-status-warning);
-      }
-
-      .crit-ico-critical {
-        color: var(--calcite-color-status-danger);
-      }
-
-      .crit-ico-standard {
-        color: var(--calcite-color-status-info);
       }
 
       .crit-chip--security {
         --calcite-chip-background-color: var(--calcite-color-foreground-1);
         --calcite-chip-border-color: var(--calcite-color-status-warning);
-        --calcite-chip-text-color: var(--calcite-color-text-1);
+        --calcite-chip-text-color: var(--calcite-color-status-warning);
+        --calcite-chip-icon-color: var(--calcite-color-status-warning);
       }
 
       .crit-chip--critical {
         --calcite-chip-background-color: var(--calcite-color-foreground-1);
         --calcite-chip-border-color: var(--calcite-color-status-danger);
-        --calcite-chip-text-color: var(--calcite-color-text-1);
+        --calcite-chip-text-color: var(--calcite-color-status-danger);
+        --calcite-chip-icon-color: var(--calcite-color-status-danger);
       }
 
       .crit-chip--standard {
         --calcite-chip-background-color: var(--calcite-color-foreground-1);
         --calcite-chip-border-color: var(--calcite-color-status-info);
-        --calcite-chip-text-color: var(--calcite-color-text-1);
+        --calcite-chip-text-color: var(--calcite-color-status-info);
+        --calcite-chip-icon-color: var(--calcite-color-status-info);
       }
 
       calcite-button.patch-link-btn {

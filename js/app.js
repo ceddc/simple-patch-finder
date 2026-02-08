@@ -68,6 +68,8 @@ let gridInitTries = 0;
 let gridBuilt = false;
 let pendingGridData = null;
 
+let calciteReadyPromise = null;
+
 let datasetEpoch = 0;
 let lastApplyKey = "";
 
@@ -449,9 +451,71 @@ function setComboboxValues(comboboxEl, values) {
   if ("filterText" in comboboxEl) comboboxEl.filterText = "";
 }
 
+function ensureCalciteReady() {
+  // Calcite components are loaded via a module script in index.html.
+  // If we set component properties before the elements are upgraded, the upgrade
+  // can clobber those values and the UI won't reflect URL-hydrated state.
+  if (calciteReadyPromise) return calciteReadyPromise;
+  calciteReadyPromise = (async () => {
+    try {
+      if (!window.customElements || typeof window.customElements.whenDefined !== "function") return;
+
+      await Promise.all([
+        window.customElements.whenDefined("calcite-input-text"),
+        window.customElements.whenDefined("calcite-combobox"),
+        window.customElements.whenDefined("calcite-segmented-control"),
+        window.customElements.whenDefined("calcite-input-date-picker"),
+      ]);
+
+      const nodes = [
+        els.fQ,
+        els.fProducts,
+        els.fVersions,
+        els.fPlatforms,
+        els.fTypes,
+        els.fCritical,
+        els.fFrom,
+        els.fTo,
+      ].filter(Boolean);
+
+      await Promise.all(
+        nodes.map((el) => {
+          try {
+            return typeof el.componentOnReady === "function" ? el.componentOnReady() : null;
+          } catch {
+            return null;
+          }
+        })
+      );
+    } catch {
+      // ignore
+    }
+  })();
+  return calciteReadyPromise;
+}
+
 function setCriticalUI(value) {
+  const v = String(value || "all");
+  try {
+    if (els.fCritical && "value" in els.fCritical) {
+      // Segmented control exposes a `value` property for the selected item.
+      els.fCritical.value = v;
+    }
+  } catch {
+    // ignore
+  }
+
   const items = els.fCritical.querySelectorAll("calcite-segmented-control-item");
-  for (const it of items) it.checked = it.value === value;
+  for (const it of items) {
+    const on = String(it.value) === v;
+    try {
+      it.checked = on;
+    } catch {
+      // ignore
+    }
+    if (on) it.setAttribute("checked", "");
+    else it.removeAttribute("checked");
+  }
 }
 
 function applyFiltersToUI() {
@@ -740,12 +804,12 @@ function ensureGrid() {
           const kind = String(d.criticalKind || "standard");
           const label = escapeHtml(String(d.criticalDisplay || ""));
           if (kind === "security") {
-            return `<calcite-chip class="crit-chip crit-chip--security" kind="neutral" appearance="outline" scale="s"><calcite-icon preload class="crit-ico crit-ico-security" icon="lock" scale="s"></calcite-icon><span class="crit-label">${label}</span></calcite-chip>`;
+            return `<calcite-chip class="crit-chip crit-chip--security" kind="neutral" appearance="outline" scale="s" icon="lock" label="Security">${label}</calcite-chip>`;
           }
           if (kind === "critical") {
-            return `<calcite-chip class="crit-chip crit-chip--critical" kind="neutral" appearance="outline" scale="s"><calcite-icon preload class="crit-ico crit-ico-critical" icon="exclamation-mark-triangle" scale="s"></calcite-icon><span class="crit-label">${label}</span></calcite-chip>`;
+            return `<calcite-chip class="crit-chip crit-chip--critical" kind="neutral" appearance="outline" scale="s" icon="exclamation-mark-triangle" label="Critical">${label}</calcite-chip>`;
           }
-          return `<calcite-chip class="crit-chip crit-chip--standard" kind="neutral" appearance="outline" scale="s"><calcite-icon preload class="crit-ico crit-ico-standard" icon="circle" scale="s"></calcite-icon><span class="crit-label">${label}</span></calcite-chip>`;
+          return `<calcite-chip class="crit-chip crit-chip--standard" kind="neutral" appearance="outline" scale="s" icon="circle" label="Standard">${label}</calcite-chip>`;
         },
       },
       {
@@ -883,13 +947,9 @@ function renderDialog(p) {
                 scale="s"
                 kind="neutral"
                 appearance="outline"
-              ><calcite-icon preload class="crit-ico ${
-                crit.label === "Security"
-                  ? "crit-ico-security"
-                  : crit.label === "Critical"
-                    ? "crit-ico-critical"
-                    : "crit-ico-standard"
-              }" icon="${escapeAttr(crit.icon)}" scale="s"></calcite-icon><span class="crit-label">${escapeHtml(crit.label)}</span></calcite-chip>
+                icon="${escapeAttr(crit.icon)}"
+                label="${escapeAttr(crit.label)}"
+              >${escapeHtml(crit.label)}</calcite-chip>
             </div>
           </div>
           <div class="dlg-fact"><div class="k">Release</div><div class="v">${escapeHtml(p.releaseDateText || "")}</div></div>
@@ -1168,6 +1228,7 @@ async function loadDataset() {
     };
 
     // Ensure UI reflects any URL-hydrated filter state.
+    await ensureCalciteReady();
     applyFiltersToUI();
 
     // applyAndRender sets the count text.
@@ -1186,5 +1247,15 @@ async function loadDataset() {
 
 hydrateFiltersFromLocation();
 wireEvents();
+
+// If filters were hydrated from the URL, apply them after Calcite upgrades.
+// (loadDataset will do this again after options are populated.)
+ensureCalciteReady()
+  .then(() => {
+    applyFiltersToUI();
+  })
+  .catch(() => {
+    // ignore
+  });
 
 loadDataset();

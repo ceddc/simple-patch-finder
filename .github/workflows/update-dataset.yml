@@ -1,0 +1,44 @@
+name: Update patches.json
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "12 4 * * *" # daily
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "update-dataset"
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Download latest patches.json
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://downloads.esri.com/patch_notification/patches.json" -o "patches.json"
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Stage the file even if it was previously untracked.
+          git add patches.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to patches.json"
+            exit 0
+          fi
+
+          git commit -m "chore: update patches.json"
+          git push

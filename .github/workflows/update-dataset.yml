@@ -3,7 +3,7 @@ name: Update patches.json
 on:
   workflow_dispatch:
   schedule:
-    - cron: "12 */6 * * *" # every 6 hours
+    - cron: "12 0,6,12,18 * * *" # every 6 hours (UTC)
 
 permissions:
   contents: write

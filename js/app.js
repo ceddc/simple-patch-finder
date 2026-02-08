@@ -48,8 +48,6 @@ const els = {
   shareAlert: document.getElementById("share-alert"),
   shareLink: document.getElementById("share-link"),
 
-  filtersCard: document.getElementById("filters-card"),
-
   fQ: document.getElementById("f-q"),
   fProducts: document.getElementById("f-products"),
   fVersions: document.getElementById("f-versions"),

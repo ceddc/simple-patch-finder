@@ -57,44 +57,7 @@
     </script>
     <link rel="icon" href="data:," />
 
-    <!--
-      Calcite (primary UI)
-      Workaround: Calcite 5.0.0 calcite-icon has an IntersectionObserver disconnect race on navigation.
-      Disabling IntersectionObserver forces eager icon loading and avoids page errors on reload.
-    -->
-    <script>
-      // Workaround: Calcite 5.0.0 calcite-icon has an IntersectionObserver disconnect race on navigation.
-      // This shim makes observations synchronous and prevents async callbacks after teardown.
-      // It intentionally treats everything as "intersecting".
-      (() => {
-        const RealIO = window.IntersectionObserver;
-        if (typeof RealIO !== "function") return;
-        class SyncIntersectionObserver {
-          constructor(callback) {
-            this._callback = callback;
-            this._elements = new Set();
-          }
-          observe(el) {
-            this._elements.add(el);
-            try {
-              this._callback([{ isIntersecting: true, target: el }], this);
-            } catch {
-              // ignore
-            }
-          }
-          unobserve(el) {
-            this._elements.delete(el);
-          }
-          disconnect() {
-            this._elements.clear();
-          }
-          takeRecords() {
-            return [];
-          }
-        }
-        window.IntersectionObserver = SyncIntersectionObserver;
-      })();
-    </script>
+    <!-- Calcite (primary UI) -->
     <script type="module" src="https://js.arcgis.com/calcite-components/5.0"></script>
 
     <!-- High-performance grid (sorting + local pagination) -->

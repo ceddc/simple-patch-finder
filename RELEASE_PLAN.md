@@ -1,6 +1,12 @@
 # Release Plan (Public)
 
-This repo is intentionally buildless: one `index.html` served as static files.
+This repo is intentionally buildless (no bundler/build step) and served as static files.
+
+Files shipped:
+
+- `index.html` - static shell + metadata
+- `css/app.css` - styling
+- `js/app.js` - app logic
 
 ## What this app does
 

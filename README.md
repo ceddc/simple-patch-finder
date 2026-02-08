@@ -35,6 +35,12 @@ python3 -m http.server 8000
 - The UI is a static page that loads `./patches.json`.
 - The dataset is published by Esri at `https://downloads.esri.com/patch_notification/patches.json`.
 
+## Repo layout
+
+- `index.html` - static shell + metadata
+- `css/app.css` - app styling
+- `js/app.js` - app logic (no build step)
+
 ## About
 
 The goal is speed: find a patch quickly and jump to the official Esri page for full details and downloads.
@@ -44,7 +50,7 @@ The goal is speed: find a patch quickly and jump to the official Esri page for f
 
 ## GitHub Pages
 
-This repo includes a GitHub Actions workflow that downloads and commits the latest `patches.json` daily to `main`.
+This repo includes a GitHub Actions workflow that downloads and commits the latest `patches.json` periodically to `main`.
 
 To publish the site:
 
@@ -55,4 +61,4 @@ To publish the site:
 
 ## Repo notes
 
-- `patches.json` is refreshed daily by GitHub Actions (see `.github/workflows/update-dataset.yml`).
+- `patches.json` is refreshed by GitHub Actions (see `.github/workflows/update-dataset.yml`).

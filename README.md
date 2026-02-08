@@ -48,13 +48,11 @@ The goal is speed: find a patch quickly and jump to the official Esri page for f
 
 ## Vibe-coded note
 
-This project was vibe-coded with OpenCode and Codex 5.3 at basically "level 0".
+This project was vibe-coded with OpenCode and Codex 5.3 at basically "level 0". I did not read much code upfront; I mostly guided the agent and pointed at specific changes.
 
-- Not much code was read upfront; I mostly guided the agent and pointed at specific changes.
-- Could I have coded it myself? Probably.
-- But it would have taken longer, with no clear idea upfront of how long.
-- I have little interest in spending free time coding tables, filters, and JSON parsing.
-- Even after thinking about this for months, I likely would never have started.
+Could I have coded it myself? Probably. But it would have taken longer with no clear idea upfront of how long, and I have little interest in spending free time coding tables, filters, and JSON parsing. Even after thinking about this for months, I likely would never have started.
+
+## Links
 
 - Official website: https://support.esri.com/
 - Feedback/issues: https://github.com/ceddc/simple-patch-finder

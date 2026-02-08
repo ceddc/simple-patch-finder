@@ -24,7 +24,29 @@ jobs:
       - name: Download latest patches.json
         run: |
           set -euo pipefail
-          curl -fsSL "https://downloads.esri.com/patch_notification/patches.json" -o "patches.json"
+          SRC_URL="https://downloads.esri.com/patch_notification/patches.json"
+          curl -fsSL "$SRC_URL" -o "patches.json"
+
+          # Write metadata for display in the UI.
+          # Note: updated_at_utc is the time this workflow ran (UTC).
+          UPDATED_AT_UTC="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          export SRC_URL UPDATED_AT_UTC
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          p = Path("patches.json").read_bytes()
+          meta = {
+            "source_url": os.environ.get("SRC_URL", ""),
+            "updated_at_utc": os.environ["UPDATED_AT_UTC"],
+            "patches_sha256": hashlib.sha256(p).hexdigest(),
+            "bytes": len(p),
+          }
+          Path("patches.meta.json").write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n")
+          PY
+          echo "updated_at_utc=$UPDATED_AT_UTC"
 
       - name: Commit if changed
         run: |
@@ -33,12 +55,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Stage the file even if it was previously untracked.
-          git add patches.json
+          git add patches.json patches.meta.json
 
           if git diff --cached --quiet; then
             echo "No changes to patches.json"
             exit 0
           fi
 
-          git commit -m "chore: update patches.json"
+          git commit -m "chore: update dataset"
           git push

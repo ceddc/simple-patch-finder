@@ -69,24 +69,6 @@
 
   <body class="calcite-mode-light">
     <calcite-shell class="shell">
-      <calcite-navigation slot="header" label="Simple Patch Finder" class="top-nav">
-        <div slot="logo" class="nav-brand" aria-label="Simple Patch Finder">
-          <div class="nav-emoji" aria-hidden="true">🗺️</div>
-          <div class="nav-text">
-            <div class="nav-title-row">
-              <div class="nav-title">Simple Patch Finder</div>
-            </div>
-            <div class="nav-official">
-              <calcite-icon class="nav-warn" icon="exclamation-mark-triangle" scale="s"></calcite-icon>
-              Vibe-coded proof-of-concept (unofficial).
-              Official website:
-              <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">support.esri.com</calcite-link>
-            </div>
-          </div>
-        </div>
-
-      </calcite-navigation>
-
       <calcite-alert id="share-alert" slot="alerts" kind="success" icon="check-circle" scale="m" auto-close auto-close-duration="4000">
         <div slot="title">Share link ready</div>
         <div slot="message">
@@ -98,10 +80,44 @@
 
         <div class="content">
           <div class="main-grid">
-          <div id="filters-card" class="filters-card glass-surface">
-            <calcite-panel heading="Filters" description="Narrow down patches" style="background: transparent">
-              <div class="filters">
-                <div class="filters-grid">
+            <div class="left-rail">
+              <div class="brand-card glass-surface">
+                <div class="nav-brand" aria-label="Simple Patch Finder">
+                  <div class="nav-emoji" aria-hidden="true">🗺️</div>
+                  <div class="nav-text">
+                    <div class="nav-title-row">
+                      <div class="nav-title">Simple Patch Finder</div>
+                    </div>
+                    <div class="nav-meta">
+                      <div class="nav-warning">
+                        <calcite-icon class="nav-warn" icon="exclamation-mark-triangle" scale="s"></calcite-icon>
+                        <span>Vibe-coded proof-of-concept (unofficial).</span>
+                      </div>
+                      <div class="nav-site">
+                        <span>Official website:</span>
+                        <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">support.esri.com</calcite-link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="filters-card" class="filters-card glass-surface">
+                <calcite-panel heading="Filters" description="Narrow down patches" style="background: transparent">
+                  <div slot="header-actions-end" class="filters-actions">
+                    <calcite-button
+                      id="btn-reset-filters"
+                      appearance="outline-fill"
+                      kind="brand"
+                      scale="s"
+                      icon-start="reset"
+                      label="Reset all filters"
+                    >
+                      Reset all
+                    </calcite-button>
+                  </div>
+                  <div class="filters">
+                    <div class="filters-grid">
                   <calcite-input-text
                     id="f-q"
                     label-text="Search"
@@ -167,21 +183,11 @@
                     <calcite-input-date-picker id="f-from" label-text="From" scale="s"></calcite-input-date-picker>
                     <calcite-input-date-picker id="f-to" label-text="To" scale="s"></calcite-input-date-picker>
                   </div>
-
-                  <calcite-button
-                    id="btn-reset-filters"
-                    appearance="outline-fill"
-                    kind="brand"
-                    scale="s"
-                    icon-start="reset"
-                    label="Reset filters"
-                  >
-                    Reset filters
-                  </calcite-button>
-                </div>
+                    </div>
+                  </div>
+                </calcite-panel>
               </div>
-            </calcite-panel>
-          </div>
+            </div>
 
           <calcite-panel
             class="results-card"
@@ -198,9 +204,9 @@
                   kind="brand"
                   scale="s"
                   icon-start="reset"
-                  label="Reset filters"
+                  label="Reset all filters"
                 >
-                  Reset
+                  Reset all
                 </calcite-button>
                 <calcite-button
                   id="btn-share"
@@ -218,7 +224,13 @@
             <div class="table-wrap">
               <div id="grid" aria-label="ArcGIS patches grid"></div>
 
-              <calcite-block class="help-block" heading="About & Help" collapsible icon-start="information">
+              <calcite-block
+                class="help-block"
+                heading="About & Help"
+                description="Data source + FAQ"
+                collapsible
+                icon-start="information"
+              >
                 <div class="help-block-body">
                   <div>
                     <div class="about-h">Why This Exists</div>
@@ -245,13 +257,14 @@
                     </div>
                   </div>
 
-                  <div>
-                    <div class="about-h">Data Workflow</div>
-                    <ul class="about-list">
-                      <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> daily (the same dataset used by Esri patch notification tools).</li>
-                      <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
-                    </ul>
-                  </div>
+                    <div>
+                      <div class="about-h">Data Workflow</div>
+                      <ul class="about-list">
+                        <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> daily (the same dataset used by Esri patch notification tools).</li>
+                        <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
+                        <li>The action also writes <span class="mono">patches.meta.json</span> so the UI can display the last refresh time.</li>
+                      </ul>
+                    </div>
 
                   <div>
                     <div class="about-h">FAQ</div>

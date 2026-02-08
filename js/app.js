@@ -74,6 +74,11 @@ let calciteReadyPromise = null;
 let datasetEpoch = 0;
 let lastApplyKey = "";
 
+let datasetLoadedAt = null;
+let datasetUpdatedAtUtc = null;
+
+let baseCountText = "";
+
 let versionSortMode = "asc";
 
 const state = {
@@ -190,7 +195,52 @@ function hydrateFiltersFromLocation() {
 // --- Core parsing helpers ---
 
 function setStatusText(text) {
-  els.textCount.textContent = text;
+  baseCountText = text;
+  updateDatasetHint();
+}
+
+function formatLocalDateTime(d) {
+  const dt = d instanceof Date ? d : new Date(d);
+  if (!dt || Number.isNaN(dt.getTime())) return "";
+  return dt.toLocaleString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function updateDatasetHint() {
+  const base = String(baseCountText || "").trim();
+  const parts = [];
+  if (datasetUpdatedAtUtc) {
+    const t = formatLocalDateTime(datasetUpdatedAtUtc);
+    if (t) parts.push(`Updated: ${t}`);
+  }
+  if (datasetLoadedAt) {
+    const t = formatLocalDateTime(datasetLoadedAt);
+    if (t) parts.push(`Loaded: ${t}`);
+  }
+
+  // Don't add suffix to initial Loading/Missing states.
+  const suppress = base.startsWith("Loading") || base.startsWith("Missing");
+  els.textCount.textContent = parts.length && !suppress ? `${base} | ${parts.join(" | ")}` : base;
+}
+
+async function loadDatasetMeta() {
+  try {
+    const res = await fetch("./patches.meta.json", { cache: "no-store" });
+    if (!res.ok) return;
+    const meta = await res.json();
+    const utc = meta && meta.updated_at_utc;
+    if (typeof utc === "string" && utc) {
+      datasetUpdatedAtUtc = utc;
+      updateDatasetHint();
+    }
+  } catch {
+    // ignore
+  }
 }
 
 function parseReleaseDateMs(mmddyyyy) {
@@ -239,13 +289,23 @@ function classifyCritical(raw) {
   return "standard";
 }
 
+const esriEraVersionCache = new Map();
+
 function parseEsriEraVersion(versionStr) {
+  const cacheKey = String(versionStr || "").trim();
+  if (cacheKey) {
+    const hit = esriEraVersionCache.get(cacheKey);
+    if (hit) return hit;
+  }
+
   const raw = String(versionStr || "").trim();
   if (!raw) return { kind: "other", raw };
 
   // Special bucket: 9.x/9.X (non-numeric minor)
   if (/^9\.[xX]\b/.test(raw)) {
-    return { kind: "9x", raw, major: 9, minor: -1, patch: -1 };
+    const out = { kind: "9x", raw, major: 9, minor: -1, patch: -1 };
+    esriEraVersionCache.set(raw, out);
+    return out;
   }
 
   // Numeric versions: only treat major 9-12 as "Esri era" versions.
@@ -261,11 +321,15 @@ function parseEsriEraVersion(versionStr) {
       major >= 9 &&
       major <= 12
     ) {
-      return { kind: "num", raw, major, minor, patch };
+      const out = { kind: "num", raw, major, minor, patch };
+      esriEraVersionCache.set(raw, out);
+      return out;
     }
   }
 
-  return { kind: "other", raw };
+  const out = { kind: "other", raw };
+  esriEraVersionCache.set(raw, out);
+  return out;
 }
 
 function compareEsriEraVersions(a, b, dir) {
@@ -466,6 +530,7 @@ function ensureCalciteReady() {
         window.customElements.whenDefined("calcite-combobox"),
         window.customElements.whenDefined("calcite-segmented-control"),
         window.customElements.whenDefined("calcite-input-date-picker"),
+        window.customElements.whenDefined("calcite-block"),
       ]);
 
       const nodes = [
@@ -493,6 +558,50 @@ function ensureCalciteReady() {
     }
   })();
   return calciteReadyPromise;
+}
+
+function applyHelpBlockHeaderAccent() {
+  // Calcite Block is a shadow-DOM component; we add a small accent by styling
+  // its internal header node after upgrade. This is purely visual.
+  try {
+    const block = document.querySelector("calcite-block.help-block");
+    const sr = block && block.shadowRoot;
+    if (!sr) return false;
+    const header = sr.querySelector("header#header") || sr.querySelector("header.header");
+    if (!header) return false;
+
+    // Keep this subtle: small accent, square corners, muted color.
+    header.style.boxSizing = "border-box";
+    header.style.overflow = "visible";
+    header.style.borderTopLeftRadius = "0px";
+    header.style.borderBottomLeftRadius = "0px";
+
+    // Use inset shadow to avoid shifting layout like a real border would.
+    header.style.boxShadow =
+      "inset 5px 0 0 color-mix(in srgb, var(--calcite-color-status-success) 55%, var(--calcite-color-border-1))";
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function wireHelpBlockHeaderAccent() {
+  const block = document.querySelector("calcite-block.help-block");
+  if (!block) return;
+  if (block.dataset && block.dataset.accentWired === "1") return;
+  if (block.dataset) block.dataset.accentWired = "1";
+
+  const apply = () => {
+    // Defer slightly in case the component re-renders after the event.
+    setTimeout(() => {
+      applyHelpBlockHeaderAccent();
+    }, 0);
+  };
+
+  block.addEventListener("calciteBlockOpen", apply);
+  block.addEventListener("calciteBlockClose", apply);
+  block.addEventListener("calciteBlockExpand", apply);
+  block.addEventListener("calciteBlockCollapse", apply);
 }
 
 function setCriticalUI(value) {
@@ -659,6 +768,24 @@ function applyAndRender() {
   if (key === lastApplyKey) return;
   lastApplyKey = key;
 
+  const active = hasActiveFilters();
+
+  if (!active) {
+    // Fast path: no need to scan the dataset if nothing is being filtered.
+    state.filtered = state.all;
+    renderGrid();
+    try {
+      if (gridBuilt && grid && typeof grid.setPage === "function") grid.setPage(1);
+    } catch {
+      // ignore
+    }
+
+    baseCountText = `${state.all.length.toLocaleString()} patches`;
+    updateDatasetHint();
+    syncLocationToFilters();
+    return;
+  }
+
   const qLower = String(state.filters.q || "").trim().toLowerCase();
   const fromMs = state.filters.from ? isoDateToMs(state.filters.from) : 0;
   const toMs = state.filters.to ? isoDateToMs(state.filters.to) : 0;
@@ -675,9 +802,8 @@ function applyAndRender() {
 
   const total = state.all.length;
   const shown = state.filtered.length;
-  els.textCount.textContent = hasActiveFilters()
-    ? `${shown.toLocaleString()} / ${total.toLocaleString()} patches`
-    : `${total.toLocaleString()} patches`;
+  baseCountText = `${shown.toLocaleString()} / ${total.toLocaleString()} patches`;
+  updateDatasetHint();
 
   syncLocationToFilters();
 }
@@ -805,12 +931,12 @@ function ensureGrid() {
           const kind = String(d.criticalKind || "standard");
           const label = escapeHtml(String(d.criticalDisplay || ""));
           if (kind === "security") {
-            return `<calcite-chip class="crit-chip crit-chip--security" kind="neutral" appearance="outline" scale="s" icon="lock" label="Security">${label}</calcite-chip>`;
+            return `<span class="crit-badge crit-badge--security">${label}</span>`;
           }
           if (kind === "critical") {
-            return `<calcite-chip class="crit-chip crit-chip--critical" kind="neutral" appearance="outline" scale="s" icon="exclamation-mark-triangle" label="Critical">${label}</calcite-chip>`;
+            return `<span class="crit-badge crit-badge--critical">${label}</span>`;
           }
-          return `<calcite-chip class="crit-chip crit-chip--standard" kind="neutral" appearance="outline" scale="s" icon="circle" label="Standard">${label}</calcite-chip>`;
+          return `<span class="crit-badge crit-badge--standard">${label}</span>`;
         },
       },
       {
@@ -825,7 +951,7 @@ function ensureGrid() {
           const rawUrl = String(d.patchPageUrl || "").trim();
           if (!rawUrl) return `<span class="dim">&mdash;</span>`;
           const url = escapeAttr(rawUrl);
-          return `<calcite-button class="patch-link-btn accent-2" appearance="outline" kind="brand" scale="s" icon-end="launch" href="${url}" target="_blank" rel="noopener noreferrer" label="Open patch page">Patch page</calcite-button>`;
+          return `<a class="patch-link-btn accent-2" href="${url}" target="_blank" rel="noopener noreferrer">Patch page</a>`;
         },
         cellClick: (e) => {
           // Don't trigger rowClick when interacting with links.
@@ -1095,11 +1221,19 @@ function wireEvents() {
     if (e.key === "Escape") syncQueryAfterUiClear();
   });
 
-  function onCombobox() {
-    state.filters.products = readSelectedSet(els.fProducts);
-    state.filters.versions = readSelectedSet(els.fVersions);
-    state.filters.platforms = readSelectedSet(els.fPlatforms);
-    state.filters.types = readSelectedSet(els.fTypes);
+  function onCombobox(e) {
+    const t = e?.target;
+    if (t === els.fProducts) state.filters.products = readSelectedSet(els.fProducts);
+    else if (t === els.fVersions) state.filters.versions = readSelectedSet(els.fVersions);
+    else if (t === els.fPlatforms) state.filters.platforms = readSelectedSet(els.fPlatforms);
+    else if (t === els.fTypes) state.filters.types = readSelectedSet(els.fTypes);
+    else {
+      // Fallback: update everything.
+      state.filters.products = readSelectedSet(els.fProducts);
+      state.filters.versions = readSelectedSet(els.fVersions);
+      state.filters.platforms = readSelectedSet(els.fPlatforms);
+      state.filters.types = readSelectedSet(els.fTypes);
+    }
     scheduleApply();
   }
 
@@ -1202,7 +1336,7 @@ function wireEvents() {
     els.shareAlert.open = true;
   });
 
-  els.btnReset.addEventListener("click", resetFilters);
+  if (els.btnReset) els.btnReset.addEventListener("click", resetFilters);
   if (els.btnResetFilters) els.btnResetFilters.addEventListener("click", resetFilters);
 
 }
@@ -1213,6 +1347,8 @@ async function loadDataset() {
   try {
     const res = await fetch("./patches.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status} loading ./patches.json`);
+    datasetLoadedAt = new Date();
+    updateDatasetHint();
     const data = await res.json();
     state.all = normalizeDataset(data);
     state.options = buildOptions(state.all);
@@ -1249,12 +1385,15 @@ async function loadDataset() {
 
 hydrateFiltersFromLocation();
 wireEvents();
+loadDatasetMeta();
 
 // If filters were hydrated from the URL, apply them after Calcite upgrades.
 // (loadDataset will do this again after options are populated.)
 ensureCalciteReady()
   .then(() => {
     applyFiltersToUI();
+    applyHelpBlockHeaderAccent();
+    wireHelpBlockHeaderAccent();
   })
   .catch(() => {
     // ignore

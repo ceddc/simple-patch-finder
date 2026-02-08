@@ -4,7 +4,7 @@
         --bs-glass: rgba(255, 255, 255, 0.72);
         --bs-border: rgba(44, 123, 229, 0.16);
         --bs-shadow: 0 18px 44px rgba(20, 36, 66, 0.12), 0 2px 10px rgba(20, 36, 66, 0.06);
-        --bs-shadow-lg: 0 24px 70px rgba(20, 36, 66, 0.16), 0 8px 24px rgba(20, 36, 66, 0.10);
+        --bs-shadow-help: 0 22px 58px rgba(20, 36, 66, 0.14), 0 6px 18px rgba(20, 36, 66, 0.09);
 
         --calcite-color-brand: var(--bs-accent);
         --calcite-color-brand-hover: #1f66c7;
@@ -74,22 +74,29 @@
       }
 
       .nav-title {
-        font-size: 16px;
-        font-weight: var(--calcite-font-weight-medium, 500);
+        font-size: 18px;
+        font-weight: var(--calcite-font-weight-medium, 600);
         line-height: 1.1;
         white-space: nowrap;
       }
 
-      .nav-official {
+      .nav-meta {
         font-size: 12px;
         color: var(--calcite-color-text-3);
-        white-space: nowrap;
+      }
+
+      .nav-warning,
+      .nav-site {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
       }
 
       .nav-warn {
         color: var(--calcite-color-status-warning);
-        margin-right: 6px;
-        transform: translateY(1px);
+        margin: 0;
+        transform: none;
       }
 
       .gh-link {
@@ -151,8 +158,61 @@
         align-items: stretch;
       }
 
-      .filters-card {
+      .left-rail {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
         height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      /* Keep the left rail flatter (less "card" shadow). */
+      .left-rail .glass-surface {
+        box-shadow: none;
+      }
+
+      .brand-card {
+        padding: 10px 12px;
+      }
+
+      .brand-card .nav-brand {
+        height: auto;
+        padding-left: 0;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .brand-card .nav-emoji {
+        font-size: 40px;
+        width: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid color-mix(in srgb, var(--bs-border) 70%, transparent);
+        padding-right: 10px;
+        margin-right: 12px;
+      }
+
+      .brand-card .nav-text {
+        padding-left: 0;
+      }
+
+      .brand-card .nav-meta {
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid color-mix(in srgb, var(--bs-border) 55%, transparent);
+        display: grid;
+        gap: 4px;
+      }
+
+      .brand-card .nav-warn {
+        flex: 0 0 auto;
+      }
+
+      .filters-card {
+        flex: 1;
+        height: auto;
         min-height: 0;
         overflow: hidden;
       }
@@ -222,6 +282,7 @@
         line-height: 1.2;
       }
 
+
       .table-wrap {
         padding: 10px;
         overflow: hidden;
@@ -239,8 +300,18 @@
       /* Collapsible footer content (About + FAQ) */
       .help-block {
         margin-top: 8px;
-        --calcite-block-icon-color: var(--calcite-color-status-success);
-        box-shadow: var(--bs-shadow-lg);
+      }
+
+      /* Make About & Help feel less "cardy". */
+      calcite-block.help-block {
+        border-radius: 0;
+        box-shadow: var(--bs-shadow-help);
+      }
+
+      .filters-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
       }
 
       .help-block-body {
@@ -384,6 +455,35 @@
         font-weight: var(--calcite-font-weight-medium, 500);
       }
 
+      /* Critical badges in the grid: keep them lightweight (no web components). */
+      .crit-badge {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        font-size: 12px;
+        line-height: 1;
+        font-weight: var(--calcite-font-weight-medium, 500);
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--calcite-color-border-1);
+        background: var(--calcite-color-foreground-1);
+      }
+
+      .crit-badge--security {
+        border-color: var(--calcite-color-status-warning);
+        color: var(--calcite-color-status-warning);
+      }
+
+      .crit-badge--critical {
+        border-color: var(--calcite-color-status-danger);
+        color: var(--calcite-color-status-danger);
+      }
+
+      .crit-badge--standard {
+        border-color: var(--calcite-color-status-info);
+        color: var(--calcite-color-status-info);
+      }
+
       .crit-chip--security {
         --calcite-chip-background-color: var(--calcite-color-foreground-1);
         --calcite-chip-border-color: var(--calcite-color-status-warning);
@@ -405,8 +505,22 @@
         --calcite-chip-icon-color: var(--calcite-color-status-info);
       }
 
-      calcite-button.patch-link-btn {
+      a.patch-link-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         white-space: nowrap;
+        padding: 6px 10px;
+        border-radius: 10px;
+        border: 1px solid color-mix(in srgb, var(--calcite-color-brand) 50%, var(--calcite-color-border-1));
+        background: var(--calcite-color-foreground-1);
+        color: var(--calcite-color-brand);
+        text-decoration: none;
+        text-decoration-color: transparent;
+      }
+
+      a.patch-link-btn:hover {
+        background: color-mix(in srgb, var(--calcite-color-brand) 8%, var(--calcite-color-foreground-1));
       }
 
       /* Patch dialog formatting */

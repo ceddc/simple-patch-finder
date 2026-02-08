@@ -8,9 +8,9 @@ Single-page patch finder for ArcGIS/Esri patches.
 - Practical filters
 - Direct links to the official Esri patch pages
 
-This project is intentionally buildless (one `index.html`) and uses CDN-loaded web components:
+This project is intentionally buildless (one `index.html`) and uses CDN-loaded dependencies:
 - Calcite Design System (primary UI)
-- ArcGIS Maps SDK for JavaScript components (light touch, secondary)
+- Tabulator (table/grid + sorting + local pagination)
 
 ## Quick start
 

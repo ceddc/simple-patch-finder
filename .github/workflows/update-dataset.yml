@@ -24,6 +24,12 @@ jobs:
       - name: Download latest patches.json
         run: |
           set -euo pipefail
+
+          # Ensure we're on an up-to-date local main branch before writing files.
+          # Scheduled runs can overlap with other pushes (including other dataset runs).
+          git checkout -B main
+          git pull --rebase origin main
+
           SRC_URL="https://downloads.esri.com/patch_notification/patches.json"
           curl -fsSL "$SRC_URL" -o "patches.json"
 
@@ -53,11 +59,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Ensure we're on an up-to-date local main branch.
-          # Scheduled runs can overlap with other pushes (including other dataset runs).
-          git checkout -B main
-          git pull --rebase origin main
 
           # Stage the file even if it was previously untracked.
           git add patches.json patches.meta.json

@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Download latest patches.json
         run: |
@@ -54,6 +54,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # Ensure we're on an up-to-date local main branch.
+          # Scheduled runs can overlap with other pushes (including other dataset runs).
+          git checkout -B main
+          git pull --rebase origin main
+
           # Stage the file even if it was previously untracked.
           git add patches.json patches.meta.json
 
@@ -63,4 +68,6 @@ jobs:
           fi
 
           git commit -m "chore: update dataset"
-          git push
+
+          # Try to push; if the remote advanced since our pull, rebase and retry once.
+          git push origin main || (git pull --rebase origin main && git push origin main)

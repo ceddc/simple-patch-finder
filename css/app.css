@@ -1,10 +1,9 @@
-      :root {
+:root {
         --bs-accent: #2c7be5;
         --bs-accent-2: #00619b;
         --bs-glass: rgba(255, 255, 255, 0.72);
         --bs-border: rgba(44, 123, 229, 0.16);
         --bs-shadow: 0 18px 44px rgba(20, 36, 66, 0.12), 0 2px 10px rgba(20, 36, 66, 0.06);
-        --bs-shadow-help: 0 22px 58px rgba(20, 36, 66, 0.14), 0 6px 18px rgba(20, 36, 66, 0.09);
 
         --calcite-color-brand: var(--bs-accent);
         --calcite-color-brand-hover: #1f66c7;
@@ -78,6 +77,19 @@
         font-weight: var(--calcite-font-weight-medium, 600);
         line-height: 1.1;
         white-space: nowrap;
+      }
+
+      .nav-subtitle {
+        font-size: 11px;
+        color: var(--calcite-color-text-2);
+        line-height: 1.2;
+        margin-top: 2px;
+      }
+
+      .nav-logo {
+        width: 42px;
+        height: 42px;
+        display: block;
       }
 
       .nav-meta {
@@ -305,7 +317,6 @@
       /* Make About & Help feel less "cardy". */
       calcite-block.help-block {
         border-radius: 0;
-        box-shadow: var(--bs-shadow-help);
       }
 
       .filters-actions {

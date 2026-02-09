@@ -476,8 +476,27 @@ function buildOptions(patches) {
     })
     .map(([value, count]) => ({ value, count }));
 
+  const productsAll = toSortedList(productCounts);
+  const priority = [
+    "ArcGIS Enterprise",
+    "ArcGIS Server",
+    "Portal for ArcGIS",
+    "ArcGIS Data Store",
+    "ArcMap",
+  ];
+  const prioritySet = new Set(priority);
+  const byValue = new Map(productsAll.map((it) => [it.value, it]));
+  const products = [];
+  for (const p of priority) {
+    const hit = byValue.get(p);
+    if (hit) products.push(hit);
+  }
+  for (const it of productsAll) {
+    if (!prioritySet.has(it.value)) products.push(it);
+  }
+
   return {
-    products: toSortedList(productCounts),
+    products,
     versions,
     platforms: toSortedList(platformCounts),
     types: toSortedList(typeCounts),

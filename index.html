@@ -3,31 +3,31 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ArcGIS Patches (Esri Patch Finder) | ArcGIS Server, Portal, Pro</title>
+    <title>ArcGIS Patch Download Search (Unofficial) | Enterprise, Server, Data Store</title>
     <meta
       name="description"
-      content="Search and filter official Esri/ArcGIS patches by product, version, release date, and type. Fast patch finder with direct links to Esri support pages."
+      content="Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages."
     />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://ceddc.github.io/simple-patch-finder/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ceddc.github.io/simple-patch-finder/" />
-    <meta property="og:title" content="ArcGIS Patches (Esri Patch Finder)" />
+    <meta property="og:title" content="ArcGIS Patch Download Search (Unofficial)" />
     <meta
       property="og:description"
-      content="Search and filter official Esri/ArcGIS patches by product, version, release date, and type."
+      content="Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages."
     />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="ArcGIS Patches (Esri Patch Finder)" />
+    <meta name="twitter:title" content="ArcGIS Patch Download Search (Unofficial)" />
     <meta
       name="twitter:description"
-      content="Search and filter official Esri/ArcGIS patches by product, version, release date, and type."
+      content="Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages."
     />
     <meta name="theme-color" content="#2c7be5" />
     <meta
       name="keywords"
-      content="arcgis patches, esri patches, arcgis server patches, portal for arcgis patches, arcgis pro patches, arcgis patch finder"
+      content="arcgis patches, esri patches, arcgis enterprise patches, arcgis server patches, arcgis data store patches, portal for arcgis patches, arcgis patch finder, patch download, latest esri patches"
     />
 
     <script type="application/ld+json">
@@ -36,6 +36,7 @@
         "@type": "WebSite",
         "name": "Simple Patch Finder",
         "url": "https://ceddc.github.io/simple-patch-finder/",
+        "description": "Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages.",
         "potentialAction": {
           "@type": "SearchAction",
           "target": "https://ceddc.github.io/simple-patch-finder/?q={search_term_string}",
@@ -55,7 +56,7 @@
 
       gtag("config", "G-SRT1WQLTTY");
     </script>
-    <link rel="icon" href="data:," />
+    <link rel="icon" type="image/svg+xml" href="./map.svg" />
 
     <!-- Calcite (primary UI) -->
     <script type="module" src="https://js.arcgis.com/calcite-components/5.0"></script>
@@ -83,15 +84,16 @@
             <div class="left-rail">
               <div class="brand-card glass-surface">
                 <div class="nav-brand" aria-label="Simple Patch Finder">
-                  <div class="nav-emoji" aria-hidden="true">🗺️</div>
+                  <div class="nav-emoji" aria-hidden="true"><img class="nav-logo" src="./map.svg" alt="" /></div>
                   <div class="nav-text">
                     <div class="nav-title-row">
                       <div class="nav-title">Simple Patch Finder</div>
                     </div>
+                    <div class="nav-subtitle">Unofficial latest Esri patches | patch download search</div>
                     <div class="nav-meta">
                       <div class="nav-warning">
                         <calcite-icon class="nav-warn" icon="exclamation-mark-triangle" scale="s"></calcite-icon>
-                        <span>Vibe-coded proof-of-concept (unofficial).</span>
+                        <span>Agent vibe-coded proof-of-concept (unofficial).</span>
                       </div>
                       <div class="nav-site">
                         <span>Official website:</span>
@@ -127,6 +129,17 @@
                   ></calcite-input-text>
 
                   <calcite-combobox
+                    id="f-versions"
+                    label="Version"
+                    label-text="Version"
+                    selection-mode="multiple"
+                    placeholder="Choose versions"
+                    selection-display="fit"
+                    overlay-positioning="fixed"
+                    scale="m"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
                     id="f-products"
                     label="Product"
                     label-text="Product"
@@ -135,17 +148,6 @@
                     selection-display="all"
                     overlay-positioning="fixed"
                     scale="m"
-                  ></calcite-combobox>
-
-                  <calcite-combobox
-                    id="f-versions"
-                    label="Version"
-                    label-text="Version"
-                    selection-mode="multiple"
-                    placeholder="Choose versions"
-                    selection-display="fit"
-                    overlay-positioning="fixed"
-                    scale="s"
                   ></calcite-combobox>
 
                   <calcite-combobox
@@ -192,7 +194,7 @@
           <calcite-panel
             class="results-card"
             heading="Patches"
-            description=""
+            description="Latest Esri patches and download links"
             style="--calcite-panel-background-color: var(--bs-glass); --calcite-panel-border-color: var(--bs-border); --calcite-panel-header-background-color: color-mix(in srgb, var(--bs-glass) 80%, #fff); --calcite-panel-space: 8px"
           >
             <div slot="header-actions-end" class="results-meta">

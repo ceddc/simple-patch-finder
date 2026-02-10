@@ -77,48 +77,37 @@
         </div>
       </calcite-alert>
 
-      <div class="app-body">
+      <calcite-shell-panel id="panel-start" slot="panel-start">
+        <calcite-panel
+          id="left-panel"
+          heading="Simple Patch Finder"
+        >
+          <div slot="header-actions-start" class="panel-header-start" aria-hidden="true">
+            <img class="brand-logo" src="./map.svg" alt="" />
+          </div>
 
-        <div class="content">
-          <div class="main-grid">
-            <div class="left-rail">
-              <div class="brand-card glass-surface">
-                <div class="nav-brand" aria-label="Simple Patch Finder">
-                  <div class="nav-emoji" aria-hidden="true"><img class="nav-logo" src="./map.svg" alt="" /></div>
-                  <div class="nav-text">
-                    <div class="nav-title-row">
-                      <div class="nav-title">Simple Patch Finder</div>
-                    </div>
-                    <div class="nav-subtitle">Unofficial latest Esri patches | patch download search</div>
-                    <div class="nav-meta">
-                      <div class="nav-warning">
-                        <span>Agent vibe-coded proof-of-concept (unofficial).</span>
-                      </div>
-                      <div class="nav-site">
-                        <span>Official website:</span>
-                        <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">support.esri.com</calcite-link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <div class="left-panel-body">
+            <calcite-notice open kind="info" scale="s">
+              <div slot="message">
+                <strong>Unofficial</strong> latest Esri patches | patch download search<br />
+                Agent vibe-coded proof-of-concept.<br />
+                Official website:
+                <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">support.esri.com</calcite-link>
               </div>
+            </calcite-notice>
 
-              <div id="filters-card" class="filters-card glass-surface">
-                <calcite-panel heading="Filters" description="Narrow down patches" style="background: transparent">
-                  <div slot="header-actions-end" class="filters-actions">
-                    <calcite-button
-                      id="btn-reset-filters"
-                      appearance="outline-fill"
-                      kind="brand"
-                      scale="s"
-                      icon-start="reset"
-                      label="Reset all filters"
-                    >
-                      Reset all
-                    </calcite-button>
-                  </div>
-                  <div class="filters">
-                    <div class="filters-grid">
+            <div class="filters-container">
+              <calcite-block heading="Filters" description="Narrow down patches" expanded>
+                <calcite-action
+                  id="btn-reset-filters"
+                  slot="actions-end"
+                  icon="reset"
+                  text="Reset all"
+                  label="Reset all filters"
+                  scale="s"
+                ></calcite-action>
+
+                <div class="filters-grid">
                   <calcite-input-text
                     id="f-q"
                     label-text="Search"
@@ -133,7 +122,7 @@
                     label-text="Version"
                     selection-mode="multiple"
                     placeholder="Choose versions"
-                    selection-display="fit"
+                    selection-display="single"
                     overlay-positioning="fixed"
                     scale="m"
                   ></calcite-combobox>
@@ -144,7 +133,7 @@
                     label-text="Product"
                     selection-mode="multiple"
                     placeholder="Choose products"
-                    selection-display="all"
+                    selection-display="single"
                     overlay-positioning="fixed"
                     scale="m"
                   ></calcite-combobox>
@@ -155,7 +144,7 @@
                     label-text="Platform"
                     selection-mode="multiple"
                     placeholder="Choose platforms"
-                    selection-display="fit"
+                    selection-display="single"
                     overlay-positioning="fixed"
                     scale="s"
                   ></calcite-combobox>
@@ -166,7 +155,7 @@
                     label-text="File type"
                     selection-mode="multiple"
                     placeholder="msp, tar, exe..."
-                    selection-display="fit"
+                    selection-display="single"
                     overlay-positioning="fixed"
                     scale="s"
                   ></calcite-combobox>
@@ -184,55 +173,51 @@
                     <calcite-input-date-picker id="f-from" label-text="From" scale="s"></calcite-input-date-picker>
                     <calcite-input-date-picker id="f-to" label-text="To" scale="s"></calcite-input-date-picker>
                   </div>
-                    </div>
-                  </div>
-                </calcite-panel>
-              </div>
+                </div>
+              </calcite-block>
             </div>
+          </div>
+        </calcite-panel>
+      </calcite-shell-panel>
 
-          <calcite-panel
-            class="results-card"
-            heading="Patches"
-            description="Latest Esri patches and download links"
-            style="--calcite-panel-background-color: var(--bs-glass); --calcite-panel-border-color: var(--bs-border); --calcite-panel-header-background-color: color-mix(in srgb, var(--bs-glass) 80%, #fff); --calcite-panel-space: 8px"
-          >
-            <div slot="header-actions-end" class="results-meta">
-              <div class="hint" id="text-count">Loading...</div>
-              <div class="results-actions">
-                <calcite-button
-                  id="btn-reset"
-                  appearance="outline-fill"
-                  kind="brand"
-                  scale="s"
-                  icon-start="reset"
-                  label="Reset all filters"
-                >
-                  Reset all
-                </calcite-button>
-                <calcite-button
-                  id="btn-share"
-                  appearance="outline-fill"
-                  kind="brand"
-                  scale="s"
-                  icon-start="link"
-                  label="Copy share link"
-                >
-                  Share
-                </calcite-button>
-              </div>
-            </div>
+      <calcite-panel class="results-card" heading="Patches" description="Latest Esri patches and download links">
+        <div slot="header-actions-end" class="results-meta">
+          <div class="hint" id="text-count">Loading...</div>
+          <div class="results-actions">
+            <calcite-button
+              id="btn-reset"
+              appearance="outline-fill"
+              kind="brand"
+              scale="s"
+              icon-start="reset"
+              label="Reset all filters"
+            >
+              Reset all
+            </calcite-button>
+            <calcite-button
+              id="btn-share"
+              appearance="outline-fill"
+              kind="brand"
+              scale="s"
+              icon-start="link"
+              label="Copy share link"
+            >
+              Share
+            </calcite-button>
+          </div>
+        </div>
 
             <div class="table-wrap">
               <div id="grid" aria-label="ArcGIS patches grid"></div>
 
               <calcite-block
-                class="help-block"
-                heading="About & Help"
-                description="Data source + FAQ"
-                collapsible
-                icon-start="information"
-              >
-                <div class="help-block-body">
+                 class="help-block"
+                 heading="About & Help"
+                 description="Data source + FAQ"
+                 collapsible
+                 icon-start="information"
+               >
+                 <div class="help-block-body">
                   <div>
                     <div class="about-h">Why This Exists</div>
                     <div class="about-b">
@@ -261,7 +246,7 @@
                     <div>
                       <div class="about-h">Data Workflow</div>
                       <ul class="about-list">
-                        <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> daily (the same dataset used by Esri patch notification tools).</li>
+                        <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> every 6 hours (the same dataset used by Esri patch notification tools).</li>
                         <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
                         <li>The action also writes <span class="mono">patches.meta.json</span> so the UI can display the last refresh time.</li>
                       </ul>
@@ -296,9 +281,6 @@
               </calcite-block>
             </div>
           </calcite-panel>
-          </div>
-        </div>
-      </div>
 
       <calcite-dialog slot="dialogs" id="dlg" heading="Patch" width-scale="m" placement="center" modal>
         <div id="dlg-body"></div>

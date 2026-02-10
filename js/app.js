@@ -70,11 +70,11 @@ let gridBuilt = false;
 let pendingGridData = null;
 
 let calciteReadyPromise = null;
+const comboboxSyncing = new WeakSet();
 
 let datasetEpoch = 0;
 let lastApplyKey = "";
 
-let datasetLoadedAt = null;
 let datasetUpdatedAtUtc = null;
 
 let baseCountText = "";
@@ -199,6 +199,228 @@ function setStatusText(text) {
   updateDatasetHint();
 }
 
+function findComboboxCountChip(comboboxEl) {
+  const sr = comboboxEl && comboboxEl.shadowRoot;
+  if (!sr) return null;
+
+  const chips = Array.from(sr.querySelectorAll("calcite-chip"));
+  if (!chips.length) return null;
+  if (chips.length === 1) return chips[0];
+
+  // Prefer a chip whose visible text is a number/count.
+  for (const c of chips) {
+    const t = String(c.textContent || "").trim();
+    if (/^\d+(?:\s+selected)?$/.test(t)) return c;
+  }
+  return chips[0];
+}
+
+function comboboxItemHumanLabel(item) {
+  if (!item) return "";
+  const pick = (...vals) => {
+    for (const v of vals) {
+      const s = String(v || "").trim();
+      if (s) return s;
+    }
+    return "";
+  };
+
+  try {
+    return pick(
+      item.textLabel,
+      item.label,
+      item.heading,
+      item.getAttribute && item.getAttribute("text-label"),
+      item.getAttribute && item.getAttribute("label"),
+      item.getAttribute && item.getAttribute("heading"),
+      item.value,
+      item.textContent
+    );
+  } catch {
+    return "";
+  }
+}
+
+function readSingleSelectedHumanLabel(comboboxEl) {
+  if (!comboboxEl) return "";
+
+  // Prefer Calcite's selectedItems collection when available.
+  try {
+    const selected = comboboxEl.selectedItems;
+    if (Array.isArray(selected) && selected.length === 1) {
+      return comboboxItemHumanLabel(selected[0]);
+    }
+  } catch {
+    // ignore
+  }
+
+  // Fall back to scanning the items.
+  try {
+    const items = comboboxEl.querySelectorAll("calcite-combobox-item");
+    if (!items || !items.length) return "";
+    let hit = null;
+    for (const it of items) {
+      if (it && it.selected) {
+        if (hit) return ""; // more than one selected
+        hit = it;
+      }
+    }
+    return comboboxItemHumanLabel(hit);
+  } catch {
+    // ignore
+  }
+
+  // Final fallback: in this app, combobox values are already human-friendly.
+  try {
+    const set = readSelectedSet(comboboxEl);
+    if (set && set.size === 1) return Array.from(set)[0];
+  } catch {
+    // ignore
+  }
+
+  return "";
+}
+
+function patchComboboxCountChip(comboboxEl, selectedValues) {
+  if (!comboboxEl) return;
+  const chip = findComboboxCountChip(comboboxEl);
+  if (!chip) return;
+
+  let n = 0;
+  let single = "";
+
+  if (selectedValues instanceof Set) {
+    n = selectedValues.size;
+    if (n === 1) single = String(Array.from(selectedValues)[0] || "").trim();
+  } else if (Array.isArray(selectedValues)) {
+    n = selectedValues.length;
+    if (n === 1) single = String(selectedValues[0] || "").trim();
+  } else {
+    n = Number(selectedValues || 0);
+  }
+
+  // When nothing is selected, Calcite should hide/remove the chip.
+  // Avoid mutating chip content while it is being torn down.
+  if (n <= 0) return;
+
+  if (n === 1 && !single) single = readSingleSelectedHumanLabel(comboboxEl);
+
+  const desired = n === 1 ? single || "1 selected" : `${n} selected`;
+
+  try {
+    if (String(chip.textContent || "").trim() === desired) return;
+  } catch {
+    // ignore
+  }
+
+  // Be careful: this chip is created/managed internally by Calcite. Prefer
+  // updating via component props/attrs or an existing label node.
+
+  // Try public-ish component fields/attrs first (don't early-return;
+  // some Calcite internals may not render from these fields).
+  try {
+    if ("label" in chip) chip.label = desired;
+  } catch {
+    // ignore
+  }
+
+  try {
+    if ("textLabel" in chip) chip.textLabel = desired;
+  } catch {
+    // ignore
+  }
+
+  try {
+    if ("value" in chip) chip.value = desired;
+  } catch {
+    // ignore
+  }
+
+  try {
+    chip.setAttribute("label", desired);
+    chip.setAttribute("value", desired);
+    chip.setAttribute("text-label", desired);
+  } catch {
+    // ignore
+  }
+
+  try {
+    if (String(chip.textContent || "").trim() === desired) return;
+  } catch {
+    // ignore
+  }
+
+  try {
+    // If the chip has a shadow root, try to update its internal label element.
+    // (This avoids touching the chip's light DOM children.)
+    const sr = chip.shadowRoot;
+    if (sr) {
+      const label = sr.querySelector('[part="text"], [part="label"]');
+      if (label) {
+        label.textContent = desired;
+      }
+    }
+  } catch {
+    // ignore
+  }
+
+  try {
+    if (String(chip.textContent || "").trim() === desired) return;
+  } catch {
+    // ignore
+  }
+
+  try {
+    // Update first matching text node without removing element children.
+    for (const node of Array.from(chip.childNodes || [])) {
+      if (node && node.nodeType === Node.TEXT_NODE) {
+        const t = String(node.nodeValue || "").trim();
+        if (/^\d+(?:\s+selected)?$/.test(t) || t === "") {
+          node.nodeValue = desired;
+          return;
+        }
+      }
+    }
+
+    // Fall back: if the chip only contains a single element child, update it.
+    if (chip.childElementCount === 1) {
+      const el = chip.firstElementChild;
+      if (el) {
+        const t = String(el.textContent || "").trim();
+        if (/^\d+(?:\s+selected)?$/.test(t) || t === "") {
+          el.textContent = desired;
+          return;
+        }
+      }
+    }
+  } catch {
+    // ignore
+  }
+
+  // Last resort.
+  try {
+    chip.textContent = desired;
+  } catch {
+    // ignore
+  }
+}
+
+function patchAllComboboxCountChips() {
+  // Calcite's internal chip can be created/replaced asynchronously (and can lag
+  // behind the selection event), so apply a few times with small delays.
+  const applyOnce = () => {
+    patchComboboxCountChip(els.fProducts, state.filters.products);
+    patchComboboxCountChip(els.fVersions, state.filters.versions);
+    patchComboboxCountChip(els.fPlatforms, state.filters.platforms);
+    patchComboboxCountChip(els.fTypes, state.filters.types);
+  };
+
+  requestAnimationFrame(() => requestAnimationFrame(applyOnce));
+  setTimeout(applyOnce, 0);
+  setTimeout(applyOnce, 60);
+  setTimeout(applyOnce, 180);
+}
+
 function formatLocalDateTime(d) {
   const dt = d instanceof Date ? d : new Date(d);
   if (!dt || Number.isNaN(dt.getTime())) return "";
@@ -216,11 +438,7 @@ function updateDatasetHint() {
   const parts = [];
   if (datasetUpdatedAtUtc) {
     const t = formatLocalDateTime(datasetUpdatedAtUtc);
-    if (t) parts.push(`Updated: ${t}`);
-  }
-  if (datasetLoadedAt) {
-    const t = formatLocalDateTime(datasetLoadedAt);
-    if (t) parts.push(`Loaded: ${t}`);
+    if (t) parts.push(`Last updated: ${t}`);
   }
 
   // Don't add suffix to initial Loading/Missing states.
@@ -482,6 +700,7 @@ function buildOptions(patches) {
     "ArcGIS Server",
     "Portal for ArcGIS",
     "ArcGIS Data Store",
+    "ArcGIS Web Adaptor (IIS)",
     "ArcMap",
   ];
   const prioritySet = new Set(priority);
@@ -517,21 +736,53 @@ function setComboboxItems(el, items) {
 }
 
 function readSelectedSet(comboboxEl) {
+  // Prefer item-driven selection state. In some interactions Calcite updates `.value`
+  // asynchronously, so reading from items/selectedItems is more reliable.
+  try {
+    const selected = comboboxEl.selectedItems;
+    if (Array.isArray(selected)) {
+      return new Set(selected.map((i) => String(i.value)).filter(Boolean));
+    }
+  } catch {
+    // ignore
+  }
+
+  try {
+    const items = comboboxEl.querySelectorAll("calcite-combobox-item");
+    if (items && items.length) {
+      const out = [];
+      for (const it of items) {
+        if (it.selected) out.push(String(it.value));
+      }
+      return new Set(out.filter(Boolean));
+    }
+  } catch {
+    // ignore
+  }
+
   const v = comboboxEl.value;
   if (Array.isArray(v)) return new Set(v.map(String).filter(Boolean));
   if (typeof v === "string" && v) return new Set([v]);
-  // Fallback
-  const selected = comboboxEl.selectedItems || [];
-  return new Set(selected.map((i) => i.value).filter(Boolean));
+  return new Set();
 }
 
 function clearCombobox(comboboxEl) {
-  comboboxEl.value = [];
+  try {
+    comboboxSyncing.add(comboboxEl);
+    comboboxEl.value = [];
+  } finally {
+    requestAnimationFrame(() => comboboxSyncing.delete(comboboxEl));
+  }
   if ("filterText" in comboboxEl) comboboxEl.filterText = "";
 }
 
 function setComboboxValues(comboboxEl, values) {
-  comboboxEl.value = Array.from(values || []);
+  try {
+    comboboxSyncing.add(comboboxEl);
+    comboboxEl.value = Array.from(values || []);
+  } finally {
+    requestAnimationFrame(() => comboboxSyncing.delete(comboboxEl));
+  }
   if ("filterText" in comboboxEl) comboboxEl.filterText = "";
 }
 
@@ -549,6 +800,7 @@ function ensureCalciteReady() {
         window.customElements.whenDefined("calcite-combobox"),
         window.customElements.whenDefined("calcite-segmented-control"),
         window.customElements.whenDefined("calcite-input-date-picker"),
+        window.customElements.whenDefined("calcite-shell-panel"),
         window.customElements.whenDefined("calcite-block"),
       ]);
 
@@ -561,6 +813,7 @@ function ensureCalciteReady() {
         els.fCritical,
         els.fFrom,
         els.fTo,
+        document.querySelector("calcite-block.help-block"),
       ].filter(Boolean);
 
       await Promise.all(
@@ -580,24 +833,20 @@ function ensureCalciteReady() {
 }
 
 function applyHelpBlockHeaderAccent() {
-  // Calcite Block is a shadow-DOM component; we add a small accent by styling
-  // its internal header node after upgrade. This is purely visual.
+  // Calcite Block renders its header in shadow DOM.
+  // Apply a subtle left accent using inline styles and re-apply after toggles.
   try {
     const block = document.querySelector("calcite-block.help-block");
     const sr = block && block.shadowRoot;
     if (!sr) return false;
-    const header = sr.querySelector("header#header") || sr.querySelector("header.header");
+
+    // Keep selectors defensive across Calcite versions.
+    const header = sr.querySelector("header#header") || sr.querySelector("header.header") || sr.querySelector("header");
     if (!header) return false;
 
-    // Keep this subtle: small accent, square corners, muted color.
+    // Use inset shadow instead of border to avoid layout shifts.
     header.style.boxSizing = "border-box";
-    header.style.overflow = "visible";
-    header.style.borderTopLeftRadius = "0px";
-    header.style.borderBottomLeftRadius = "0px";
-
-    // Use inset shadow to avoid shifting layout like a real border would.
-    header.style.boxShadow =
-      "inset 5px 0 0 color-mix(in srgb, var(--calcite-color-status-success) 55%, var(--calcite-color-border-1))";
+    header.style.boxShadow = "inset 5px 0 0 var(--calcite-color-status-success)";
     return true;
   } catch {
     return false;
@@ -607,20 +856,42 @@ function applyHelpBlockHeaderAccent() {
 function wireHelpBlockHeaderAccent() {
   const block = document.querySelector("calcite-block.help-block");
   if (!block) return;
-  if (block.dataset && block.dataset.accentWired === "1") return;
-  if (block.dataset) block.dataset.accentWired = "1";
+  if (block.dataset && block.dataset.helpAccentWired === "1") return;
+  if (block.dataset) block.dataset.helpAccentWired = "1";
 
   const apply = () => {
     // Defer slightly in case the component re-renders after the event.
-    setTimeout(() => {
-      applyHelpBlockHeaderAccent();
-    }, 0);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        applyHelpBlockHeaderAccent();
+      }, 0);
+    });
   };
 
   block.addEventListener("calciteBlockOpen", apply);
   block.addEventListener("calciteBlockClose", apply);
   block.addEventListener("calciteBlockExpand", apply);
   block.addEventListener("calciteBlockCollapse", apply);
+}
+
+function syncShellPanelDisplayMode() {
+  const panel = document.getElementById("panel-start");
+  if (!panel) return;
+
+  const mql = window.matchMedia("(max-width: 900px)");
+  const setMode = () => {
+    // Per Calcite guidance, switch shell panel modes at smaller viewports.
+    // Use overlay on small screens; dock on larger screens.
+    panel.setAttribute("display-mode", mql.matches ? "overlay" : "dock");
+  };
+
+  setMode();
+  try {
+    if (typeof mql.addEventListener === "function") mql.addEventListener("change", setMode);
+    else if (typeof mql.addListener === "function") mql.addListener(setMode);
+  } catch {
+    // ignore
+  }
 }
 
 function setCriticalUI(value) {
@@ -656,6 +927,7 @@ function applyFiltersToUI() {
   setCriticalUI(state.filters.critical);
   els.fFrom.value = state.filters.from;
   els.fTo.value = state.filters.to;
+  patchAllComboboxCountChips();
 }
 
 function criticalLabel(kind) {
@@ -961,20 +1233,47 @@ function ensureGrid() {
       {
         title: "Links",
         field: "patchPageUrl",
-        width: 150,
+        width: 110,
         widthShrink: 1,
         hozAlign: "left",
         headerSort: false,
         formatter: (cell) => {
           const d = cell.getRow().getData();
           const rawUrl = String(d.patchPageUrl || "").trim();
-          if (!rawUrl) return `<span class="dim">&mdash;</span>`;
-          const url = escapeAttr(rawUrl);
-          return `<a class="patch-link-btn accent-2" href="${url}" target="_blank" rel="noopener noreferrer">Patch page</a>`;
+          const url = rawUrl ? escapeAttr(rawUrl) : "";
+          const ext = url
+            ? `<a class="row-action row-action--ext" data-action="ext" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Open Esri page">\u{1F517}</a>`
+            : `<span class="row-action row-action--disabled" aria-hidden="true">\u{1F517}</span>`;
+          return `
+            <div class="row-actions">
+              <button class="row-action row-action--info" type="button" data-action="info" aria-label="Details">\u2139</button>
+              ${ext}
+            </div>
+          `;
         },
-        cellClick: (e) => {
-          // Don't trigger rowClick when interacting with links.
-          e.stopPropagation();
+        cellClick: (e, cell) => {
+          const t = e.target;
+          const el = t && typeof t.closest === "function" ? t.closest("[data-action]") : null;
+          if (!el) return;
+
+          const action = el.getAttribute("data-action") || "";
+          if (action === "info") {
+            e.stopPropagation();
+            try {
+              const row = cell && typeof cell.getRow === "function" ? cell.getRow() : null;
+              const d = row && typeof row.getData === "function" ? row.getData() : null;
+              if (d) openPatch(d);
+            } catch {
+              // ignore
+            }
+            return;
+          }
+
+          if (action === "ext") {
+            // Allow navigation, but prevent row click opening the dialog.
+            e.stopPropagation();
+            return;
+          }
         },
       },
     ],
@@ -1241,23 +1540,35 @@ function wireEvents() {
   });
 
   function onCombobox(e) {
-    const t = e?.target;
-    if (t === els.fProducts) state.filters.products = readSelectedSet(els.fProducts);
-    else if (t === els.fVersions) state.filters.versions = readSelectedSet(els.fVersions);
-    else if (t === els.fPlatforms) state.filters.platforms = readSelectedSet(els.fPlatforms);
-    else if (t === els.fTypes) state.filters.types = readSelectedSet(els.fTypes);
-    else {
-      // Fallback: update everything.
-      state.filters.products = readSelectedSet(els.fProducts);
-      state.filters.versions = readSelectedSet(els.fVersions);
-      state.filters.platforms = readSelectedSet(els.fPlatforms);
-      state.filters.types = readSelectedSet(els.fTypes);
-    }
-    scheduleApply();
+    // Calcite updates `.value`/`selectedItems` asynchronously for some interactions.
+    // Defer reading selections to ensure state has settled (especially on unselect).
+    requestAnimationFrame(() => {
+      const t = e?.target;
+
+      if (t && comboboxSyncing.has(t)) return;
+
+      if (t === els.fProducts) state.filters.products = readSelectedSet(els.fProducts);
+      else if (t === els.fVersions) state.filters.versions = readSelectedSet(els.fVersions);
+      else if (t === els.fPlatforms) state.filters.platforms = readSelectedSet(els.fPlatforms);
+      else if (t === els.fTypes) state.filters.types = readSelectedSet(els.fTypes);
+      else {
+        // Fallback: update everything.
+        state.filters.products = readSelectedSet(els.fProducts);
+        state.filters.versions = readSelectedSet(els.fVersions);
+        state.filters.platforms = readSelectedSet(els.fPlatforms);
+        state.filters.types = readSelectedSet(els.fTypes);
+      }
+
+      patchAllComboboxCountChips();
+      scheduleApply();
+    });
   }
 
   for (const el of [els.fProducts, els.fVersions, els.fPlatforms, els.fTypes]) {
     el.addEventListener("calciteComboboxChange", onCombobox);
+    // When a selected chip is removed via its close button, Calcite emits a
+    // dedicated event. Listen to it so URL + count update on unselect.
+    el.addEventListener("calciteComboboxChipClose", onCombobox);
   }
 
   els.fCritical.addEventListener("calciteSegmentedControlChange", () => {
@@ -1366,8 +1677,6 @@ async function loadDataset() {
   try {
     const res = await fetch("./patches.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status} loading ./patches.json`);
-    datasetLoadedAt = new Date();
-    updateDatasetHint();
     const data = await res.json();
     state.all = normalizeDataset(data);
     state.options = buildOptions(state.all);
@@ -1387,6 +1696,8 @@ async function loadDataset() {
     // Ensure UI reflects any URL-hydrated filter state.
     await ensureCalciteReady();
     applyFiltersToUI();
+    wireHelpBlockHeaderAccent();
+    applyHelpBlockHeaderAccent();
 
     // applyAndRender sets the count text.
     applyAndRender();
@@ -1411,8 +1722,9 @@ loadDatasetMeta();
 ensureCalciteReady()
   .then(() => {
     applyFiltersToUI();
-    applyHelpBlockHeaderAccent();
+    syncShellPanelDisplayMode();
     wireHelpBlockHeaderAccent();
+    applyHelpBlockHeaderAccent();
   })
   .catch(() => {
     // ignore

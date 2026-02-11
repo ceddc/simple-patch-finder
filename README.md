@@ -104,4 +104,4 @@ To publish the site:
 
 - The dataset is refreshed by GitHub Actions (see `.github/workflows/update-dataset.yml`).
 - `robots.txt` and `sitemap.xml` are included for SEO.
-- `scripts/generate_sitemap.py` generates `sitemap.xml`, `sitemap-pages.xml`, and `sitemap-patches.xml` from `patches.json`.
+- The update workflow generates `sitemap.xml`, `sitemap-pages.xml`, and `sitemap-patches.xml` from `patches.json`.

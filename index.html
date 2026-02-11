@@ -31,6 +31,49 @@
       content="arcgis patches, esri patches, arcgis enterprise patches, arcgis server patches, arcgis data store patches, portal for arcgis patches, arcgis patch finder, patch download, latest esri patches"
     />
 
+    <script>
+      (function () {
+        try {
+          var base = location.origin + location.pathname;
+          var params = new URLSearchParams(location.search);
+          var pid = String(params.get("pid") || "").trim();
+          var pn = String(params.get("pn") || "").trim().toLowerCase();
+          var rawP = String(params.get("p") || "");
+          var products = rawP
+            ? rawP
+                .split("|")
+                .map(function (v) {
+                  try {
+                    return decodeURIComponent(v);
+                  } catch {
+                    return v;
+                  }
+                })
+                .map(function (v) {
+                  return String(v || "").trim();
+                })
+                .filter(Boolean)
+            : [];
+
+          var out = new URLSearchParams();
+          if (pid) {
+            out.set("pid", pid);
+            if (pn) out.set("pn", pn);
+          } else if (products.length === 1) {
+            out.set("p", products[0]);
+          }
+
+          var href = out.toString() ? base + "?" + out.toString() : base;
+          var canonical = document.querySelector('link[rel="canonical"]');
+          if (canonical) canonical.setAttribute("href", href);
+          var ogUrl = document.querySelector('meta[property="og:url"]');
+          if (ogUrl) ogUrl.setAttribute("content", href);
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

@@ -171,8 +171,31 @@ function selectedSingleProduct() {
   return String(Array.from(state.filters.products)[0] || "").trim();
 }
 
-function currentAbsoluteRouteUrl() {
-  return `${location.origin}${location.pathname}${location.search}`;
+function buildSeoCanonicalUrl() {
+  const base = `${location.origin}${location.pathname}`;
+  const params = new URLSearchParams(location.search);
+
+  // Canonicalize only the routes we intentionally want indexed:
+  // - patch details: pid(+pn)
+  // - single product landing: p=<one product>
+  // Everything else canonicalizes to the homepage.
+  const pid = String(params.get("pid") || "").trim();
+  const pn = String(params.get("pn") || "").trim().toLowerCase();
+  if (pid) {
+    const out = new URLSearchParams();
+    out.set("pid", pid);
+    if (pn) out.set("pn", pn);
+    return `${base}?${out.toString()}`;
+  }
+
+  const products = decodeList(params.get("p"));
+  if (products.length === 1) {
+    const out = new URLSearchParams();
+    out.set("p", products[0]);
+    return `${base}?${out.toString()}`;
+  }
+
+  return base;
 }
 
 function ensureCanonicalLinkEl() {
@@ -185,7 +208,7 @@ function ensureCanonicalLinkEl() {
 }
 
 function updateRouteSeoMeta() {
-  const href = currentAbsoluteRouteUrl();
+  const href = buildSeoCanonicalUrl();
 
   try {
     const canonical = ensureCanonicalLinkEl();

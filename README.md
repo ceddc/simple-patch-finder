@@ -87,6 +87,9 @@ This repo includes a GitHub Actions workflow that downloads and commits the late
 
 - `patches.json` (upstream content)
 - `patches.meta.json` (refresh timestamp + hash)
+- `sitemap.xml` (sitemap index)
+- `sitemap-pages.xml` (homepage + product URLs)
+- `sitemap-patches.xml` (patch deep-link URLs)
 
 Schedule: `HH:12` and `HH:42` (UTC). You can also run it manually from the Actions tab.
 
@@ -101,4 +104,4 @@ To publish the site:
 
 - The dataset is refreshed by GitHub Actions (see `.github/workflows/update-dataset.yml`).
 - `robots.txt` and `sitemap.xml` are included for SEO.
-- `sitemap.xml` is generated from `patches.json` by `scripts/generate_sitemap.py` in the update workflow.
+- `scripts/generate_sitemap.py` generates `sitemap.xml`, `sitemap-pages.xml`, and `sitemap-patches.xml` from `patches.json`.

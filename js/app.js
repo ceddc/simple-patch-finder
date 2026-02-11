@@ -105,6 +105,12 @@ const state = {
   },
 };
 
+const DEFAULT_PAGE_TITLE = String(document.title || "ArcGIS Patch Download Search (Unofficial) | Enterprise, Server, Data Store");
+const TITLE_BRAND = "Simple Patch Finder";
+
+let activePatch = null;
+let patchRoute = { pid: "", pn: "" };
+
 // --- URL state (shareable links) ---
 
 function encodeList(values) {
@@ -130,6 +136,110 @@ function decodeList(s) {
     .filter(Boolean);
 }
 
+function slugifyPatchName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 180);
+}
+
+function normalizePatchRoute(pid, pn) {
+  const outPid = String(pid || "").trim();
+  const outPn = String(pn || "").trim().toLowerCase();
+  return {
+    pid: outPid,
+    pn: outPid ? outPn : "",
+  };
+}
+
+function readPatchRouteFromParams(params) {
+  if (!params) return { pid: "", pn: "" };
+  return normalizePatchRoute(params.get("pid"), params.get("pn"));
+}
+
+function patchRouteFromPatch(p) {
+  if (!p) return { pid: "", pn: "" };
+  const pid = String(p.qfeId || "").trim();
+  const pn = slugifyPatchName(p.name || "");
+  return normalizePatchRoute(pid, pn);
+}
+
+function selectedSingleProduct() {
+  if (!state.filters.products || state.filters.products.size !== 1) return "";
+  return String(Array.from(state.filters.products)[0] || "").trim();
+}
+
+function currentAbsoluteRouteUrl() {
+  return `${location.origin}${location.pathname}${location.search}`;
+}
+
+function ensureCanonicalLinkEl() {
+  let el = document.querySelector('link[rel="canonical"]');
+  if (el) return el;
+  el = document.createElement("link");
+  el.setAttribute("rel", "canonical");
+  document.head.appendChild(el);
+  return el;
+}
+
+function updateRouteSeoMeta() {
+  const href = currentAbsoluteRouteUrl();
+
+  try {
+    const canonical = ensureCanonicalLinkEl();
+    if (canonical.getAttribute("href") !== href) canonical.setAttribute("href", href);
+  } catch {
+    // ignore
+  }
+
+  try {
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl && ogUrl.getAttribute("content") !== href) ogUrl.setAttribute("content", href);
+  } catch {
+    // ignore
+  }
+}
+
+function updatePageTitle() {
+  if (activePatch) {
+    const name = String(activePatch.name || "").trim();
+    const pid = String(activePatch.qfeId || "").trim();
+    if (name && pid) {
+      document.title = `${name} (${pid}) | ${TITLE_BRAND}`;
+      return;
+    }
+    if (name) {
+      document.title = `${name} | ${TITLE_BRAND}`;
+      return;
+    }
+  }
+
+  const product = selectedSingleProduct();
+  if (product) {
+    document.title = `${product} patches | ${TITLE_BRAND}`;
+    return;
+  }
+
+  document.title = DEFAULT_PAGE_TITLE;
+}
+
+function findPatchByRoute(route) {
+  const pid = String(route?.pid || "").trim().toLowerCase();
+  if (!pid) return null;
+  const candidates = (state.all || []).filter((p) => String(p.qfeId || "").trim().toLowerCase() === pid);
+  if (!candidates.length) return null;
+
+  const slug = String(route?.pn || "").trim().toLowerCase();
+  if (slug) {
+    const exact = candidates.find((p) => slugifyPatchName(p.name || "") === slug);
+    if (exact) return exact;
+  }
+
+  return candidates[0];
+}
+
 function serializeFiltersToParams() {
   // Only emit non-default filters to keep URLs short/stable.
   const f = state.filters;
@@ -142,6 +252,8 @@ function serializeFiltersToParams() {
   if (f.critical && f.critical !== "all") params.set("c", f.critical);
   if (f.from) params.set("from", f.from);
   if (f.to) params.set("to", f.to);
+  if (patchRoute.pid) params.set("pid", patchRoute.pid);
+  if (patchRoute.pn) params.set("pn", patchRoute.pn);
   return params;
 }
 
@@ -160,14 +272,25 @@ function syncLocationToFilters() {
   const qs = params.toString();
   const desired = `${location.pathname}${qs ? `?${qs}` : ""}${location.hash || ""}`;
   const current = `${location.pathname}${location.search}${location.hash || ""}`;
-  if (desired === current) return;
-  if (desired === lastSyncedLocation) return;
+  if (desired === current) {
+    updateRouteSeoMeta();
+    updatePageTitle();
+    return;
+  }
+  if (desired === lastSyncedLocation) {
+    updateRouteSeoMeta();
+    updatePageTitle();
+    return;
+  }
   try {
     history.replaceState({}, "", desired);
     lastSyncedLocation = desired;
   } catch {
     // ignore
   }
+
+  updateRouteSeoMeta();
+  updatePageTitle();
 }
 
 function hydrateFiltersFromLocation() {
@@ -190,6 +313,10 @@ function hydrateFiltersFromLocation() {
   state.filters.critical = ["all", "security", "critical"].includes(critical) ? critical : "all";
   state.filters.from = from;
   state.filters.to = to;
+  patchRoute = readPatchRouteFromParams(params);
+
+  updateRouteSeoMeta();
+  updatePageTitle();
 }
 
 // --- Core parsing helpers ---
@@ -1074,6 +1201,7 @@ function applyAndRender() {
     baseCountText = `${state.all.length.toLocaleString()} patches`;
     updateDatasetHint();
     syncLocationToFilters();
+    updatePageTitle();
     return;
   }
 
@@ -1097,12 +1225,35 @@ function applyAndRender() {
   updateDatasetHint();
 
   syncLocationToFilters();
+  updatePageTitle();
 }
 
-function openPatch(p) {
+function clearPatchRoute() {
+  activePatch = null;
+  patchRoute = { pid: "", pn: "" };
+  syncLocationToFilters();
+  updatePageTitle();
+}
+
+function openPatch(p, opts = {}) {
   if (!p) return;
+  const syncRoute = opts.syncRoute !== false;
+
+  activePatch = p;
+  if (syncRoute) patchRoute = patchRouteFromPatch(p);
+
   renderDialog(p);
   els.dlg.open = true;
+
+  if (syncRoute) syncLocationToFilters();
+  updatePageTitle();
+}
+
+function openPatchFromRouteIfNeeded() {
+  if (!patchRoute.pid) return;
+  const p = findPatchByRoute(patchRoute);
+  if (!p) return;
+  openPatch(p, { syncRoute: true });
 }
 
 
@@ -1505,6 +1656,18 @@ function wireEvents() {
   if (shareBtnDefaultText == null) shareBtnDefaultText = String(els.btnShare.textContent || "").trim() || "Share";
   if (shareBtnDefaultIcon == null) shareBtnDefaultIcon = els.btnShare.getAttribute("icon-start") || "link";
 
+  if (els.dlg) {
+    const onDialogClose = () => {
+      if (!els.dlg.open && (activePatch || patchRoute.pid || patchRoute.pn)) clearPatchRoute();
+    };
+
+    els.dlg.addEventListener("calciteDialogClose", onDialogClose);
+    els.dlg.addEventListener("close", onDialogClose);
+
+    const obs = new MutationObserver(onDialogClose);
+    obs.observe(els.dlg, { attributes: true, attributeFilter: ["open"] });
+  }
+
   const onQueryInput = () => {
     if (qTimer) clearTimeout(qTimer);
     qTimer = setTimeout(() => {
@@ -1701,6 +1864,7 @@ async function loadDataset() {
 
     // applyAndRender sets the count text.
     applyAndRender();
+    openPatchFromRouteIfNeeded();
   } catch (err) {
     setStatusText("Missing patches.json");
     // keep current status text

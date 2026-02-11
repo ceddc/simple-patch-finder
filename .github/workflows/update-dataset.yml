@@ -54,6 +54,11 @@ jobs:
           PY
           echo "updated_at_utc=$UPDATED_AT_UTC"
 
+      - name: Generate sitemap.xml
+        run: |
+          set -euo pipefail
+          python3 scripts/generate_sitemap.py
+
       - name: Commit if changed
         run: |
           set -euo pipefail
@@ -61,10 +66,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Stage the file even if it was previously untracked.
-          git add patches.json patches.meta.json
+          git add patches.json patches.meta.json sitemap.xml
 
           if git diff --cached --quiet; then
-            echo "No changes to patches.json"
+            echo "No dataset/sitemap changes"
             exit 0
           fi
 

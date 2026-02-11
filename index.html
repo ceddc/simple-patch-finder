@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://ceddc.github.io/simple-patch-finder/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Patch Finder" />
     <meta property="og:url" content="https://ceddc.github.io/simple-patch-finder/" />
     <meta property="og:title" content="ArcGIS Patch Download Search (Unofficial)" />
     <meta
@@ -35,6 +36,7 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Simple Patch Finder",
+        "alternateName": "ArcGIS Patch Download Search",
         "url": "https://ceddc.github.io/simple-patch-finder/",
         "description": "Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages.",
         "potentialAction": {
@@ -246,7 +248,7 @@
                     <div>
                       <div class="about-h">Data Workflow</div>
                       <ul class="about-list">
-                        <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> every 6 hours (the same dataset used by Esri patch notification tools).</li>
+                        <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> every 30 minutes (the same dataset used by Esri patch notification tools).</li>
                         <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
                         <li>The action also writes <span class="mono">patches.meta.json</span> so the UI can display the last refresh time.</li>
                       </ul>

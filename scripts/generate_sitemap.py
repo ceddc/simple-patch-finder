@@ -27,6 +27,12 @@ SITEMAP_PAGES_XML = ROOT / "sitemap-pages.xml"
 SITEMAP_PATCHES_XML = ROOT / "sitemap-patches.xml"
 
 
+def write_text_lf(path: Path, content: str) -> None:
+    # Force Unix newlines even when generated on Windows.
+    with path.open("w", encoding="utf-8", newline="\n") as f:
+        f.write(content)
+
+
 @dataclass(frozen=True)
 class UrlEntry:
     loc: str
@@ -131,7 +137,7 @@ def write_urlset(path: Path, entries: Iterable[UrlEntry]) -> None:
             lines.append(f"    <lastmod>{escape(e.lastmod, quote=False)}</lastmod>")
         lines.append("  </url>")
     lines.append("</urlset>")
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text_lf(path, "\n".join(lines) + "\n")
 
 
 def write_sitemap_index(dataset_lastmod: str) -> None:
@@ -151,7 +157,7 @@ def write_sitemap_index(dataset_lastmod: str) -> None:
             lines.append(f"    <lastmod>{escape(item.lastmod, quote=False)}</lastmod>")
         lines.append("  </sitemap>")
     lines.append("</sitemapindex>")
-    SITEMAP_INDEX_XML.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text_lf(SITEMAP_INDEX_XML, "\n".join(lines) + "\n")
 
 
 def main() -> None:

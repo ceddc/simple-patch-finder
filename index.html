@@ -103,7 +103,7 @@
     </script>
     <link rel="icon" type="image/svg+xml" href="./map.svg" />
 
-    <!-- Calcite (primary UI) -->
+    <!-- Calcite (loaded like official tutorial examples) -->
     <script type="module" src="https://js.arcgis.com/calcite-components/5.0"></script>
 
     <!-- High-performance grid (sorting + local pagination) -->
@@ -226,9 +226,22 @@
       </calcite-shell-panel>
 
       <calcite-panel class="results-card" heading="Patches" description="Latest Esri patches and download links">
+        <div slot="header-actions-start" class="results-mobile-brand" aria-hidden="true">
+          <img class="brand-logo brand-logo--mobile" src="./map.svg" alt="" />
+        </div>
         <div slot="header-actions-end" class="results-meta">
           <div class="hint" id="text-count">Loading...</div>
           <div class="results-actions">
+            <calcite-button
+              id="btn-toggle-panel"
+              appearance="outline-fill"
+              kind="neutral"
+              scale="s"
+              icon-start="panel-left"
+              label="Toggle filters panel"
+            >
+              Filters
+            </calcite-button>
             <calcite-button
               id="btn-reset"
               appearance="outline-fill"
@@ -260,7 +273,7 @@
                  heading="About & Help"
                  description="Data source + FAQ"
                  collapsible
-                 icon-start="information"
+                  icon-start="information"
                >
                  <div class="help-block-body">
                   <div>

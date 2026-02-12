@@ -18,6 +18,12 @@ calcite-shell-panel#panel-start {
   --calcite-shell-panel-width: 360px;
 }
 
+@media (max-width: 900px) {
+  calcite-shell-panel#panel-start {
+    --calcite-shell-panel-width: min(92vw, 360px);
+  }
+}
+
 /* Keep the left rail compact: fixed header, scrollable filters. */
 #left-panel {
   --calcite-panel-space: 8px;
@@ -75,11 +81,55 @@ calcite-shell-panel#panel-start {
   gap: 6px;
 }
 
+.results-mobile-brand {
+  display: none;
+  align-items: center;
+}
+
+.brand-logo--mobile {
+  width: 24px;
+  height: 24px;
+}
+
+#btn-toggle-panel {
+  display: none;
+}
+
 .hint {
   font-size: var(--calcite-font-size-sm, 12px);
   color: var(--calcite-color-text-2);
   line-height: 1.2;
   white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .results-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 6px;
+  }
+
+  .results-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .hint {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 900px) {
+  #btn-toggle-panel {
+    display: inline-flex;
+  }
+
+  .results-mobile-brand {
+    display: inline-flex;
+  }
 }
 
 .table-wrap {

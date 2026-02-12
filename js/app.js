@@ -58,6 +58,7 @@ const els = {
   fTo: document.getElementById("f-to"),
 
   btnShare: document.getElementById("btn-share"),
+  btnTogglePanel: document.getElementById("btn-toggle-panel"),
   btnReset: document.getElementById("btn-reset"),
   btnResetFilters: document.getElementById("btn-reset-filters"),
 };
@@ -1027,12 +1028,32 @@ function wireHelpBlockHeaderAccent() {
 function syncShellPanelDisplayMode() {
   const panel = document.getElementById("panel-start");
   if (!panel) return;
+  const resultsPanel = document.querySelector("calcite-panel.results-card");
 
   const mql = window.matchMedia("(max-width: 900px)");
   const setMode = () => {
     // Per Calcite guidance, switch shell panel modes at smaller viewports.
-    // Use overlay on small screens; dock on larger screens.
-    panel.setAttribute("display-mode", mql.matches ? "overlay" : "dock");
+    // On mobile, show overlay and collapse by default (single-column layout).
+    // On larger screens, show docked two-column layout.
+    const mobile = mql.matches;
+    panel.setAttribute("display-mode", mobile ? "overlay" : "dock");
+    if (mobile) panel.setAttribute("collapsed", "");
+    else panel.removeAttribute("collapsed");
+
+    if (resultsPanel) {
+      if (!resultsPanel.dataset.desktopHeading) {
+        resultsPanel.dataset.desktopHeading = resultsPanel.getAttribute("heading") || "Patches";
+        resultsPanel.dataset.desktopDescription = resultsPanel.getAttribute("description") || "";
+      }
+
+      if (mobile) {
+        resultsPanel.setAttribute("heading", "Simple Patch Finder");
+        resultsPanel.setAttribute("description", "");
+      } else {
+        resultsPanel.setAttribute("heading", resultsPanel.dataset.desktopHeading || "Patches");
+        resultsPanel.setAttribute("description", resultsPanel.dataset.desktopDescription || "");
+      }
+    }
   };
 
   setMode();
@@ -1851,6 +1872,32 @@ function wireEvents() {
     }
     els.shareAlert.open = true;
   });
+
+  if (els.btnTogglePanel) {
+    els.btnTogglePanel.addEventListener("click", () => {
+      const panel = document.getElementById("panel-start");
+      if (!panel) return;
+      const mobile = window.matchMedia("(max-width: 900px)").matches;
+      if (!mobile) return;
+
+      const collapsed = panel.hasAttribute("collapsed") || !!panel.collapsed;
+      if (collapsed) {
+        panel.removeAttribute("collapsed");
+        try {
+          panel.collapsed = false;
+        } catch {
+          // ignore
+        }
+      } else {
+        panel.setAttribute("collapsed", "");
+        try {
+          panel.collapsed = true;
+        } catch {
+          // ignore
+        }
+      }
+    });
+  }
 
   if (els.btnReset) els.btnReset.addEventListener("click", resetFilters);
   if (els.btnResetFilters) els.btnResetFilters.addEventListener("click", resetFilters);

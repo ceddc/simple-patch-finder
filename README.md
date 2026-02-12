@@ -83,7 +83,7 @@ The goal is speed: find a patch quickly and jump to the official Esri page for f
 
 ## GitHub Pages
 
-This repo includes a GitHub Actions workflow that downloads and commits the latest dataset every 30 minutes (UTC) to `main`:
+This repo includes a GitHub Actions workflow that downloads and commits the latest dataset every 3 hours (UTC) to `main`:
 
 - `patches.json` (upstream content)
 - `patches.meta.json` (refresh timestamp + hash)
@@ -91,7 +91,7 @@ This repo includes a GitHub Actions workflow that downloads and commits the late
 - `sitemap-pages.xml` (homepage + product URLs)
 - `sitemap-patches.xml` (patch deep-link URLs)
 
-Schedule: `HH:12` and `HH:42` (UTC). You can also run it manually from the Actions tab.
+Schedule: `00:12`, `03:12`, `06:12`, `09:12`, `12:12`, `15:12`, `18:12`, `21:12` (UTC). You can also run it manually from the Actions tab.
 
 To publish the site:
 

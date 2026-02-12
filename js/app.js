@@ -155,9 +155,28 @@ function normalizePatchRoute(pid, pn) {
   };
 }
 
+function isLikelyPid(value) {
+  return /^[A-Za-z0-9._-]{2,80}$/.test(String(value || ""));
+}
+
+function isLikelySlug(value) {
+  return /^[a-z0-9-]{2,180}$/.test(String(value || ""));
+}
+
+function isKnownProductValue(value) {
+  const wanted = String(value || "").trim();
+  if (!wanted) return false;
+  const opts = Array.isArray(state.options?.products) ? state.options.products : [];
+  if (!opts.length) return false;
+  return opts.some((o) => String(o?.value || "").trim() === wanted);
+}
+
 function readPatchRouteFromParams(params) {
   if (!params) return { pid: "", pn: "" };
-  return normalizePatchRoute(params.get("pid"), params.get("pn"));
+  const route = normalizePatchRoute(params.get("pid"), params.get("pn"));
+  if (!isLikelyPid(route.pid)) return { pid: "", pn: "" };
+  if (route.pn && !isLikelySlug(route.pn)) return { pid: route.pid, pn: "" };
+  return route;
 }
 
 function patchRouteFromPatch(p) {
@@ -169,7 +188,9 @@ function patchRouteFromPatch(p) {
 
 function selectedSingleProduct() {
   if (!state.filters.products || state.filters.products.size !== 1) return "";
-  return String(Array.from(state.filters.products)[0] || "").trim();
+  const product = String(Array.from(state.filters.products)[0] || "").trim();
+  if (!product) return "";
+  return isKnownProductValue(product) ? product : "";
 }
 
 function buildSeoCanonicalUrl() {
@@ -182,15 +203,18 @@ function buildSeoCanonicalUrl() {
   // Everything else canonicalizes to the homepage.
   const pid = String(params.get("pid") || "").trim();
   const pn = String(params.get("pn") || "").trim().toLowerCase();
-  if (pid) {
-    const out = new URLSearchParams();
-    out.set("pid", pid);
-    if (pn) out.set("pn", pn);
-    return `${base}?${out.toString()}`;
+  if (pid && isLikelyPid(pid) && (!pn || isLikelySlug(pn))) {
+    const match = findPatchByRoute({ pid, pn });
+    if (match) {
+      const out = new URLSearchParams();
+      out.set("pid", String(match.qfeId || "").trim());
+      out.set("pn", slugifyPatchName(match.name || ""));
+      return `${base}?${out.toString()}`;
+    }
   }
 
   const products = decodeList(params.get("p"));
-  if (products.length === 1) {
+  if (products.length === 1 && isKnownProductValue(products[0])) {
     const out = new URLSearchParams();
     out.set("p", products[0]);
     return `${base}?${out.toString()}`;
@@ -1435,7 +1459,8 @@ function ensureGrid() {
         formatter: (cell) => {
           const d = cell.getRow().getData();
           const rawUrl = String(d.patchPageUrl || "").trim();
-          const url = rawUrl ? escapeAttr(rawUrl) : "";
+          const safeUrl = sanitizeHttpUrl(rawUrl);
+          const url = safeUrl ? escapeAttr(safeUrl) : "";
           const ext = url
             ? `<a class="row-action row-action--ext" data-action="ext" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Open Esri page">\u{1F517}</a>`
             : `<span class="row-action row-action--disabled" aria-hidden="true">\u{1F517}</span>`;
@@ -1553,16 +1578,23 @@ function renderDialog(p) {
     return String(a.filename || "").localeCompare(String(b.filename || ""));
   });
 
+  const safePatchPageUrl = sanitizeHttpUrl(p.patchPageUrl);
+
   const fileRowsHtml = filesSorted
     .map((f) => {
       const v = escapeHtml(f.fileVersion || p.version || "");
+      const safeFileUrl = sanitizeHttpUrl(f.url);
       return (
         `<calcite-table-row>
           <calcite-table-cell>${v}</calcite-table-cell>
           <calcite-table-cell>${escapeHtml(f.filename)}</calcite-table-cell>
           <calcite-table-cell>
             <div class="url-full">
-              <calcite-link href="${escapeAttr(f.url)}" target="_blank" rel="noopener">${escapeHtml(f.url)}</calcite-link>
+              ${
+                safeFileUrl
+                  ? `<calcite-link href="${escapeAttr(safeFileUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(safeFileUrl)}</calcite-link>`
+                  : `<span class="dim">Invalid URL</span>`
+              }
             </div>
           </calcite-table-cell>
         </calcite-table-row>`
@@ -1609,8 +1641,8 @@ function renderDialog(p) {
           <div>
             <div class="dim" style="margin-bottom: 4px">Patch page</div>
             ${
-              p.patchPageUrl
-                ? `<div class="url-full"><calcite-link href="${escapeAttr(p.patchPageUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.patchPageUrl)}</calcite-link></div>`
+              safePatchPageUrl
+                ? `<div class="url-full"><calcite-link href="${escapeAttr(safePatchPageUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(safePatchPageUrl)}</calcite-link></div>`
                 : `<div class="dim">&mdash;</div>`
             }
           </div>
@@ -1661,6 +1693,20 @@ function escapeHtml(s) {
 function escapeAttr(s) {
   // Keep it simple; used only for href values.
   return escapeHtml(s).replaceAll("`", "");
+}
+
+function sanitizeHttpUrl(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  try {
+    const parsed = new URL(raw, window.location.origin);
+    const proto = String(parsed.protocol || "").toLowerCase();
+    if (proto !== "http:" && proto !== "https:") return "";
+    return parsed.href;
+  } catch {
+    return "";
+  }
 }
 
 function resetFilters() {

@@ -61,7 +61,7 @@ jobs:
           import json
           import re
           from dataclasses import dataclass
-          from datetime import date
+          from datetime import date, datetime
           from html import escape
           from pathlib import Path
           from urllib.parse import quote
@@ -69,15 +69,15 @@ jobs:
           BASE_URL = "https://ceddc.github.io/simple-patch-finder/"
           PATCHES_JSON = Path("patches.json")
           PATCHES_META_JSON = Path("patches.meta.json")
-          SITEMAP_INDEX_XML = Path("sitemap.xml")
-          SITEMAP_PAGES_XML = Path("sitemap-pages.xml")
-          SITEMAP_PATCHES_XML = Path("sitemap-patches.xml")
+          SITEMAP_XML = Path("sitemap.xml")
 
 
           @dataclass(frozen=True)
           class UrlEntry:
               loc: str
               lastmod: str = ""
+              changefreq: str = ""
+              priority: str = ""
 
 
           def write_text_lf(path: Path, content: str) -> None:
@@ -108,6 +108,34 @@ jobs:
                   return ""
 
 
+          def parse_isoish(value: str):
+              raw = (value or "").strip()
+              if not raw:
+                  return None
+              try:
+                  if raw.endswith("Z"):
+                      raw = raw[:-1] + "+00:00"
+                  return datetime.fromisoformat(raw)
+              except ValueError:
+                  pass
+              try:
+                  return datetime.combine(date.fromisoformat(raw), datetime.min.time())
+              except ValueError:
+                  return None
+
+
+          def newer_lastmod(a: str, b: str) -> str:
+              if not a:
+                  return b
+              if not b:
+                  return a
+              da = parse_isoish(a)
+              db = parse_isoish(b)
+              if da and db:
+                  return a if da >= db else b
+              return max(a, b)
+
+
           def read_dataset_lastmod() -> str:
               if not PATCHES_META_JSON.exists():
                   return ""
@@ -118,7 +146,7 @@ jobs:
                   return ""
 
 
-          def build_entries() -> tuple[list[UrlEntry], list[UrlEntry], str]:
+          def build_entries() -> list[UrlEntry]:
               raw = json.loads(PATCHES_JSON.read_text(encoding="utf-8"))
               groups = raw.get("Product") if isinstance(raw, dict) else []
               groups = groups if isinstance(groups, list) else []
@@ -134,16 +162,14 @@ jobs:
                       if not isinstance(p, dict):
                           continue
 
-                      rel = parse_release_date(str(p.get("ReleaseDate", "")))
+                      rel = parse_release_date(str(p.get("ReleaseDate", ""))) or dataset_lastmod
 
                       for prod in tokenize_csv(str(p.get("Products", ""))):
                           if not prod:
                               continue
-                          prev = product_lastmods.get(prod, "")
-                          if rel and (not prev or rel > prev):
-                              product_lastmods[prod] = rel
-                          elif not prev and dataset_lastmod:
-                              product_lastmods[prod] = dataset_lastmod
+                          product_lastmods[prod] = newer_lastmod(
+                              product_lastmods.get(prod, ""), rel
+                          )
 
                       pid = str(p.get("QFE_ID", "")).strip()
                       name = str(p.get("Name", "")).strip()
@@ -152,22 +178,41 @@ jobs:
 
                       pn = slugify_patch_name(name)
                       loc = f"{BASE_URL}?pid={quote(pid, safe='')}&pn={quote(pn, safe='')}"
-                      lastmod = rel or dataset_lastmod
-                      existing = patch_entries.get(loc)
-                      if existing is None:
-                          patch_entries[loc] = UrlEntry(loc=loc, lastmod=lastmod)
-                      elif lastmod and (not existing.lastmod or lastmod > existing.lastmod):
-                          patch_entries[loc] = UrlEntry(loc=loc, lastmod=lastmod)
+                      current = patch_entries.get(loc)
+                      if current is None:
+                          patch_entries[loc] = UrlEntry(
+                              loc=loc,
+                              lastmod=rel,
+                              changefreq="monthly",
+                              priority="0.7",
+                          )
+                      else:
+                          patch_entries[loc] = UrlEntry(
+                              loc=loc,
+                              lastmod=newer_lastmod(current.lastmod, rel),
+                              changefreq=current.changefreq,
+                              priority=current.priority,
+                          )
 
-              page_entries = [UrlEntry(loc=BASE_URL, lastmod=dataset_lastmod)]
-              for prod in sorted(product_lastmods):
-                  loc = f"{BASE_URL}?p={quote(prod, safe='')}"
-                  page_entries.append(
-                      UrlEntry(loc=loc, lastmod=product_lastmods.get(prod, "") or dataset_lastmod)
+              entries = [
+                  UrlEntry(
+                      loc=BASE_URL,
+                      lastmod=dataset_lastmod,
+                      changefreq="daily",
+                      priority="1.0",
                   )
-
-              patch_list = [patch_entries[k] for k in sorted(patch_entries)]
-              return page_entries, patch_list, dataset_lastmod
+              ]
+              for prod in sorted(product_lastmods):
+                  entries.append(
+                      UrlEntry(
+                          loc=f"{BASE_URL}?p={quote(prod, safe='')}",
+                          lastmod=product_lastmods[prod],
+                          changefreq="weekly",
+                          priority="0.8",
+                      )
+                  )
+              entries.extend(patch_entries[k] for k in sorted(patch_entries))
+              return entries
 
 
           def write_urlset(path: Path, entries: list[UrlEntry]) -> None:
@@ -180,35 +225,16 @@ jobs:
                   lines.append(f"    <loc>{escape(e.loc, quote=False)}</loc>")
                   if e.lastmod:
                       lines.append(f"    <lastmod>{escape(e.lastmod, quote=False)}</lastmod>")
+                  if e.changefreq:
+                      lines.append(f"    <changefreq>{escape(e.changefreq, quote=False)}</changefreq>")
+                  if e.priority:
+                      lines.append(f"    <priority>{escape(e.priority, quote=False)}</priority>")
                   lines.append("  </url>")
               lines.append("</urlset>")
               write_text_lf(path, "\n".join(lines) + "\n")
 
-
-          def write_sitemap_index(dataset_lastmod: str) -> None:
-              items = [
-                  UrlEntry(loc=f"{BASE_URL}sitemap-pages.xml", lastmod=dataset_lastmod),
-                  UrlEntry(loc=f"{BASE_URL}sitemap-patches.xml", lastmod=dataset_lastmod),
-              ]
-
-              lines = [
-                  '<?xml version="1.0" encoding="UTF-8"?>',
-                  '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-              ]
-              for item in items:
-                  lines.append("  <sitemap>")
-                  lines.append(f"    <loc>{escape(item.loc, quote=False)}</loc>")
-                  if item.lastmod:
-                      lines.append(f"    <lastmod>{escape(item.lastmod, quote=False)}</lastmod>")
-                  lines.append("  </sitemap>")
-              lines.append("</sitemapindex>")
-              write_text_lf(SITEMAP_INDEX_XML, "\n".join(lines) + "\n")
-
-
-          pages, patches, dataset_lastmod = build_entries()
-          write_urlset(SITEMAP_PAGES_XML, pages)
-          write_urlset(SITEMAP_PATCHES_XML, patches)
-          write_sitemap_index(dataset_lastmod)
+          entries = build_entries()
+          write_urlset(SITEMAP_XML, entries)
           PY
 
       - name: Commit if changed
@@ -218,7 +244,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Stage the file even if it was previously untracked.
-          git add patches.json patches.meta.json sitemap.xml sitemap-pages.xml sitemap-patches.xml
+          git add patches.json patches.meta.json sitemap.xml
 
           if git diff --cached --quiet; then
             echo "No dataset/sitemap changes"

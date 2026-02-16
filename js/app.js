@@ -47,6 +47,7 @@ const els = {
 
   shareAlert: document.getElementById("share-alert"),
   shareLink: document.getElementById("share-link"),
+  btnDlgShare: document.getElementById("btn-dlg-share"),
 
   fQ: document.getElementById("f-q"),
   fProducts: document.getElementById("f-products"),
@@ -311,6 +312,17 @@ function buildShareUrl() {
   const base = `${location.origin}${location.pathname}`;
   const qs = params.toString();
   return qs ? `${base}?${qs}` : base;
+}
+
+function buildPatchPermalinkUrl(patch) {
+  if (!patch) return buildShareUrl();
+  const route = patchRouteFromPatch(patch);
+  if (!route.pid) return buildShareUrl();
+
+  const params = new URLSearchParams();
+  params.set("pid", route.pid);
+  if (route.pn) params.set("pn", route.pn);
+  return `${location.origin}${location.pathname}?${params.toString()}`;
 }
 
 function syncLocationToFilters() {
@@ -1131,6 +1143,18 @@ function criticalLabel(kind) {
   return { label: "Standard", icon: "circle", chipClass: "crit-chip--standard" };
 }
 
+function criticalBadgeClass(kind) {
+  if (kind === "security") return "crit-badge--security";
+  if (kind === "critical") return "crit-badge--critical";
+  return "crit-badge--standard";
+}
+
+function renderCriticalBadgeHtml(kind, label) {
+  const cls = criticalBadgeClass(String(kind || "standard"));
+  const text = escapeHtml(String(label || criticalLabel(kind).label || "Standard"));
+  return `<span class="crit-badge ${cls}">${text}</span>`;
+}
+
 function inferFileVersionFromUrl(url) {
   const u = String(url || "");
   const name = filenameFromUrl(u);
@@ -1299,6 +1323,8 @@ function applyAndRender() {
 function clearPatchRoute() {
   activePatch = null;
   patchRoute = { pid: "", pn: "" };
+  setDialogShareButtonState("default");
+  updateDialogShareActionState();
   syncLocationToFilters();
   updatePageTitle();
 }
@@ -1311,6 +1337,8 @@ function openPatch(p, opts = {}) {
   if (syncRoute) patchRoute = patchRouteFromPatch(p);
 
   renderDialog(p);
+  setDialogShareButtonState("default");
+  updateDialogShareActionState();
   els.dlg.open = true;
 
   if (syncRoute) syncLocationToFilters();
@@ -1439,14 +1467,8 @@ function ensureGrid() {
         formatter: (cell) => {
           const d = cell.getRow().getData();
           const kind = String(d.criticalKind || "standard");
-          const label = escapeHtml(String(d.criticalDisplay || ""));
-          if (kind === "security") {
-            return `<span class="crit-badge crit-badge--security">${label}</span>`;
-          }
-          if (kind === "critical") {
-            return `<span class="crit-badge crit-badge--critical">${label}</span>`;
-          }
-          return `<span class="crit-badge crit-badge--standard">${label}</span>`;
+          const label = String(d.criticalDisplay || "");
+          return renderCriticalBadgeHtml(kind, label);
         },
       },
       {
@@ -1461,12 +1483,13 @@ function ensureGrid() {
           const rawUrl = String(d.patchPageUrl || "").trim();
           const safeUrl = sanitizeHttpUrl(rawUrl);
           const url = safeUrl ? escapeAttr(safeUrl) : "";
-          const ext = url
-            ? `<a class="row-action row-action--ext" data-action="ext" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Open Esri page">\u{1F517}</a>`
-            : `<span class="row-action row-action--disabled" aria-hidden="true">\u{1F517}</span>`;
+          const ext =
+            url
+              ? `<calcite-action class="row-action row-action--ext" data-action="ext" data-url="${url}" icon="launch" text="Open Esri page" label="Open Esri page" scale="s"></calcite-action>`
+              : `<calcite-action class="row-action row-action--ext" data-action="ext" icon="launch" text="Open Esri page" label="Open Esri page" scale="s" disabled></calcite-action>`;
           return `
             <div class="row-actions">
-              <button class="row-action row-action--info" type="button" data-action="info" aria-label="Details">\u2139</button>
+              <calcite-action class="row-action row-action--info" data-action="info" icon="information" text="Details" label="Details" scale="s"></calcite-action>
               ${ext}
             </div>
           `;
@@ -1490,8 +1513,17 @@ function ensureGrid() {
           }
 
           if (action === "ext") {
-            // Allow navigation, but prevent row click opening the dialog.
+            // Open external link and prevent row click opening the dialog.
             e.stopPropagation();
+            const raw = String(el.getAttribute("data-url") || "").trim();
+            const href = sanitizeHttpUrl(raw);
+            if (href) {
+              try {
+                window.open(href, "_blank", "noopener,noreferrer");
+              } catch {
+                // ignore
+              }
+            }
             return;
           }
         },
@@ -1503,7 +1535,7 @@ function ensureGrid() {
     const path = e.composedPath?.() || [];
     const clickedLinkish = path.some((n) => {
       if (!(n instanceof HTMLElement)) return false;
-      return n.matches?.("a, calcite-button, button");
+      return n.matches?.("a, calcite-button, calcite-action, button");
     });
     if (clickedLinkish) return;
     openPatch(row.getData());
@@ -1559,7 +1591,7 @@ function renderDialog(p) {
   // Patch details dialog is built as HTML strings for speed and simplicity.
   // All dynamic content is escaped via escapeHtml/escapeAttr.
   els.dlg.heading = p.name || "Patch";
-  const crit = criticalLabel(p.criticalKind);
+  const critLabel = String(p.criticalDisplay || criticalLabel(p.criticalKind).label || "Standard");
 
   const products = p.productsTokens.length ? p.productsTokens.join(", ") : p.productsRaw;
   const platforms = p.platformTokens.length ? p.platformTokens.join(", ") : p.platformRaw;
@@ -1614,14 +1646,7 @@ function renderDialog(p) {
             <div class="k">Version</div>
             <div class="v">${escapeHtml(p.version || "")}</div>
             <div style="margin-top: 6px">
-              <calcite-chip
-                class="crit-chip ${crit.chipClass}"
-                scale="s"
-                kind="neutral"
-                appearance="outline"
-                icon="${escapeAttr(crit.icon)}"
-                label="${escapeAttr(crit.label)}"
-              >${escapeHtml(crit.label)}</calcite-chip>
+              ${renderCriticalBadgeHtml(p.criticalKind, critLabel)}
             </div>
           </div>
           <div class="dlg-fact"><div class="k">Release</div><div class="v">${escapeHtml(p.releaseDateText || "")}</div></div>
@@ -1727,8 +1752,126 @@ let qTimer = null;
 let shareBtnTimer = null;
 let shareBtnDefaultText = null;
 let shareBtnDefaultIcon = null;
+let dlgShareBtnTimer = null;
+let dlgShareDefaultText = null;
+let dlgShareDefaultIcon = null;
 let applyPending = false;
 let lastSyncedLocation = "";
+
+function setMainShareButtonState(state) {
+  if (shareBtnTimer) {
+    clearTimeout(shareBtnTimer);
+    shareBtnTimer = null;
+  }
+  if (state === "copied") {
+    els.btnShare.setAttribute("icon-start", "check-circle");
+    els.btnShare.textContent = "Copied";
+    shareBtnTimer = setTimeout(() => {
+      els.btnShare.setAttribute("icon-start", shareBtnDefaultIcon || "link");
+      els.btnShare.textContent = shareBtnDefaultText || "Share";
+      shareBtnTimer = null;
+    }, 2200);
+    return;
+  }
+  els.btnShare.setAttribute("icon-start", shareBtnDefaultIcon || "link");
+  els.btnShare.textContent = shareBtnDefaultText || "Share";
+}
+
+function setDialogShareButtonState(state) {
+  if (!els.btnDlgShare) return;
+  if (dlgShareBtnTimer) {
+    clearTimeout(dlgShareBtnTimer);
+    dlgShareBtnTimer = null;
+  }
+
+  if (state === "copied") {
+    els.btnDlgShare.setAttribute("icon-start", "check-circle");
+    els.btnDlgShare.textContent = "Copied";
+    dlgShareBtnTimer = setTimeout(() => {
+      els.btnDlgShare.setAttribute("icon-start", dlgShareDefaultIcon || "link");
+      els.btnDlgShare.textContent = dlgShareDefaultText || "Permalink";
+      dlgShareBtnTimer = null;
+    }, 2200);
+    return;
+  }
+
+  els.btnDlgShare.setAttribute("icon-start", dlgShareDefaultIcon || "link");
+  els.btnDlgShare.textContent = dlgShareDefaultText || "Permalink";
+}
+
+async function copyToClipboard(text) {
+  // Prefer modern Clipboard API, but keep an execCommand fallback for more environments.
+  try {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // fall through to execCommand fallback
+  }
+
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    ta.style.top = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand && document.execCommand("copy");
+    document.body.removeChild(ta);
+    return !!ok;
+  } catch {
+    return false;
+  }
+}
+
+async function shareUrlWithAlert(url, opts = {}) {
+  const titleEl = els.shareAlert.querySelector('[slot="title"]');
+  const msgEl = els.shareAlert.querySelector('[slot="message"]');
+
+  els.shareLink.href = url;
+  els.shareLink.textContent = url;
+
+  try {
+    const ok = await copyToClipboard(url);
+    if (!ok) throw new Error("copy failed");
+    els.shareAlert.kind = "success";
+    els.shareAlert.icon = "check-circle";
+    if (titleEl) titleEl.textContent = opts.copiedTitle || "Copied";
+    if (typeof opts.onCopied === "function") opts.onCopied();
+    if (msgEl) {
+      const hint = msgEl.querySelector(".share-hint");
+      if (hint) hint.remove();
+      const span = document.createElement("span");
+      span.className = "share-hint";
+      span.textContent = (opts.copiedPrefix || "Share link copied. ");
+      msgEl.prepend(span);
+    }
+  } catch {
+    // Clipboard can fail in some environments; the alert still shows the URL.
+    els.shareAlert.kind = "info";
+    els.shareAlert.icon = "information";
+    if (titleEl) titleEl.textContent = opts.defaultTitle || "Share link";
+    if (typeof opts.onCopyFailed === "function") opts.onCopyFailed();
+  }
+
+  els.shareAlert.open = true;
+}
+
+function updateDialogShareActionState() {
+  if (!els.btnDlgShare) return;
+  const enabled = !!activePatch;
+  try {
+    els.btnDlgShare.disabled = !enabled;
+  } catch {
+    // ignore
+  }
+  if (enabled) els.btnDlgShare.removeAttribute("disabled");
+  else els.btnDlgShare.setAttribute("disabled", "");
+}
+
 function scheduleApply() {
   // Batch rapid UI events into one apply pass per animation frame.
   if (applyPending) return;
@@ -1745,6 +1888,12 @@ function wireEvents() {
   // Capture default share button state once.
   if (shareBtnDefaultText == null) shareBtnDefaultText = String(els.btnShare.textContent || "").trim() || "Share";
   if (shareBtnDefaultIcon == null) shareBtnDefaultIcon = els.btnShare.getAttribute("icon-start") || "link";
+  if (els.btnDlgShare && dlgShareDefaultText == null) {
+    dlgShareDefaultText = String(els.btnDlgShare.textContent || "").trim() || "Permalink";
+  }
+  if (els.btnDlgShare && dlgShareDefaultIcon == null) {
+    dlgShareDefaultIcon = els.btnDlgShare.getAttribute("icon-start") || "link";
+  }
 
   if (els.dlg) {
     const onDialogClose = () => {
@@ -1841,83 +1990,29 @@ function wireEvents() {
 
   els.btnShare.addEventListener("click", async () => {
     // Share button updates an alert and attempts to copy the URL.
-    const url = buildShareUrl();
-    els.shareLink.href = url;
-    els.shareLink.textContent = url;
-    const titleEl = els.shareAlert.querySelector('[slot="title"]');
-    const msgEl = els.shareAlert.querySelector('[slot="message"]');
-
-    const setShareButtonState = (state) => {
-      if (shareBtnTimer) {
-        clearTimeout(shareBtnTimer);
-        shareBtnTimer = null;
-      }
-      if (state === "copied") {
-        els.btnShare.setAttribute("icon-start", "check");
-        els.btnShare.textContent = "Copied";
-        shareBtnTimer = setTimeout(() => {
-          els.btnShare.setAttribute("icon-start", shareBtnDefaultIcon || "link");
-          els.btnShare.textContent = shareBtnDefaultText || "Share";
-          shareBtnTimer = null;
-        }, 2200);
-        return;
-      }
-      els.btnShare.setAttribute("icon-start", shareBtnDefaultIcon || "link");
-      els.btnShare.textContent = shareBtnDefaultText || "Share";
-    };
-
-    const copyToClipboard = async (text) => {
-      // Prefer modern Clipboard API, but keep an execCommand fallback for more environments.
-      try {
-        if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
-          await navigator.clipboard.writeText(text);
-          return true;
-        }
-      } catch {
-        // fall through to execCommand fallback
-      }
-
-      try {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        ta.style.top = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        const ok = document.execCommand && document.execCommand("copy");
-        document.body.removeChild(ta);
-        return !!ok;
-      } catch {
-        return false;
-      }
-    };
-
-    try {
-      const ok = await copyToClipboard(url);
-      if (!ok) throw new Error("copy failed");
-      els.shareAlert.kind = "success";
-      els.shareAlert.icon = "check-circle";
-      if (titleEl) titleEl.textContent = "Copied";
-      setShareButtonState("copied");
-      if (msgEl) {
-        const hint = msgEl.querySelector(".share-hint");
-        if (hint) hint.remove();
-        const span = document.createElement("span");
-        span.className = "share-hint";
-        span.textContent = "Share link copied. ";
-        msgEl.prepend(span);
-      }
-    } catch {
-      // Clipboard can fail in some environments; the alert still shows the URL.
-      els.shareAlert.kind = "info";
-      els.shareAlert.icon = "information";
-      if (titleEl) titleEl.textContent = "Share link";
-      setShareButtonState("default");
-    }
-    els.shareAlert.open = true;
+    await shareUrlWithAlert(buildShareUrl(), {
+      copiedTitle: "Copied",
+      defaultTitle: "Share link",
+      copiedPrefix: "Share link copied. ",
+      onCopied: () => setMainShareButtonState("copied"),
+      onCopyFailed: () => setMainShareButtonState("default"),
+    });
   });
+
+  if (els.btnDlgShare) {
+    els.btnDlgShare.addEventListener("click", async () => {
+      if (!activePatch) return;
+      await shareUrlWithAlert(buildPatchPermalinkUrl(activePatch), {
+        copiedTitle: "Permalink copied",
+        defaultTitle: "Patch permalink",
+        copiedPrefix: "Patch permalink copied. ",
+        onCopied: () => setDialogShareButtonState("copied"),
+        onCopyFailed: () => setDialogShareButtonState("default"),
+      });
+    });
+  }
+
+  updateDialogShareActionState();
 
   if (els.btnTogglePanel) {
     els.btnTogglePanel.addEventListener("click", () => {

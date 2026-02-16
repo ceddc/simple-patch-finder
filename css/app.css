@@ -73,12 +73,14 @@ calcite-shell-panel#panel-start {
   gap: 10px;
   width: 100%;
   min-width: 0;
+  min-height: 32px;
 }
 
 .results-actions {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 32px;
 }
 
 .results-mobile-brand {
@@ -96,10 +98,13 @@ calcite-shell-panel#panel-start {
 }
 
 .hint {
+  display: inline-flex;
+  align-items: center;
   font-size: var(--calcite-font-size-sm, 12px);
   color: var(--calcite-color-text-2);
   line-height: 1.2;
   white-space: nowrap;
+  min-height: 32px;
 }
 
 @media (max-width: 640px) {
@@ -108,17 +113,20 @@ calcite-shell-panel#panel-start {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: 6px;
+    min-height: 0;
   }
 
   .results-actions {
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
+    min-height: 0;
   }
 
   .hint {
     white-space: normal;
     overflow-wrap: anywhere;
+    min-height: 0;
   }
 }
 
@@ -199,41 +207,11 @@ calcite-shell-panel#panel-start {
 }
 
 
-/* Lightweight row actions (keep grid perf; align with Calcite tokens). */
+/* Row actions in table use Calcite icon-only actions. */
 .row-actions {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-}
-
-.row-action {
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--calcite-color-border-1);
-  border-radius: var(--calcite-border-radius, 4px);
-  background: var(--calcite-color-foreground-1);
-  color: var(--calcite-color-text-1);
-  text-decoration: none;
-  cursor: pointer;
-  user-select: none;
-  line-height: 1;
-}
-
-.row-action:hover {
-  background: var(--calcite-color-foreground-2);
-}
-
-.row-action:focus-visible {
-  outline: 2px solid var(--calcite-color-brand);
-  outline-offset: 2px;
-}
-
-.row-action--disabled {
-  opacity: 0.5;
-  pointer-events: none;
+  gap: 2px;
 }
 
 .tabulator .tabulator-footer {

@@ -202,7 +202,7 @@
             </calcite-button>
             <calcite-button
               id="btn-reset"
-              appearance="outline-fill"
+              appearance="solid"
               kind="brand"
               scale="s"
               icon-start="reset"
@@ -212,7 +212,7 @@
             </calcite-button>
             <calcite-button
               id="btn-share"
-              appearance="outline-fill"
+              appearance="solid"
               kind="brand"
               scale="s"
               icon-start="link"
@@ -299,6 +299,17 @@
           </calcite-panel>
 
       <calcite-dialog slot="dialogs" id="dlg" heading="Patch" width-scale="m" placement="center" modal>
+        <calcite-button
+          id="btn-dlg-share"
+          slot="header-actions-end"
+          appearance="solid"
+          kind="brand"
+          scale="s"
+          icon-start="link"
+          label="Copy patch permalink"
+        >
+          Permalink
+        </calcite-button>
         <div id="dlg-body"></div>
       </calcite-dialog>
 

@@ -204,8 +204,19 @@ function buildSeoCanonicalUrl() {
   // Everything else canonicalizes to the homepage.
   const pid = String(params.get("pid") || "").trim();
   const pn = String(params.get("pn") || "").trim().toLowerCase();
-  if (pid && isLikelyPid(pid) && (!pn || isLikelySlug(pn))) {
-    const match = findPatchByRoute({ pid, pn });
+  if (pid && isLikelyPid(pid)) {
+    const safePn = pn && isLikelySlug(pn) ? pn : "";
+
+    // Preserve valid patch route canonicals on first load, before dataset is
+    // available for exact matching/normalization.
+    if (!state.all.length) {
+      const out = new URLSearchParams();
+      out.set("pid", pid);
+      if (safePn) out.set("pn", safePn);
+      return `${base}?${out.toString()}`;
+    }
+
+    const match = findPatchByRoute({ pid, pn: safePn });
     if (match) {
       const out = new URLSearchParams();
       out.set("pid", String(match.qfeId || "").trim());

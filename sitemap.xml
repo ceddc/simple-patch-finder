@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ceddc.github.io/simple-patch-finder/</loc>
-    <lastmod>2026-02-19T15:30:27Z</lastmod>
+    <lastmod>2026-02-19T18:31:32Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://ceddc.github.io/simple-patch-finder/?p=ArcGIS%20Enterprise</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -266,7 +266,7 @@
   </url>
   <url>
     <loc>https://ceddc.github.io/simple-patch-finder/?p=Portal%20for%20ArcGIS</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1561,8 +1561,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ceddc.github.io/simple-patch-finder/?pid=PFA-115-P-1383&amp;pn=portal-for-arcgis-11-5-mission-manager-tasking-and-template-patch</loc>
-    <lastmod>2026-02-13</lastmod>
+    <loc>https://ceddc.github.io/simple-patch-finder/?pid=PFA-115-P-1383B&amp;pn=portal-for-arcgis-11-5-mission-manager-tasking-and-template-patch</loc>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

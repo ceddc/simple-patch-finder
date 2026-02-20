@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ceddc.github.io/simple-patch-finder/</loc>
-    <lastmod>2026-02-20T00:48:27Z</lastmod>
+    <lastmod>2026-02-20T04:00:23Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -194,7 +194,7 @@
   </url>
   <url>
     <loc>https://ceddc.github.io/simple-patch-finder/?p=ArcGIS%20Server</loc>
-    <lastmod>2026-02-04</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -4773,6 +4773,12 @@
   <url>
     <loc>https://ceddc.github.io/simple-patch-finder/?pid=S-111-P-1378&amp;pn=arcgis-server-11-1-utility-network-and-data-management-patch-5</loc>
     <lastmod>2026-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ceddc.github.io/simple-patch-finder/?pid=S-111-P-1396&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</loc>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

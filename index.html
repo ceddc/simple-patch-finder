@@ -10,11 +10,26 @@
     />
     <meta name="robots" content="index,follow" />
     <meta name="msvalidate.01" content="DCED9FB754860CB81DEBA0EE29BC5B70" />
-    <link rel="canonical" href="https://ceddc.github.io/simple-patch-finder/" />
+    <script>
+      (function () {
+        try {
+          if (location.hostname !== "ceddc.github.io") return;
+          var prefix = "/simple-patch-finder";
+          if (!(location.pathname === prefix || location.pathname.indexOf(prefix + "/") === 0)) return;
+
+          var rest = location.pathname.slice(prefix.length) || "/";
+          var dest = "https://simplepatchfinder.ceddc.dev" + rest + (location.search || "") + (location.hash || "");
+          if (location.href !== dest) location.replace(dest);
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+    <link rel="canonical" href="https://simplepatchfinder.ceddc.dev/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Simple Patch Finder" />
-    <meta property="og:url" content="https://ceddc.github.io/simple-patch-finder/" />
+    <meta property="og:url" content="https://simplepatchfinder.ceddc.dev/" />
     <meta property="og:title" content="ArcGIS Patch Download Search (Unofficial)" />
     <meta
       property="og:description"
@@ -38,11 +53,11 @@
         "@type": "WebSite",
         "name": "Simple Patch Finder",
         "alternateName": "ArcGIS Patch Download Search",
-        "url": "https://ceddc.github.io/simple-patch-finder/",
+        "url": "https://simplepatchfinder.ceddc.dev/",
         "description": "Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages.",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://ceddc.github.io/simple-patch-finder/?q={search_term_string}",
+          "target": "https://simplepatchfinder.ceddc.dev/?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       }

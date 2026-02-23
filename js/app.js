@@ -138,6 +138,59 @@ function decodeList(s) {
     .filter(Boolean);
 }
 
+function slugifyFilterToken(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 180);
+}
+
+function encodeListSlugs(values) {
+  return Array.from(values || [])
+    .map((v) => slugifyFilterToken(v))
+    .filter(Boolean)
+    .map((v) => encodeURIComponent(String(v)))
+    .join("|");
+}
+
+function buildSlugLookup(items) {
+  const map = new Map();
+  for (const it of Array.isArray(items) ? items : []) {
+    const value = String(it?.value || "").trim();
+    if (!value) continue;
+    const slug = slugifyFilterToken(value);
+    if (!slug) continue;
+    const prev = map.get(slug);
+    if (prev === undefined) map.set(slug, value);
+    else if (prev !== value) map.set(slug, "");
+  }
+  return map;
+}
+
+function resolveOptionValueFromToken(token, items) {
+  const wanted = String(token || "").trim();
+  if (!wanted) return "";
+
+  const list = Array.isArray(items) ? items : [];
+  const exact = list.find((it) => String(it?.value || "").trim() === wanted);
+  if (exact) return String(exact.value || "").trim();
+
+  const lookup = buildSlugLookup(list);
+  const fromSlug = lookup.get(slugifyFilterToken(wanted));
+  return String(fromSlug || "").trim();
+}
+
+function normalizeFilterSetFromOptions(values, items) {
+  const out = new Set();
+  for (const token of values || []) {
+    const resolved = resolveOptionValueFromToken(token, items);
+    if (resolved) out.add(resolved);
+  }
+  return out;
+}
+
 function slugifyPatchName(name) {
   return String(name || "")
     .toLowerCase()
@@ -169,7 +222,7 @@ function isKnownProductValue(value) {
   if (!wanted) return false;
   const opts = Array.isArray(state.options?.products) ? state.options.products : [];
   if (!opts.length) return false;
-  return opts.some((o) => String(o?.value || "").trim() === wanted);
+  return !!resolveOptionValueFromToken(wanted, opts);
 }
 
 function readPatchRouteFromParams(params) {
@@ -226,10 +279,23 @@ function buildSeoCanonicalUrl() {
   }
 
   const products = decodeList(params.get("p"));
-  if (products.length === 1 && isKnownProductValue(products[0])) {
+  if (products.length === 1) {
     const out = new URLSearchParams();
-    out.set("p", products[0]);
-    return `${base}?${out.toString()}`;
+    const token = String(products[0] || "").trim();
+
+    if (!state.options.products.length) {
+      const slug = slugifyFilterToken(token);
+      if (slug) {
+        out.set("p", slug);
+        return `${base}?${out.toString()}`;
+      }
+    }
+
+    const resolved = resolveOptionValueFromToken(token, state.options.products);
+    if (resolved) {
+      out.set("p", slugifyFilterToken(resolved));
+      return `${base}?${out.toString()}`;
+    }
   }
 
   return base;
@@ -305,10 +371,10 @@ function serializeFiltersToParams() {
   const f = state.filters;
   const params = new URLSearchParams();
   if (f.q) params.set("q", f.q);
-  if (f.products.size) params.set("p", encodeList(f.products));
-  if (f.versions.size) params.set("v", encodeList(f.versions));
-  if (f.platforms.size) params.set("os", encodeList(f.platforms));
-  if (f.types.size) params.set("t", encodeList(f.types));
+  if (f.products.size) params.set("p", encodeListSlugs(f.products));
+  if (f.versions.size) params.set("v", encodeListSlugs(f.versions));
+  if (f.platforms.size) params.set("os", encodeListSlugs(f.platforms));
+  if (f.types.size) params.set("t", encodeListSlugs(f.types));
   if (f.critical && f.critical !== "all") params.set("c", f.critical);
   if (f.from) params.set("from", f.from);
   if (f.to) params.set("to", f.to);
@@ -388,6 +454,13 @@ function hydrateFiltersFromLocation() {
 
   updateRouteSeoMeta();
   updatePageTitle();
+}
+
+function normalizeFiltersFromOptions() {
+  state.filters.products = normalizeFilterSetFromOptions(state.filters.products, state.options.products);
+  state.filters.versions = normalizeFilterSetFromOptions(state.filters.versions, state.options.versions);
+  state.filters.platforms = normalizeFilterSetFromOptions(state.filters.platforms, state.options.platforms);
+  state.filters.types = normalizeFilterSetFromOptions(state.filters.types, state.options.types);
 }
 
 // --- Core parsing helpers ---
@@ -2072,6 +2145,7 @@ async function loadDataset() {
     setComboboxItems(els.fVersions, state.options.versions);
     setComboboxItems(els.fPlatforms, state.options.platforms);
     setComboboxItems(els.fTypes, state.options.types);
+    normalizeFiltersFromOptions();
 
     window.__spf = {
       versionsOrdered: state.options.versions.map((v) => v.value),

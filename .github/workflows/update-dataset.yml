@@ -66,7 +66,7 @@ jobs:
           from pathlib import Path
           from urllib.parse import quote
 
-          BASE_URL = "https://ceddc.github.io/simple-patch-finder/"
+          BASE_URL = "https://simplepatchfinder.ceddc.dev/"
           PATCHES_JSON = Path("patches.json")
           PATCHES_META_JSON = Path("patches.meta.json")
           SITEMAP_XML = Path("sitemap.xml")
@@ -87,6 +87,14 @@ jobs:
 
           def slugify_patch_name(name: str) -> str:
               s = (name or "").lower()
+              s = s.replace("&", " and ")
+              s = re.sub(r"[^a-z0-9]+", "-", s)
+              s = re.sub(r"(^-+|-+$)", "", s)
+              return s[:180]
+
+
+          def slugify_filter_token(value: str) -> str:
+              s = (value or "").lower()
               s = s.replace("&", " and ")
               s = re.sub(r"[^a-z0-9]+", "-", s)
               s = re.sub(r"(^-+|-+$)", "", s)
@@ -203,9 +211,12 @@ jobs:
                   )
               ]
               for prod in sorted(product_lastmods):
+                  pslug = slugify_filter_token(prod)
+                  if not pslug:
+                      continue
                   entries.append(
                       UrlEntry(
-                          loc=f"{BASE_URL}?p={quote(prod, safe='')}",
+                          loc=f"{BASE_URL}?p={quote(pslug, safe='')}",
                           lastmod=product_lastmods[prod],
                           changefreq="weekly",
                           priority="0.8",

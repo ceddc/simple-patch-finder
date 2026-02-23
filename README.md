@@ -1,6 +1,6 @@
 # Simple Patch Finder
 
-Live demo: https://ceddc.github.io/simple-patch-finder/
+Live demo: https://simplepatchfinder.ceddc.dev/
 
 Single-page patch finder for ArcGIS/Esri patches.
 

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting | Simple Patch Finder</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="https://simplepatchfinder.ceddc.dev/" />
+    <script>
+      (function () {
+        try {
+          var canonicalOrigin = "https://simplepatchfinder.ceddc.dev";
+          var prefix = "/simple-patch-finder";
+          var pathname = location.pathname || "/";
+          var rest = pathname === prefix || pathname.indexOf(prefix + "/") === 0 ? pathname.slice(prefix.length) || "/" : pathname;
+          var dest = canonicalOrigin + rest + (location.search || "") + (location.hash || "");
+          if (location.href !== dest) location.replace(dest);
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to the canonical URL...</p>
+    <p><a href="https://simplepatchfinder.ceddc.dev/">Continue to Simple Patch Finder</a></p>
+  </body>
+</html>

@@ -13,12 +13,16 @@
     <script>
       (function () {
         try {
-          if (location.hostname !== "ceddc.github.io") return;
+          var canonicalOrigin = "https://simplepatchfinder.ceddc.dev";
+          var legacyHost = "ceddc.github.io";
           var prefix = "/simple-patch-finder";
-          if (!(location.pathname === prefix || location.pathname.indexOf(prefix + "/") === 0)) return;
+          var pathname = location.pathname || "/";
+          var hasLegacyPrefix = pathname === prefix || pathname.indexOf(prefix + "/") === 0;
+          var shouldRedirect = location.hostname === legacyHost || hasLegacyPrefix;
+          if (!shouldRedirect) return;
 
-          var rest = location.pathname.slice(prefix.length) || "/";
-          var dest = "https://simplepatchfinder.ceddc.dev" + rest + (location.search || "") + (location.hash || "");
+          var rest = hasLegacyPrefix ? pathname.slice(prefix.length) || "/" : pathname;
+          var dest = canonicalOrigin + rest + (location.search || "") + (location.hash || "");
           if (location.href !== dest) location.replace(dest);
         } catch {
           // ignore

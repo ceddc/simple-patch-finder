@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found | Simple Patch Finder</title>
+    <meta name="robots" content="noindex,follow" />
+    <script>
+      (function () {
+        try {
+          var canonicalOrigin = "https://simplepatchfinder.ceddc.dev";
+          var prefix = "/simple-patch-finder";
+          var pathname = location.pathname || "/";
+          if (!(pathname === prefix || pathname.indexOf(prefix + "/") === 0)) return;
+
+          var rest = pathname.slice(prefix.length) || "/";
+          var dest = canonicalOrigin + rest + (location.search || "") + (location.hash || "");
+          if (location.href !== dest) location.replace(dest);
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <h1>Page not found</h1>
+    <p>The page could not be found.</p>
+    <p><a href="https://simplepatchfinder.ceddc.dev/">Go to Simple Patch Finder</a></p>
+  </body>
+</html>

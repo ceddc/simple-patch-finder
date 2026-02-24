@@ -21,8 +21,9 @@
           var shouldRedirect = location.hostname === legacyHost || hasLegacyPrefix;
           if (!shouldRedirect) return;
 
-          var rest = hasLegacyPrefix ? pathname.slice(prefix.length) || "/" : pathname;
-          var dest = canonicalOrigin + rest + (location.search || "") + (location.hash || "");
+          var targetPath = hasLegacyPrefix ? "/" : pathname;
+          if (targetPath === "/index.html") targetPath = "/";
+          var dest = canonicalOrigin + targetPath + (location.search || "") + (location.hash || "");
           if (location.href !== dest) location.replace(dest);
         } catch {
           // ignore

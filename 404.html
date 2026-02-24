@@ -11,10 +11,11 @@
           var canonicalOrigin = "https://simplepatchfinder.ceddc.dev";
           var prefix = "/simple-patch-finder";
           var pathname = location.pathname || "/";
-          if (!(pathname === prefix || pathname.indexOf(prefix + "/") === 0)) return;
+          var hasLegacyPrefix = pathname === prefix || pathname.indexOf(prefix + "/") === 0;
+          var isLikelyDocumentPath = pathname !== "/" && pathname.indexOf(".") === -1;
+          if (!(hasLegacyPrefix || isLikelyDocumentPath)) return;
 
-          var rest = pathname.slice(prefix.length) || "/";
-          var dest = canonicalOrigin + rest + (location.search || "") + (location.hash || "");
+          var dest = canonicalOrigin + "/" + (location.search || "") + (location.hash || "");
           if (location.href !== dest) location.replace(dest);
         } catch {
           // ignore

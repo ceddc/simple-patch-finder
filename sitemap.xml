@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-03-09T12:26:19Z</lastmod>
+    <lastmod>2026-03-09T15:33:59Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-enterprise</loc>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -266,7 +266,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=portal-for-arcgis</loc>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1568,7 +1568,13 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1405&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1406.&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
+    <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

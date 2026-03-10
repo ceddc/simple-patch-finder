@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-03-10T15:35:30Z</lastmod>
+    <lastmod>2026-03-10T18:29:13Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -68,7 +68,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-data-store</loc>
-    <lastmod>2024-11-07</lastmod>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-enterprise</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -194,7 +194,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-server</loc>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -489,6 +489,12 @@
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=DS-111-P-914C&amp;pn=arcgis-data-store-11-1-knowledge-graph-patch</loc>
     <lastmod>2024-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=DS-115-P-1395&amp;pn=arcgis-data-store-11-5-reliability-patch</loc>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1573,7 +1579,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1406.&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1406&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4965,6 +4971,12 @@
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1397&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</loc>
     <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1401&amp;pn=arcgis-server-11-3-network-diagrams-layouts-improvement-patch</loc>
+    <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

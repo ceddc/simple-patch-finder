@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-03-19T18:30:58Z</lastmod>
+    <lastmod>2026-03-19T21:23:32Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-enterprise</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -266,7 +266,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=portal-for-arcgis</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1478,7 +1478,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1402&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1538,7 +1538,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1403&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1567,6 +1567,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1404&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1287&amp;pn=portal-for-arcgis-11-5-web-applications-patch</loc>
     <lastmod>2025-08-06</lastmod>
     <changefreq>monthly</changefreq>
@@ -1586,13 +1592,13 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1405&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1406&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

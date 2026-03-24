@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-03-24T18:33:31Z</lastmod>
+    <lastmod>2026-03-24T21:24:25Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -5089,7 +5089,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1424&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</loc>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1425&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

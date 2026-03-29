@@ -5,357 +5,357 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 24 Feb 2026 21:23:58 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2026 06:38:30 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server Reconcile and Post Consistency Patch (S-111-P-1423)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1423&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:1f21e18ed411b0d742b6ac9bddcb25b9a69e3bac06b2eabd8223afbe5494ecef</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.1 | Release date: 03/23/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-reconcile-and-post-consistency-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Reconcile and Post Consistency Patch (S-113-P-1424)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1424&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:318eb85447f555015e3fdc30e854269b2123b8125c6a76d1a9aa4569f565a8e0</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 03/23/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-reconcile-and-post-consistency-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Reconcile and Post Consistency Patch (S-115-P-1425)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1425&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:26cef46e231f99b0fa83d56ff11250d3c880b4565dd66cb2758e057e43670721</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 03/23/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-reconcile-and-post-consistency-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Web App Embedded Element Patch (PFA-111-P-1402)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1402&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:bb99e4c41fb4fbbc187bd0f3b90df5ef296aaeb40a75f17fedb453bcca3002dd</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.1 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Web App Embedded Element Patch (PFA-113-P-1403)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1403&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:44543c91a8d0f10a34d9f465b79d3d4329eeb83bc59c6de8afb71438bda206d2</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Web App Embedded Element Patch (PFA-114-P-1404)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1404&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:f7ee6eb997fa78eff421c4865998a0e058425b514080b9bc85e54085adb0ecef</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.4 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Web App Embedded Element Patch (PFA-115-P-1405)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1405&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:865552bead177a789d56814665d38bc9b88f74083ab28067196aef83fbbd24eb</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Web App Embedded Element Patch (PFA-120-P-1406)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1406&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:31783fda9cc831a82b35a5e6b6f24ae1c313bff5e33e2b37fb7a06fc234542bb</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 12.0 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Data Store 11.5 Reliability Patch (DS-115-P-1395)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=DS-115-P-1395&amp;pn=arcgis-data-store-11-5-reliability-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:d8b81105be90f4eb75114c77454f07cd563837dbe501a9ff679eef1d1e720df3</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 03/10/2026 | Products: ArcGIS Data Store, ArcGIS Enterprise | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-data-store-11-5-reliability-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server 11.3 Network Diagrams Layouts Improvement Patch (S-113-P-1401)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1401&amp;pn=arcgis-server-11-3-network-diagrams-layouts-improvement-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:353e8b7a755bc5b8ac183d10e11e8a0ff0cb673c32dc54658e1e630fe9540119</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 03/10/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-network-diagrams-layouts-improvement-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Parcel Fabric Build Extent Patch 2 (S-111-P-1396)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1396&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:d6742db9c0151ea881b29fcb6077182663063e9245bb63ff6a5a9ea165a72499</guid>
-      <pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 02/19/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-parcel-fabric-build-extent-patch-2</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:aef2a9da2eabb0684ab917dae5815147a84f8432608f685260f451cbe0954a9e</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.1 | Release date: 02/26/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-parcel-fabric-build-extent-patch-2</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Parcel Fabric Build Extent Patch 2 (S-113-P-1397)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1397&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:e3e3c4ac06aa10b2d01bd53d4561c20f947e366fc460e83187fdee727f9570bd</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 02/26/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-parcel-fabric-build-extent-patch-2</description>
+    </item>
+    <item>
+      <title>ArcGIS Workflow Manager Server 11.3 Patch 3 (QFE-WMXServer-11.3.6530)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-WMXServer-11.3.6530&amp;pn=arcgis-workflow-manager-server-11-3-patch-3</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:8fd2f3e8e68d9e721dee832800e7665e58b399637cafa2783633394dc026ea4d</guid>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 02/25/2026 | Products: ArcGIS Enterprise, ArcGIS Workflow Manager Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-workflow-manager-server-11-3-patch-3</description>
     </item>
     <item>
       <title>Portal for ArcGIS 11.5 Mission Manager Tasking and Template Patch (PFA-115-P-1383B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1383B&amp;pn=portal-for-arcgis-11-5-mission-manager-tasking-and-template-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:427c9c0b63f33f50fd566ba30e1f3c5a1ddb1cb097ef2838f410b5f0691c86cd</guid>
-      <pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 02/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-11-5-mission-manager-tasking-and-template-patch</description>
     </item>
     <item>
       <title>ArcGIS Server 11.5 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 2 (S-115-P-1390)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1390&amp;pn=arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-2</link>
       <guid isPermaLink="false">urn:simple-patch-finder:5febc568fe88d5e6ffa0d48e19ad72a56993cf3c950e20b153a25bfead93bfac</guid>
-      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 02/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-2</description>
     </item>
     <item>
       <title>ArcGIS Server 11.3 Utility Network and Data Management Patch 2 (S-113-P-1380)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1380&amp;pn=arcgis-server-11-3-utility-network-and-data-management-patch-2</link>
       <guid isPermaLink="false">urn:simple-patch-finder:b57e0d9087ffe78d9187eb1571ea86ebd6602060d4df5caac696b6d77a9be1d1</guid>
-      <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 02/03/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-utility-network-and-data-management-patch-2</description>
     </item>
     <item>
       <title>ArcGIS Server 11.1 Utility Network and Data Management Patch 5 (S-111-P-1378)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1378&amp;pn=arcgis-server-11-1-utility-network-and-data-management-patch-5</link>
       <guid isPermaLink="false">urn:simple-patch-finder:995e9966b41e5f751481be1c745b8d5dab8241bfaadfbb43c31a847a20c33b83</guid>
-      <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.1 | Release date: 01/28/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-1-utility-network-and-data-management-patch-5</description>
     </item>
     <item>
       <title>ArcGIS 12.0 Maritime Server extension Patch 1  (Windows Software and Required Deployment Steps) (QFE-MaritimeServer-12.0.3196)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-MaritimeServer-12.0.3196&amp;pn=arcgis-12-0-maritime-server-extension-patch-1-windows-software-and-required-deployment-steps</link>
       <guid isPermaLink="false">urn:simple-patch-finder:94d20c6ab5102a7924a9c7026ca012e8ffb310a49b174024c87504ba19bea156</guid>
-      <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 12.0 | Release date: 01/23/2026 | Products: ArcGIS Enterprise, ArcGIS Maritime, ArcGIS Maritime for Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-12-0-maritime-server-extension-patch-1</description>
     </item>
     <item>
       <title>Portal for ArcGIS 11.3 Map Viewer HTTP/2 Patch (PFA-113-P-1356)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1356&amp;pn=portal-for-arcgis-11-3-map-viewer-http-2-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:d0d2abdf93164f06136ad582760f3fa09e5db814d62c4033920c83e0fd5a0524</guid>
-      <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 12/18/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-11-3-map-viewer-http-2-patch</description>
     </item>
     <item>
       <title>ArcGIS Server 11.3 Utility Network and Data Management Patch 1 (S-113-P-1338)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1338&amp;pn=arcgis-server-11-3-utility-network-and-data-management-patch-1</link>
       <guid isPermaLink="false">urn:simple-patch-finder:e4741c16e4450be3c0799f0db9aa628fe345aa931d4df5abcd1972dfa9c5a566</guid>
-      <pubDate>Tue, 16 Dec 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 12/16/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-3-utility-network-and-data-management-patch-1</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2025 Update 3 Patch (PFA-1091-P-1274B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-1274B&amp;pn=portal-for-arcgis-security-2025-update-3-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:712a0b08ab1013185d13ca30796ac4afd1189c1d122ae255bab1a1f176875237</guid>
-      <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 10.9.1 | Criticality: Security | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2025 Update 3 Patch (PFA-111-P-1275)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1275&amp;pn=portal-for-arcgis-security-2025-update-3-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:c2c6230fdcf7acd7ec86075dfa5187d8e2d0379fe3ac437cb0cf2028686b669e</guid>
-      <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2025 Update 3 Patch (PFA-113-P-1277B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1277B&amp;pn=portal-for-arcgis-security-2025-update-3-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:fe8ff359178387bf304f579a5ba0a1ab2b5f9358f49ea562d3f578328cbedd24</guid>
-      <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2025 Update 3 Patch (PFA-114-P-1278B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1278B&amp;pn=portal-for-arcgis-security-2025-update-3-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:bb69b12f7ea1d201d1dde97da828b60304d60da7a4e9be4870f974029edf4967</guid>
-      <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.4 | Criticality: Security | Release date: 12/11/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-3-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2025 Update 2 Patch (S-1091-P-1355)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-1355&amp;pn=arcgis-server-security-2025-update-2-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:b9a76bd58df1d9fd47e12ccbff53afb2ca53432b410d9139a6c77ef49bf9d7cb</guid>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 10.9.1 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2025 Update 2 Patch (S-111-P-1357)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1357&amp;pn=arcgis-server-security-2025-update-2-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:0fa1e09ecb20d255441d9a9a6de9c5899ed195a07d4ba6755175596e623c421f</guid>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2025 Update 2 Patch (S-113-P-1358)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1358&amp;pn=arcgis-server-security-2025-update-2-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:51fd0394256a720c3b0136275cb1333b92ce660d81ae4ebce5a59a3979bc649f</guid>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2025 Update 2 Patch (S-114-P-1359)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1359&amp;pn=arcgis-server-security-2025-update-2-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:23394a273fe7718ecc2ba0d64a90ec1548638931f7097521fe70047bb9447d52</guid>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.4 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2025 Update 2 Patch (S-115-P-1360)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1360&amp;pn=arcgis-server-security-2025-update-2-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:bb0b3480d687750966e44bb754dd1dd5aca8cc075dc4aea6bf6fe9e60fb9f68e</guid>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
     </item>
     <item>
       <title>ArcGIS Server 10.9.1 Branch Versioning SAP HANA General Patch (S-1091-P-1324)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-1324&amp;pn=arcgis-server-10-9-1-branch-versioning-sap-hana-general-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:c563dc88034526f71553e68d8d2edec768e2b1b317116c9b459efd070d69dbb4</guid>
-      <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 10.9.1 | Release date: 12/01/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-10-9-1-branch-versioning-sap-hana-general-patch</description>
     </item>
     <item>
       <title>ArcGIS Workflow Manager Server 12.0 Patch 1 (QFE-WMXServer-12.0.9010)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-WMXServer-12.0.9010&amp;pn=arcgis-workflow-manager-server-12-0-patch-1</link>
       <guid isPermaLink="false">urn:simple-patch-finder:a95bdfe959f5a10d639358815f6764fe9ff594fd0e102c57f49270864e2503b4</guid>
-      <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 12.0 | Release date: 11/20/2025 | Products: ArcGIS Enterprise, ArcGIS Workflow Manager Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-workflow-manager-server-12-0-patch-1</description>
     </item>
     <item>
       <title>ArcGIS Server Parcel Fabric Build Extent Patch (S-111-P-1344)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1344&amp;pn=arcgis-server-parcel-fabric-build-extent-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:4d0c69dadd967ac37843e07af35dbf5cf2255a1f1af0a2702a13a076a06e5219</guid>
-      <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.1 | Release date: 11/04/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-parcel-fabric-build-extent-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Parcel Fabric Build Extent Patch (S-113-P-1343)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1343&amp;pn=arcgis-server-parcel-fabric-build-extent-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:d3a2f649e71c33fd8e1f2dcf28ba61cccb84116c8ffebc409a6f9ab21ac9d0da</guid>
-      <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 11/04/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-parcel-fabric-build-extent-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Parcel Fabric Build Extent Patch (S-115-P-1342)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1342&amp;pn=arcgis-server-parcel-fabric-build-extent-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:324ed3c3c19e40a9182d0917293b94d1bb5200f7be7d97053cb599448fc540e8</guid>
-      <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 11/04/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-parcel-fabric-build-extent-patch</description>
     </item>
     <item>
       <title>ArcGIS Server 11.1 Utility Network and Data Management Patch 4 (S-111-P-1314)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1314&amp;pn=arcgis-server-11-1-utility-network-and-data-management-patch-4</link>
       <guid isPermaLink="false">urn:simple-patch-finder:fecff4adb43370dae8af85466334227fc32351ae497cb475372b953ffcf2c7bb</guid>
-      <pubDate>Wed, 22 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.1 | Release date: 10/22/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-1-utility-network-and-data-management-patch-4</description>
     </item>
     <item>
       <title>ArcGIS Web Adaptor (IIS) Stability Patch (WAI-113-P-1302)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=WAI-113-P-1302&amp;pn=arcgis-web-adaptor-iis-stability-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:5051ea00466fda01b6c183908403773a90e3fbf04fbeebc396f2f3596c27b500</guid>
-      <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
     </item>
     <item>
       <title>ArcGIS Web Adaptor (IIS) Stability Patch (WAI-114-P-1371)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=WAI-114-P-1371&amp;pn=arcgis-web-adaptor-iis-stability-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:d5166663e9f514eede18125a8d05e923b1641cee484232abbf2d940e6c7d3c35</guid>
-      <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.4 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
     </item>
     <item>
       <title>ArcGIS Web Adaptor (IIS) Stability Patch (WAI-115-P-1303)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=WAI-115-P-1303&amp;pn=arcgis-web-adaptor-iis-stability-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:a929f249699f5b012422e6d61ecbbd25a568d56a92e975882edf17859884f21a</guid>
-      <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Mission Manager Location Services and Projection Patch (PFA-114-P-1326)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1326&amp;pn=portal-for-arcgis-mission-manager-location-services-and-projection-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:c9b4ef49372a7909c6939966a0f821f7ca5ab07e8489587dba8918e0cc391bbe</guid>
-      <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.4 | Release date: 10/16/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-mission-manager-location-services-and-projection-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Mission Manager Location Services and Projection Patch (PFA-115-P-1327B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1327B&amp;pn=portal-for-arcgis-mission-manager-location-services-and-projection-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:e484705e32f25c1544ecbcd63b379497ec0de17f07342f5f43f6a23a75a3a109</guid>
-      <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 10/16/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-mission-manager-location-services-and-projection-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Feature Services Security Patch (S-113-P-1332)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1332&amp;pn=arcgis-server-feature-services-security-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:925ffd96966eac0cf4661ebfcd9c96237dc382d74cc0ac1b01a6a51a8c93e31f</guid>
-      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Feature Services Security Patch (S-114-P-1331)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1331&amp;pn=arcgis-server-feature-services-security-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:0b63958905e1e8e59b6db4434547c67ca358307ad6cf6105a90f6fa37892a7ca</guid>
-      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.4 | Criticality: Security | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Feature Services Security Patch (S-115-P-1330)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1330&amp;pn=arcgis-server-feature-services-security-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:f9c8f4ce8fa76be8439e07d6a70889bf004536f0e296bc803b0e9606a88321a2</guid>
-      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Branch Versioning Licensing Patch (S-113-P-1305)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1305&amp;pn=arcgis-server-branch-versioning-licensing-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:f559adf14eef81c28933488137ebb06b7473d1abb4c64f5137efe6ef07ca3c37</guid>
-      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 09/24/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-branch-versioning-licensing-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Branch Versioning Licensing Patch (S-115-P-1306)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1306&amp;pn=arcgis-server-branch-versioning-licensing-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:630f68ff0ac86560aefc9b29b05f384f94778c47b9abe142478c5396cc53be7d</guid>
-      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 09/24/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-branch-versioning-licensing-patch</description>
     </item>
     <item>
       <title>ArcGIS Server 10.9.1 General Branch Versioning Reconcile Patch (S-1091-P-1299)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-1299&amp;pn=arcgis-server-10-9-1-general-branch-versioning-reconcile-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:b00b81323982dbf315faf4dc372c8865f4e1076221593d94fd011d3e5e3988a7</guid>
-      <pubDate>Thu, 18 Sep 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 10.9.1 | Release date: 09/18/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-10-9-1-general-branch-versioning-reconcile-patch</description>
     </item>
     <item>
       <title>ArcGIS Server 11.3 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 3 (S-113-P-1293)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1293&amp;pn=arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-3</link>
       <guid isPermaLink="false">urn:simple-patch-finder:78892cc2d30a25149ff862a0c1de77be247ce9c313d3402c1d7ac87afc5c62dc</guid>
-      <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.3 | Release date: 09/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-3</description>
     </item>
     <item>
       <title>ArcGIS Server 11.5 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 1 (S-115-P-1295)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1295&amp;pn=arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-1</link>
       <guid isPermaLink="false">urn:simple-patch-finder:816732e41a8c294ed5b22e5e887830fbe98d6ca208bfe6837c7f08f94e894bac</guid>
-      <pubDate>Fri, 29 Aug 2025 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
       <description>Version: 11.5 | Release date: 08/29/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-1</description>
     </item>
     <item>
       <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-1091-P-1289)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-1289&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:7d9dc761dcae395b39b101f589c5084e41b7a01ea9d0ed224dbe80aec66b5244</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 10.9.1 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-111-P-1264)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1264&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
       <guid isPermaLink="false">urn:simple-patch-finder:bcb0a3ca8f30cf560acb8161f98a9525c2b24b783ece2a81a0d25eaa707313ed</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-113-P-1265)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1265&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:482bf8b522c259f8f159abb1db1a7902d6124277f315937e4c50548f9ab3c1d6</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-114-P-1266)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1266&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:0f1c89cbd0119ff469575b894370b6a44930d3d63aa8cf5af8a2e9ff15818a4f</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS 11.5 Web Applications Patch (PFA-115-P-1287)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1287&amp;pn=portal-for-arcgis-11-5-web-applications-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:a9a18112d6153e55fcb7dbdd842b37187a330f4448bd4f669f77bd26d0f26650</guid>
-      <pubDate>Wed, 06 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 08/06/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-11-5-web-applications-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 10.9.1 Utility Network and Data Management Patch 8 (S-1091-P-1238B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-1238B&amp;pn=arcgis-server-10-9-1-utility-network-and-data-management-patch-8</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:de17f48fded13af4f79807759c4f748f80b77d057d03a89d8eeea6575846dd9a</guid>
-      <pubDate>Mon, 04 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Release date: 08/04/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-10-9-1-utility-network-and-data-management-patch-8</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS 11.3 Distributed Collaboration Quality Patch (PFA-113-P-1272)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1272&amp;pn=portal-for-arcgis-11-3-distributed-collaboration-quality-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:cae6fa601cbc49b01b63601aa5cc2bee60bc39043961149cdc040d179326a679</guid>
-      <pubDate>Thu, 24 Jul 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 07/24/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-11-3-distributed-collaboration-quality-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Workflow Manager Server 11.1 Patch 4 (QFE-WMXServer-11.1.5440)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-WMXServer-11.1.5440&amp;pn=arcgis-workflow-manager-server-11-1-patch-4</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:8daedc5a4e2ecf1b9fcaefc04cbeb6cf0b81d7800db970aaac8a1e870b44c1d3</guid>
-      <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 07/21/2025 | Products: ArcGIS Enterprise, ArcGIS Workflow Manager Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-workflow-manager-server-11-1-patch-4</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.5 Utility Network Patch 1 (S-115-P-1271)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1271&amp;pn=arcgis-server-11-5-utility-network-patch-1</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:ae5c4a412b5b381c14450ee3153afa9c706fd7745de8a2f783b3b09f0e83a81d</guid>
-      <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 07/02/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-5-utility-network-patch-1</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.3 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 2 (S-113-P-1217)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1217&amp;pn=arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-2</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:fe607acb460ca3430191716b722d56dd3a9d7d5df101ca9449ec12bf980f57c2</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 06/12/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-2</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.4 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 1 (S-114-P-1227)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1227&amp;pn=arcgis-server-11-4-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-1</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:85c46717328b2ee88e4ce52043863403d3d3c61306610a7d91bde7037efc62ca</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Release date: 06/12/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-4-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-1</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.5 Calculate Field Patch (S-115-P-1250)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1250&amp;pn=arcgis-server-11-5-calculate-field-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:6b679d1f2cf458466366c1a1f6df5519cfcb0dcd0fa7cd999dc4a89af7829829</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 06/12/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-5-calculate-field-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-1091-P-1233)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-1233&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:7e44f7df428fd6a4d33f8e6d9cae2d8488d7f0ce2849519039aa57a01a77b7a8</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-111-P-1234)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1234&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:0d9645327be4ba112a453e4af21364cbb5ec275594ce3dd586f4e669ab12ea2d</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
+      <pubDate>Sun, 29 Mar 2026 06:38:30 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
     </item>
   </channel>
 </rss>

@@ -237,7 +237,7 @@ def build_entries() -> list[UrlEntry]:
         UrlEntry(
             loc=BASE_URL,
             lastmod=dataset_lastmod,
-            changefreq="daily",
+            changefreq="hourly",
             priority="1.0",
         )
     ]
@@ -247,7 +247,7 @@ def build_entries() -> list[UrlEntry]:
             UrlEntry(
                 loc=f"{BASE_URL}?page={page}",
                 lastmod=dataset_lastmod,
-                changefreq="daily",
+                changefreq="hourly",
                 priority="0.9",
             )
         )
@@ -264,7 +264,7 @@ def build_entries() -> list[UrlEntry]:
             UrlEntry(
                 loc=f"{BASE_URL}?p={quote(pslug, safe='')}",
                 lastmod=product_lastmods[prod],
-                changefreq="weekly",
+                changefreq="hourly",
                 priority="0.8",
             )
         )
@@ -274,7 +274,7 @@ def build_entries() -> list[UrlEntry]:
                 UrlEntry(
                     loc=f"{BASE_URL}?p={quote(pslug, safe='')}&page={page}",
                     lastmod=product_lastmods[prod],
-                    changefreq="weekly",
+                    changefreq="hourly",
                     priority="0.7",
                 )
             )

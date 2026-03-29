@@ -33,6 +33,7 @@
     <link rel="canonical" href="https://simplepatchfinder.ceddc.dev/" />
     <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS" href="./rss.xml" />
     <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS" href="./rss-enterprise.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS" href="./rss-security-critical.xml" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Simple Patch Finder" />
@@ -255,6 +256,26 @@
                     <span>Enterprise</span>
                   </span>
                 </calcite-button>
+                <calcite-button
+                  href="./rss-security-critical.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  appearance="outline-fill"
+                  kind="neutral"
+                  scale="m"
+                  label="Open security and critical patches RSS feed in a new tab"
+                >
+                  <span class="rss-button-label">
+                    <span class="rss-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                        <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                        <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                      </svg>
+                    </span>
+                    <span>Sec/Crit</span>
+                  </span>
+                </calcite-button>
               </div>
               <calcite-button
                id="btn-toggle-panel"
@@ -331,14 +352,14 @@
                         <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> every 3 hours (the same dataset used by Esri patch notification tools).</li>
                         <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
                         <li>The action also writes <span class="mono">patches.meta.json</span> so the UI can display the last refresh time.</li>
-                        <li>The published RSS files are <span class="mono">./rss.xml</span> (all patches) and <span class="mono">./rss-enterprise.xml</span> (ArcGIS Enterprise server-side components).</li>
+                        <li>The published RSS files are <span class="mono">./rss.xml</span> (all patches), <span class="mono">./rss-enterprise.xml</span> (ArcGIS Enterprise server-side components), and <span class="mono">./rss-security-critical.xml</span> (security + critical patches).</li>
                       </ul>
                     </div>
 
                   <div id="feed-links">
                     <div class="about-h">RSS Feeds</div>
                     <div class="about-b rss-copy">
-                      Subscribe to the general patch feed or the ArcGIS Enterprise server-side components feed.
+                      Subscribe to the general patch feed, the ArcGIS Enterprise server-side components feed, or the security + critical feed.
                       Feed files are only rewritten when newly seen patches are added to that feed.
                     </div>
                     <ul class="about-list rss-list">
@@ -347,6 +368,9 @@
                       </li>
                       <li>
                         <calcite-link href="./rss-enterprise.xml">ArcGIS Enterprise RSS</calcite-link>
+                      </li>
+                      <li>
+                        <calcite-link href="./rss-security-critical.xml">Security + critical RSS</calcite-link>
                       </li>
                     </ul>
                   </div>

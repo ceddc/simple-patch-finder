@@ -18,10 +18,11 @@ import json
 import re
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
-from email.utils import format_datetime
+from email.utils import format_datetime, parsedate_to_datetime
 from html import escape
 from pathlib import Path
 from urllib.parse import quote
+import xml.etree.ElementTree as ET
 
 BASE_URL = "https://simplepatchfinder.ceddc.dev/"
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,6 +30,7 @@ PATCHES_JSON = ROOT / "patches.json"
 PATCHES_META_JSON = ROOT / "patches.meta.json"
 RSS_XML = ROOT / "rss.xml"
 RSS_ENTERPRISE_XML = ROOT / "rss-enterprise.xml"
+RSS_SECURITY_CRITICAL_XML = ROOT / "rss-security-critical.xml"
 DEFAULT_LIMIT = 50
 
 # Keep this set in sync with the ArcGIS Enterprise aggregate used in js/app.js.
@@ -65,6 +67,7 @@ class PatchEntry:
     name: str
     qfe_id: str
     version: str
+    critical_kind: str
     release_date_text: str
     release_date_iso: str
     release_ordinal: int
@@ -99,6 +102,15 @@ def parse_release_date(value: str) -> date | None:
         return date(yyyy, mm, dd)
     except ValueError:
         return None
+
+
+def classify_critical(raw: object) -> str:
+    value = str(raw if raw is not None else "").strip().lower()
+    if value == "security":
+        return "security"
+    if value == "true":
+        return "critical"
+    return "standard"
 
 
 def parse_isoish(value: str) -> datetime | None:
@@ -136,6 +148,53 @@ def is_enterprise_family_patch(products_tokens: tuple[str, ...]) -> bool:
     return any(token in ENTERPRISE_FAMILY_TOKENS for token in products_tokens)
 
 
+def guid_for_key(key: str) -> str:
+    digest = hashlib.sha256(key.encode("utf-8")).hexdigest()
+    return f"urn:simple-patch-finder:{digest}"
+
+
+def load_existing_item_pubdates(path: Path) -> dict[str, datetime]:
+    if not path.exists():
+        return {}
+
+    try:
+        root = ET.parse(path).getroot()
+    except Exception:
+        return {}
+
+    out: dict[str, datetime] = {}
+    for item in root.findall("./channel/item"):
+        guid = str(item.findtext("guid", "")).strip()
+        pub_date = str(item.findtext("pubDate", "")).strip()
+        if not guid or not pub_date:
+            continue
+        try:
+            dt = parsedate_to_datetime(pub_date)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            out[guid] = dt.astimezone(timezone.utc)
+        except Exception:
+            continue
+
+    return out
+
+
+def effective_entry_pub_date(
+    entry: PatchEntry,
+    existing_pub_dates: dict[str, datetime],
+    dataset_lastmod: datetime | None,
+) -> datetime:
+    existing = existing_pub_dates.get(entry_guid(entry))
+    if existing:
+        return existing
+    if dataset_lastmod:
+        return dataset_lastmod
+    if entry.release_date_iso:
+        y, m, d = (int(part) for part in entry.release_date_iso.split("-"))
+        return datetime(y, m, d, tzinfo=timezone.utc)
+    return datetime.now(timezone.utc)
+
+
 def load_patch_entries(path: Path) -> list[PatchEntry]:
     if not path.exists():
         return []
@@ -157,6 +216,7 @@ def load_patch_entries(path: Path) -> list[PatchEntry]:
 
             qfe_id = str(patch.get("QFE_ID", "")).strip()
             name = str(patch.get("Name", "")).strip()
+            critical_kind = classify_critical(patch.get("Critical"))
             release_date_text = str(patch.get("ReleaseDate", "")).strip()
             patch_page_url = str(patch.get("url", "")).strip()
             products_tokens = tuple(tokenize_csv(str(patch.get("Products", ""))))
@@ -171,6 +231,7 @@ def load_patch_entries(path: Path) -> list[PatchEntry]:
                 name=name,
                 qfe_id=qfe_id,
                 version=version,
+                critical_kind=critical_kind,
                 release_date_text=release_date_text,
                 release_date_iso=release_date.isoformat() if release_date else "",
                 release_ordinal=release_date.toordinal() if release_date else -1,
@@ -182,7 +243,7 @@ def load_patch_entries(path: Path) -> list[PatchEntry]:
     return list(deduped.values())
 
 
-def feed_entries(entries: list[PatchEntry], mode: str, limit: int) -> list[PatchEntry]:
+def entries_for_mode(entries: list[PatchEntry], mode: str) -> list[PatchEntry]:
     filtered = entries
     if mode == "enterprise":
         filtered = [
@@ -190,9 +251,30 @@ def feed_entries(entries: list[PatchEntry], mode: str, limit: int) -> list[Patch
             for entry in entries
             if is_enterprise_family_patch(entry.products_tokens)
         ]
+    elif mode == "security-critical":
+        filtered = [
+            entry
+            for entry in entries
+            if entry.critical_kind in {"security", "critical"}
+        ]
+
+    return filtered
+
+
+def feed_entries(
+    entries: list[PatchEntry],
+    mode: str,
+    limit: int,
+    existing_pub_dates: dict[str, datetime],
+    dataset_lastmod: datetime | None,
+) -> list[PatchEntry]:
+    filtered = entries_for_mode(entries, mode)
 
     filtered.sort(
         key=lambda entry: (
+            -effective_entry_pub_date(
+                entry, existing_pub_dates, dataset_lastmod
+            ).timestamp(),
             -entry.release_ordinal,
             entry.name.lower(),
             entry.qfe_id.lower(),
@@ -221,6 +303,14 @@ def feed_channel(mode: str) -> tuple[str, str, str, str]:
             f"{BASE_URL}rss-enterprise.xml",
         )
 
+    if mode == "security-critical":
+        return (
+            "Simple Patch Finder - Security and Critical RSS",
+            "Latest security and critical patches from Simple Patch Finder.",
+            BASE_URL,
+            f"{BASE_URL}rss-security-critical.xml",
+        )
+
     return (
         "Simple Patch Finder - All patches RSS",
         "Latest ArcGIS and Esri patches from Simple Patch Finder.",
@@ -236,23 +326,17 @@ def entry_title(entry: PatchEntry) -> str:
 
 
 def entry_guid(entry: PatchEntry) -> str:
-    digest = hashlib.sha256(entry.key.encode("utf-8")).hexdigest()
-    return f"urn:simple-patch-finder:{digest}"
-
-
-def entry_pub_date(entry: PatchEntry, dataset_lastmod: datetime | None) -> datetime:
-    if entry.release_date_iso:
-        y, m, d = (int(part) for part in entry.release_date_iso.split("-"))
-        return datetime(y, m, d, tzinfo=timezone.utc)
-    if dataset_lastmod:
-        return dataset_lastmod
-    return datetime.now(timezone.utc)
+    return guid_for_key(entry.key)
 
 
 def entry_description(entry: PatchEntry) -> str:
     parts = []
     if entry.version:
         parts.append(f"Version: {entry.version}")
+    if entry.critical_kind == "security":
+        parts.append("Criticality: Security")
+    elif entry.critical_kind == "critical":
+        parts.append("Criticality: Critical")
     if entry.release_date_text:
         parts.append(f"Release date: {entry.release_date_text}")
     if entry.products_tokens:
@@ -263,11 +347,17 @@ def entry_description(entry: PatchEntry) -> str:
 
 
 def build_rss_xml(
-    entries: list[PatchEntry], mode: str, dataset_lastmod: datetime | None
+    entries: list[PatchEntry],
+    mode: str,
+    dataset_lastmod: datetime | None,
+    existing_pub_dates: dict[str, datetime],
 ) -> str:
     title, description, site_link, self_link = feed_channel(mode)
     last_build = dataset_lastmod or max(
-        (entry_pub_date(entry, None) for entry in entries),
+        (
+            effective_entry_pub_date(entry, existing_pub_dates, dataset_lastmod)
+            for entry in entries
+        ),
         default=datetime.now(timezone.utc),
     )
 
@@ -290,7 +380,7 @@ def build_rss_xml(
                 f"      <title>{escape(entry_title(entry), quote=False)}</title>",
                 f"      <link>{escape(entry.permalink, quote=False)}</link>",
                 f'      <guid isPermaLink="false">{escape(entry_guid(entry), quote=False)}</guid>',
-                f"      <pubDate>{escape(format_datetime(entry_pub_date(entry, dataset_lastmod)), quote=False)}</pubDate>",
+                f"      <pubDate>{escape(format_datetime(effective_entry_pub_date(entry, existing_pub_dates, dataset_lastmod)), quote=False)}</pubDate>",
                 f"      <description>{escape(entry_description(entry), quote=False)}</description>",
                 "    </item>",
             ]
@@ -309,17 +399,24 @@ def maybe_write_feed(
     dataset_lastmod: datetime | None,
     force: bool,
 ) -> str:
-    selected_current = feed_entries(current_entries, mode, limit)
-    selected_previous = feed_entries(previous_entries, mode, limit)
+    existing_pub_dates = load_existing_item_pubdates(output_path)
+    selected_current = feed_entries(
+        current_entries, mode, limit, existing_pub_dates, dataset_lastmod
+    )
 
-    current_keys = {entry.key for entry in selected_current}
-    previous_keys = {entry.key for entry in selected_previous}
-    has_new_patch = bool(current_keys - previous_keys)
+    selected_current_guids = {entry_guid(entry) for entry in selected_current}
+    if existing_pub_dates:
+        has_new_patch = bool(selected_current_guids - set(existing_pub_dates))
+    else:
+        previous_guids = {
+            entry_guid(entry) for entry in entries_for_mode(previous_entries, mode)
+        }
+        has_new_patch = bool(selected_current_guids - previous_guids)
 
     if output_path.exists() and not force and not has_new_patch:
         return f"Skipped {output_path.name}: no new {mode} patches"
 
-    xml = build_rss_xml(selected_current, mode, dataset_lastmod)
+    xml = build_rss_xml(selected_current, mode, dataset_lastmod, existing_pub_dates)
     write_text_lf(output_path, xml)
     return f"Wrote {output_path.name}: {len(selected_current)} items"
 
@@ -372,6 +469,17 @@ def main() -> None:
             previous_entries=previous_entries,
             output_path=RSS_ENTERPRISE_XML,
             mode="enterprise",
+            limit=args.limit,
+            dataset_lastmod=dataset_lastmod,
+            force=args.force,
+        )
+    )
+    print(
+        maybe_write_feed(
+            current_entries=current_entries,
+            previous_entries=previous_entries,
+            output_path=RSS_SECURITY_CRITICAL_XML,
+            mode="security-critical",
             limit=args.limit,
             dataset_lastmod=dataset_lastmod,
             force=args.force,

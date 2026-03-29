@@ -52,6 +52,7 @@ python3 -m http.server 8000
 - `js/app.js` - app logic (no build step)
 - `rss.xml` - latest 50 unique patches feed
 - `rss-enterprise.xml` - latest 50 ArcGIS Enterprise server-side component patches
+- `rss-security-critical.xml` - latest 50 security and critical patches
 
 ## About
 
@@ -69,6 +70,7 @@ This repo includes a GitHub Actions workflow that refreshes the dataset every 3 
 - `sitemap.xml`
 - `rss.xml`
 - `rss-enterprise.xml`
+- `rss-security-critical.xml`
 
 To publish the site:
 
@@ -93,4 +95,5 @@ python3 scripts/generate_rss.py --force
 ```
 
 - `rss.xml` covers all patches; `rss-enterprise.xml` uses the same ArcGIS Enterprise server-side component aggregate as the UI's `ArcGIS Enterprise` product selection.
+- `rss-security-critical.xml` covers patches classified as `Security` or `Critical` by the app's existing criticality logic.
 - Existing RSS files are only rewritten automatically when a newly seen patch appears in that feed.

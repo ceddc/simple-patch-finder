@@ -184,14 +184,14 @@ def effective_entry_pub_date(
     existing_pub_dates: dict[str, datetime],
     dataset_lastmod: datetime | None,
 ) -> datetime:
+    if entry.release_date_iso:
+        y, m, d = (int(part) for part in entry.release_date_iso.split("-"))
+        return datetime(y, m, d, tzinfo=timezone.utc)
     existing = existing_pub_dates.get(entry_guid(entry))
     if existing:
         return existing
     if dataset_lastmod:
         return dataset_lastmod
-    if entry.release_date_iso:
-        y, m, d = (int(part) for part in entry.release_date_iso.split("-"))
-        return datetime(y, m, d, tzinfo=timezone.utc)
     return datetime.now(timezone.utc)
 
 
@@ -272,10 +272,10 @@ def feed_entries(
 
     filtered.sort(
         key=lambda entry: (
+            -entry.release_ordinal,
             -effective_entry_pub_date(
                 entry, existing_pub_dates, dataset_lastmod
             ).timestamp(),
-            -entry.release_ordinal,
             entry.name.lower(),
             entry.qfe_id.lower(),
             entry.version.lower(),

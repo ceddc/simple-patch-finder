@@ -111,6 +111,8 @@ let datasetUpdatedAtUtc = null;
 let baseCountText = "";
 
 let versionSortMode = "asc";
+let preserveNextResultsPage = false;
+let pendingPageHistoryMode = "";
 
 const state = {
   // `all` is the normalized dataset.
@@ -134,6 +136,7 @@ const state = {
     from: "",
     to: "",
   },
+  resultsPage: 1,
 };
 
 const DEFAULT_PAGE_TITLE = String(document.title || "ArcGIS Patch Download Search (Unofficial) | Enterprise, Server, Data Store");
@@ -238,6 +241,28 @@ function normalizePatchRoute(pid, pn) {
   };
 }
 
+function normalizePageNumber(value) {
+  const n = Number.parseInt(String(value || "").trim(), 10);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.floor(n);
+}
+
+function getMaxPageForCount(totalRows) {
+  const total = Number(totalRows || 0);
+  if (!Number.isFinite(total) || total <= 0) return 1;
+  return Math.max(1, Math.ceil(total / PAGE_SIZE));
+}
+
+function clampPageForCount(page, totalRows) {
+  return Math.min(normalizePageNumber(page), getMaxPageForCount(totalRows));
+}
+
+function isCanonicalHomeListingRoute(params) {
+  if (!params) return true;
+  const keys = ["q", "p", "v", "os", "t", "c", "from", "to", "pid", "pn"];
+  return keys.every((key) => !String(params.get(key) || "").trim());
+}
+
 function isLikelyPid(value) {
   return /^[A-Za-z0-9._-]{2,80}$/.test(String(value || ""));
 }
@@ -279,10 +304,12 @@ function selectedSingleProduct() {
 function buildSeoCanonicalUrl() {
   const base = `${location.origin}${location.pathname}`;
   const params = new URLSearchParams(location.search);
+  const page = normalizePageNumber(params.get("page"));
 
   // Canonicalize only the routes we intentionally want indexed:
   // - patch details: pid(+pn)
   // - single product landing: p=<one product>
+  // - paginated listing pages: ?page=<n> and ?p=<product>&page=<n>
   // Everything else canonicalizes to the homepage.
   const pid = String(params.get("pid") || "").trim();
   const pn = String(params.get("pn") || "").trim().toLowerCase();
@@ -316,6 +343,7 @@ function buildSeoCanonicalUrl() {
       const slug = slugifyFilterToken(token);
       if (slug) {
         out.set("p", slug);
+        if (page > 1) out.set("page", String(page));
         return `${base}?${out.toString()}`;
       }
     }
@@ -323,8 +351,15 @@ function buildSeoCanonicalUrl() {
     const resolved = resolveOptionValueFromToken(token, state.options.products);
     if (resolved) {
       out.set("p", slugifyFilterToken(resolved));
+      if (page > 1) out.set("page", String(page));
       return `${base}?${out.toString()}`;
     }
+  }
+
+  if (isCanonicalHomeListingRoute(params) && page > 1) {
+    const out = new URLSearchParams();
+    out.set("page", String(page));
+    return `${base}?${out.toString()}`;
   }
 
   return base;
@@ -358,6 +393,8 @@ function updateRouteSeoMeta() {
 }
 
 function updatePageTitle() {
+  const pageSuffix = state.resultsPage > 1 ? ` - Page ${state.resultsPage}` : "";
+
   if (activePatch) {
     const name = String(activePatch.name || "").trim();
     const pid = String(activePatch.qfeId || "").trim();
@@ -373,11 +410,11 @@ function updatePageTitle() {
 
   const product = selectedSingleProduct();
   if (product) {
-    document.title = `${product} patches | ${TITLE_BRAND}`;
+    document.title = `${product} patches${pageSuffix} | ${TITLE_BRAND}`;
     return;
   }
 
-  document.title = DEFAULT_PAGE_TITLE;
+  document.title = pageSuffix ? `${DEFAULT_PAGE_TITLE}${pageSuffix}` : DEFAULT_PAGE_TITLE;
 }
 
 function findPatchByRoute(route) {
@@ -409,6 +446,7 @@ function serializeFiltersToParams() {
   if (f.to) params.set("to", f.to);
   if (patchRoute.pid) params.set("pid", patchRoute.pid);
   if (patchRoute.pn) params.set("pn", patchRoute.pn);
+  if (!patchRoute.pid && state.resultsPage > 1) params.set("page", String(state.resultsPage));
   return params;
 }
 
@@ -431,9 +469,10 @@ function buildPatchPermalinkUrl(patch) {
   return `${location.origin}${location.pathname}?${params.toString()}`;
 }
 
-function syncLocationToFilters() {
+function syncLocationToFilters(opts = {}) {
   // Keep the address bar in sync with current filters (shareable URL), without navigation.
   // Only include non-default filters to keep URLs short and stable.
+  const historyMode = opts.history === "push" ? "push" : "replace";
   const params = serializeFiltersToParams();
   const qs = params.toString();
   const desired = `${location.pathname}${qs ? `?${qs}` : ""}${location.hash || ""}`;
@@ -443,14 +482,9 @@ function syncLocationToFilters() {
     updatePageTitle();
     return;
   }
-  if (desired === lastSyncedLocation) {
-    updateRouteSeoMeta();
-    updatePageTitle();
-    return;
-  }
   try {
-    history.replaceState({}, "", desired);
-    lastSyncedLocation = desired;
+    if (historyMode === "push") history.pushState({}, "", desired);
+    else history.replaceState({}, "", desired);
   } catch {
     // ignore
   }
@@ -479,7 +513,9 @@ function hydrateFiltersFromLocation() {
   state.filters.critical = ["all", "security", "critical"].includes(critical) ? critical : "all";
   state.filters.from = from;
   state.filters.to = to;
+  state.resultsPage = normalizePageNumber(params.get("page"));
   patchRoute = readPatchRouteFromParams(params);
+  preserveNextResultsPage = true;
 
   updateRouteSeoMeta();
   updatePageTitle();
@@ -1032,6 +1068,47 @@ function buildOptions(patches) {
   };
 }
 
+function syncGridPageToState(historyMode = "replace") {
+  if (!gridBuilt || !grid || typeof grid.setPage !== "function") return;
+
+  const desired = clampPageForCount(state.resultsPage, state.filtered.length);
+  state.resultsPage = desired;
+
+  let current = 1;
+  try {
+    current = normalizePageNumber(typeof grid.getPage === "function" ? grid.getPage() : 1);
+  } catch {
+    current = 1;
+  }
+
+  if (current === desired) {
+    syncLocationToFilters({ history: historyMode });
+    return;
+  }
+
+  pendingPageHistoryMode = historyMode;
+  try {
+    const maybePromise = grid.setPage(desired);
+    if (maybePromise && typeof maybePromise.catch === "function") {
+      maybePromise.catch(() => {
+        pendingPageHistoryMode = "";
+        state.resultsPage = 1;
+        syncLocationToFilters({ history: "replace" });
+      });
+    }
+  } catch {
+    pendingPageHistoryMode = "";
+  }
+}
+
+function queueGridPageSync(historyMode = "replace") {
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      syncGridPageToState(historyMode);
+    }, 0);
+  });
+}
+
 // --- Filtering engine ---
 
 function setComboboxItems(el, items) {
@@ -1415,18 +1492,17 @@ function applyAndRender() {
   const key = computeApplyKey();
   if (key === lastApplyKey) return;
   lastApplyKey = key;
+  const preservePage = preserveNextResultsPage;
+  preserveNextResultsPage = false;
 
   const active = hasActiveFilters();
 
   if (!active) {
+    if (!preservePage) state.resultsPage = 1;
     // Fast path: no need to scan the dataset if nothing is being filtered.
     state.filtered = state.all;
+    state.resultsPage = clampPageForCount(state.resultsPage, state.filtered.length);
     renderGrid();
-    try {
-      if (gridBuilt && grid && typeof grid.setPage === "function") grid.setPage(1);
-    } catch {
-      // ignore
-    }
 
     baseCountText = `${state.all.length.toLocaleString()} patches`;
     updateDatasetHint();
@@ -1439,15 +1515,10 @@ function applyAndRender() {
   const fromMs = state.filters.from ? isoDateToMs(state.filters.from) : 0;
   const toMs = state.filters.to ? isoDateToMs(state.filters.to) : 0;
 
+  if (!preservePage) state.resultsPage = 1;
   state.filtered = state.all.filter((p) => passesFiltersWithContext(p, qLower, fromMs, toMs));
+  state.resultsPage = clampPageForCount(state.resultsPage, state.filtered.length);
   renderGrid();
-
-  // When filters change, reset pagination so the user doesn't land on an empty page.
-  try {
-    if (gridBuilt && grid && typeof grid.setPage === "function") grid.setPage(1);
-  } catch {
-    // ignore
-  }
 
   const total = state.all.length;
   const shown = state.filtered.length;
@@ -1679,6 +1750,13 @@ function ensureGrid() {
     openPatch(row.getData());
   });
 
+  grid.on("pageLoaded", (pageNumber) => {
+    state.resultsPage = normalizePageNumber(pageNumber);
+    const historyMode = pendingPageHistoryMode || "push";
+    pendingPageHistoryMode = "";
+    syncLocationToFilters({ history: historyMode });
+  });
+
   grid.on("tableBuilt", () => {
     gridBuilt = true;
 
@@ -1692,8 +1770,19 @@ function ensureGrid() {
     }
 
     if (pendingGridData) {
-      grid.setData(pendingGridData);
+      const maybePromise = grid.setData(pendingGridData);
       pendingGridData = null;
+      if (maybePromise && typeof maybePromise.then === "function") {
+        maybePromise
+          .then(() => {
+            queueGridPageSync("replace");
+          })
+          .catch(() => {
+            queueGridPageSync("replace");
+          });
+      } else {
+        queueGridPageSync("replace");
+      }
     }
   });
 
@@ -1722,7 +1811,19 @@ function renderGrid() {
   }
 
   // replaceData is faster than rebuilding the table.
-  grid.replaceData(state.filtered);
+  const maybePromise = grid.replaceData(state.filtered);
+  if (maybePromise && typeof maybePromise.then === "function") {
+    maybePromise
+      .then(() => {
+        queueGridPageSync("replace");
+      })
+      .catch(() => {
+        queueGridPageSync("replace");
+      });
+    return;
+  }
+
+  queueGridPageSync("replace");
 }
 
 function renderDialog(p) {
@@ -1881,6 +1982,8 @@ function resetFilters() {
   state.filters.critical = "all";
   state.filters.from = "";
   state.filters.to = "";
+  state.resultsPage = 1;
+  preserveNextResultsPage = false;
 
   applyFiltersToUI();
   scheduleApply();
@@ -1894,7 +1997,6 @@ let dlgShareBtnTimer = null;
 let dlgShareDefaultText = null;
 let dlgShareDefaultIcon = null;
 let applyPending = false;
-let lastSyncedLocation = "";
 
 function setMainShareButtonState(state) {
   if (shareBtnTimer) {
@@ -2049,6 +2151,7 @@ function wireEvents() {
     if (qTimer) clearTimeout(qTimer);
     qTimer = setTimeout(() => {
       state.filters.q = String(els.fQ.value || "").trim();
+      preserveNextResultsPage = false;
       scheduleApply();
     }, 350);
   };
@@ -2060,6 +2163,7 @@ function wireEvents() {
       const next = String(els.fQ.value || "").trim();
       if (next !== state.filters.q) {
         state.filters.q = next;
+        preserveNextResultsPage = false;
         scheduleApply();
       }
     }, 0);
@@ -2100,6 +2204,7 @@ function wireEvents() {
       }
 
       patchAllComboboxCountChips();
+      preserveNextResultsPage = false;
       scheduleApply();
     });
   }
@@ -2114,12 +2219,14 @@ function wireEvents() {
   els.fCritical.addEventListener("calciteSegmentedControlChange", () => {
     const selected = els.fCritical.selectedItem;
     state.filters.critical = String(selected?.value || "all");
+    preserveNextResultsPage = false;
     scheduleApply();
   });
 
   function onDate() {
     state.filters.from = String(els.fFrom.value || "");
     state.filters.to = String(els.fTo.value || "");
+    preserveNextResultsPage = false;
     scheduleApply();
   }
 
@@ -2181,6 +2288,34 @@ function wireEvents() {
   if (els.btnReset) els.btnReset.addEventListener("click", resetFilters);
   if (els.btnResetFilters) els.btnResetFilters.addEventListener("click", resetFilters);
 
+  window.addEventListener("popstate", () => {
+    hydrateFiltersFromLocation();
+    if (state.options.products.length) normalizeFiltersFromOptions();
+    applyFiltersToUI();
+
+    if (!patchRoute.pid) {
+      activePatch = null;
+      setDialogShareButtonState("default");
+      updateDialogShareActionState();
+      if (els.dlg) {
+        try {
+          els.dlg.open = false;
+        } catch {
+          // ignore
+        }
+      }
+    }
+
+    lastApplyKey = "";
+    scheduleApply();
+
+    if (patchRoute.pid && state.all.length) {
+      requestAnimationFrame(() => {
+        openPatchFromRouteIfNeeded();
+      });
+    }
+  });
+
 }
 
 async function loadDataset() {
@@ -2204,6 +2339,13 @@ async function loadDataset() {
     window.__spf = {
       versionsOrdered: state.options.versions.map((v) => v.value),
       compareEsriEraVersions,
+      getCurrentPage: () => {
+        try {
+          return grid && typeof grid.getPage === "function" ? normalizePageNumber(grid.getPage()) : 1;
+        } catch {
+          return 1;
+        }
+      },
     };
 
     // Ensure UI reflects any URL-hydrated filter state.

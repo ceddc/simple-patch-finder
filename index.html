@@ -215,42 +215,62 @@
             <div class="results-actions">
               <div class="results-feed-links" aria-label="RSS feeds">
                 <span class="results-feed-label">RSS:</span>
-                <a class="feed-link-pill" href="./rss.xml" target="_blank" rel="noopener noreferrer">
-                  <span class="rss-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
-                      <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                      <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                    </svg>
+                <calcite-button
+                  href="./rss.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  appearance="outline-fill"
+                  kind="neutral"
+                  scale="m"
+                  label="Open all patches RSS feed in a new tab"
+                >
+                  <span class="rss-button-label">
+                    <span class="rss-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                        <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                        <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                      </svg>
+                    </span>
+                    <span>All</span>
                   </span>
-                  <span>All</span>
-                </a>
-                <a class="feed-link-pill" href="./rss-enterprise.xml" target="_blank" rel="noopener noreferrer">
-                  <span class="rss-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
-                      <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                      <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                    </svg>
+                </calcite-button>
+                <calcite-button
+                  href="./rss-enterprise.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  appearance="outline-fill"
+                  kind="neutral"
+                  scale="m"
+                  label="Open ArcGIS Enterprise RSS feed in a new tab"
+                >
+                  <span class="rss-button-label">
+                    <span class="rss-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                        <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                        <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                      </svg>
+                    </span>
+                    <span>Enterprise</span>
                   </span>
-                  <span>Enterprise</span>
-                </a>
+                </calcite-button>
               </div>
               <calcite-button
                id="btn-toggle-panel"
                appearance="outline-fill"
-              kind="neutral"
-              scale="s"
-              icon-start="panel-left"
-              label="Toggle filters panel"
-            >
+               kind="neutral"
+               scale="m"
+               icon-start="panel-left"
+               label="Toggle filters panel"
+             >
               Filters
             </calcite-button>
             <calcite-button
               id="btn-reset"
               appearance="solid"
               kind="brand"
-              scale="s"
+              scale="m"
               icon-start="reset"
               label="Reset all filters"
             >
@@ -260,7 +280,7 @@
               id="btn-share"
               appearance="solid"
               kind="brand"
-              scale="s"
+              scale="m"
               icon-start="link"
               label="Copy share link"
             >
@@ -323,28 +343,10 @@
                     </div>
                     <ul class="about-list rss-list">
                       <li>
-                        <a class="feed-link-pill" href="./rss.xml" target="_blank" rel="noopener noreferrer">
-                          <span class="rss-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                              <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
-                              <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                              <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                            </svg>
-                          </span>
-                          <span>All patches RSS</span>
-                        </a>
+                        <calcite-link href="./rss.xml">All patches RSS</calcite-link>
                       </li>
                       <li>
-                        <a class="feed-link-pill" href="./rss-enterprise.xml" target="_blank" rel="noopener noreferrer">
-                          <span class="rss-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                              <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
-                              <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                              <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-                            </svg>
-                          </span>
-                          <span>ArcGIS Enterprise RSS</span>
-                        </a>
+                        <calcite-link href="./rss-enterprise.xml">ArcGIS Enterprise RSS</calcite-link>
                       </li>
                     </ul>
                   </div>

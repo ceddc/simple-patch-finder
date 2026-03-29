@@ -19,10 +19,15 @@ This project is intentionally buildless (one `index.html`) and uses CDN-loaded d
 1) Download the patches dataset next to the HTML:
 
 ```bash
-curl -fsSL "https://downloads.esri.com/patch_notification/patches.json" -o patches.json
+./scripts/fetch_patches.sh
 ```
 
-Note: `patches.meta.json` is normally created by GitHub Actions. If it is missing locally, the app still loads but the dataset "Updated" timestamp is unavailable.
+That command refreshes `patches.json` and `patches.meta.json`. Rebuild the sitemap and RSS feeds with:
+
+```bash
+python3 scripts/generate_sitemap.py
+python3 scripts/generate_rss.py --force
+```
 
 2) Serve locally (required for `fetch()` to work):
 
@@ -45,6 +50,8 @@ python3 -m http.server 8000
 - `index.html` - static shell + metadata
 - `css/app.css` - app styling
 - `js/app.js` - app logic (no build step)
+- `rss.xml` - latest 50 unique patches feed
+- `rss-enterprise.xml` - latest 50 ArcGIS Enterprise server-side component patches
 
 ## About
 
@@ -55,13 +62,13 @@ The goal is speed: find a patch quickly and jump to the official Esri page for f
 
 ## GitHub Pages
 
-This repo includes a GitHub Actions workflow that downloads and commits the latest dataset every 3 hours (UTC) to `main`:
+This repo includes a GitHub Actions workflow that refreshes the dataset every 3 hours (UTC) and regenerates:
 
-- `patches.json` (upstream content)
-- `patches.meta.json` (refresh timestamp + hash)
-- `sitemap.xml` (single sitemap with homepage, product pages, and patch permalinks)
-
-Schedule: `00:12`, `03:12`, `06:12`, `09:12`, `12:12`, `15:12`, `18:12`, `21:12` (UTC).
+- `patches.json`
+- `patches.meta.json`
+- `sitemap.xml`
+- `rss.xml`
+- `rss-enterprise.xml`
 
 To publish the site:
 
@@ -77,4 +84,13 @@ The site includes crawl files for search engines:
 
 ## Repo notes
 
-- The dataset and sitemap are refreshed by GitHub Actions (see `.github/workflows/update-dataset.yml`).
+- `patches.json` can be refreshed locally with `./scripts/fetch_patches.sh`.
+- Regenerate `sitemap.xml` and both RSS feeds after dataset updates with:
+
+```bash
+python3 scripts/generate_sitemap.py
+python3 scripts/generate_rss.py --force
+```
+
+- `rss.xml` covers all patches; `rss-enterprise.xml` uses the same ArcGIS Enterprise server-side component aggregate as the UI's `ArcGIS Enterprise` product selection.
+- Existing RSS files are only rewritten automatically when a newly seen patch appears in that feed.

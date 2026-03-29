@@ -1,0 +1,221 @@
+#!/usr/bin/env python3
+"""Generate a single sitemap.xml for search engines.
+
+The sitemap includes:
+- homepage
+- single-product landing URLs (?p=...)
+- patch deep links (?pid=...&pn=...)
+
+Metadata included per URL:
+- lastmod
+- changefreq
+- priority
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from dataclasses import dataclass
+from datetime import date, datetime
+from html import escape
+from pathlib import Path
+from urllib.parse import quote
+
+BASE_URL = "https://simplepatchfinder.ceddc.dev/"
+ROOT = Path(__file__).resolve().parents[1]
+PATCHES_JSON = ROOT / "patches.json"
+PATCHES_META_JSON = ROOT / "patches.meta.json"
+SITEMAP_XML = ROOT / "sitemap.xml"
+
+
+@dataclass(frozen=True)
+class UrlEntry:
+    loc: str
+    lastmod: str = ""
+    changefreq: str = ""
+    priority: str = ""
+
+
+def write_text_lf(path: Path, content: str) -> None:
+    # Force Unix newlines even when generated on Windows.
+    with path.open("w", encoding="utf-8", newline="\n") as f:
+        f.write(content)
+
+
+def slugify_patch_name(name: str) -> str:
+    s = (name or "").lower()
+    s = s.replace("&", " and ")
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    s = re.sub(r"(^-+|-+$)", "", s)
+    return s[:180]
+
+
+def slugify_filter_token(value: str) -> str:
+    s = (value or "").lower()
+    s = s.replace("&", " and ")
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    s = re.sub(r"(^-+|-+$)", "", s)
+    return s[:180]
+
+
+def tokenize_csv(value: str) -> list[str]:
+    return [t.strip() for t in (value or "").split(",") if t.strip()]
+
+
+def parse_release_date(value: str) -> str:
+    """Convert MM/DD/YYYY to YYYY-MM-DD. Returns empty string if invalid."""
+    m = re.match(r"^(\d{1,2})/(\d{1,2})/(\d{4})$", (value or "").strip())
+    if not m:
+        return ""
+    mm, dd, yyyy = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    try:
+        return date(yyyy, mm, dd).isoformat()
+    except ValueError:
+        return ""
+
+
+def parse_isoish(value: str) -> datetime | None:
+    raw = (value or "").strip()
+    if not raw:
+        return None
+
+    try:
+        if raw.endswith("Z"):
+            raw = raw[:-1] + "+00:00"
+        return datetime.fromisoformat(raw)
+    except ValueError:
+        pass
+
+    try:
+        return datetime.combine(date.fromisoformat(raw), datetime.min.time())
+    except ValueError:
+        return None
+
+
+def newer_lastmod(a: str, b: str) -> str:
+    if not a:
+        return b
+    if not b:
+        return a
+    da = parse_isoish(a)
+    db = parse_isoish(b)
+    if da and db:
+        return a if da >= db else b
+    return max(a, b)
+
+
+def read_dataset_lastmod() -> str:
+    if not PATCHES_META_JSON.exists():
+        return ""
+    try:
+        meta = json.loads(PATCHES_META_JSON.read_text(encoding="utf-8"))
+        return str(meta.get("updated_at_utc", "")).strip()
+    except Exception:
+        return ""
+
+
+def write_urlset(path: Path, entries: list[UrlEntry]) -> None:
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+
+    for e in entries:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{escape(e.loc, quote=False)}</loc>")
+        if e.lastmod:
+            lines.append(f"    <lastmod>{escape(e.lastmod, quote=False)}</lastmod>")
+        if e.changefreq:
+            lines.append(
+                f"    <changefreq>{escape(e.changefreq, quote=False)}</changefreq>"
+            )
+        if e.priority:
+            lines.append(f"    <priority>{escape(e.priority, quote=False)}</priority>")
+        lines.append("  </url>")
+
+    lines.append("</urlset>")
+    write_text_lf(path, "\n".join(lines) + "\n")
+
+
+def build_entries() -> list[UrlEntry]:
+    raw = json.loads(PATCHES_JSON.read_text(encoding="utf-8"))
+    groups = raw.get("Product") if isinstance(raw, dict) else []
+    groups = groups if isinstance(groups, list) else []
+
+    dataset_lastmod = read_dataset_lastmod()
+    product_lastmods: dict[str, str] = {}
+    patch_entries: dict[str, UrlEntry] = {}
+
+    for g in groups:
+        patches = g.get("patches") if isinstance(g, dict) else []
+        patches = patches if isinstance(patches, list) else []
+        for p in patches:
+            if not isinstance(p, dict):
+                continue
+
+            rel = parse_release_date(str(p.get("ReleaseDate", ""))) or dataset_lastmod
+
+            for prod in tokenize_csv(str(p.get("Products", ""))):
+                if not prod:
+                    continue
+                product_lastmods[prod] = newer_lastmod(
+                    product_lastmods.get(prod, ""), rel
+                )
+
+            pid = str(p.get("QFE_ID", "")).strip()
+            name = str(p.get("Name", "")).strip()
+            if not pid:
+                continue
+
+            pn = slugify_patch_name(name)
+            loc = f"{BASE_URL}?pid={quote(pid, safe='')}&pn={quote(pn, safe='')}"
+            current = patch_entries.get(loc)
+            if current is None:
+                patch_entries[loc] = UrlEntry(
+                    loc=loc,
+                    lastmod=rel,
+                    changefreq="monthly",
+                    priority="0.7",
+                )
+            else:
+                patch_entries[loc] = UrlEntry(
+                    loc=loc,
+                    lastmod=newer_lastmod(current.lastmod, rel),
+                    changefreq=current.changefreq,
+                    priority=current.priority,
+                )
+
+    entries: list[UrlEntry] = [
+        UrlEntry(
+            loc=BASE_URL,
+            lastmod=dataset_lastmod,
+            changefreq="daily",
+            priority="1.0",
+        )
+    ]
+
+    for prod in sorted(product_lastmods):
+        pslug = slugify_filter_token(prod)
+        if not pslug:
+            continue
+        entries.append(
+            UrlEntry(
+                loc=f"{BASE_URL}?p={quote(pslug, safe='')}",
+                lastmod=product_lastmods[prod],
+                changefreq="weekly",
+                priority="0.8",
+            )
+        )
+
+    entries.extend(patch_entries[k] for k in sorted(patch_entries))
+    return entries
+
+
+def main() -> None:
+    entries = build_entries()
+    write_urlset(SITEMAP_XML, entries)
+
+
+if __name__ == "__main__":
+    main()

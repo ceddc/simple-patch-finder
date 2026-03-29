@@ -1,0 +1,5 @@
+# Internal planning notes belong in the private repo
+PLAN.md
+plans/
+.tmp/
+__pycache__/

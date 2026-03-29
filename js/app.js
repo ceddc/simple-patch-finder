@@ -23,6 +23,7 @@
  * @property {string} name
  * @property {string} qfeId
  * @property {string} version
+ * @property {boolean} isEnterpriseFamily
  * @property {string[]} productsTokens
  * @property {string} productsDisplay
  * @property {string[]} platformTokens
@@ -65,6 +66,34 @@ const els = {
 };
 
 const PAGE_SIZE = 25;
+const ENTERPRISE_PRODUCT_VALUE = "ArcGIS Enterprise";
+
+// Keep this set in sync with scripts/generate_rss.py.
+const ENTERPRISE_FAMILY_TOKENS = new Set([
+  "ArcGIS Enterprise",
+  "ArcGIS Server",
+  "Portal for ArcGIS",
+  "ArcGIS Data Store",
+  "ArcGIS GeoEvent Server",
+  "GeoEvent",
+  "ArcGIS Notebook Server",
+  "ArcGIS Mission Server",
+  "ArcGIS Video Server",
+  "ArcGIS Knowledge Server",
+  "ArcGIS Workflow Manager Server",
+  "ArcGIS Image Server",
+  "ArcGIS Web Adaptor (IIS)",
+  "ArcGIS Web Adaptor (Java Platform)",
+  "ArcGIS GeoAnalytics Server",
+  "ArcGIS Data Interoperability for Server",
+  "ArcGIS Maritime for Server",
+  "Maritime Server",
+  "ArcGIS Roads and Highways for Server",
+  "ArcGIS Production Mapping for Server",
+  "ArcGIS Defense Mapping for Server",
+  "Esri Production Mapping for Server",
+  "Esri Defense Mapping for Server",
+]);
 
 let grid = null;
 let gridInitTries = 0;
@@ -771,6 +800,10 @@ function tokenizeCsv(s) {
     .filter(Boolean);
 }
 
+function isEnterpriseProductTokens(tokens) {
+  return (tokens || []).some((token) => ENTERPRISE_FAMILY_TOKENS.has(String(token || "").trim()));
+}
+
 function classifyCritical(raw) {
   const v = String(raw ?? "").trim().toLowerCase();
   if (v === "security") return "security";
@@ -881,6 +914,7 @@ function normalizeDataset(data) {
       const typeSet = new Set(files.map((f) => f.ext).filter(Boolean));
       const productsTokens = tokenizeCsv(productsRaw);
       const platformTokens = tokenizeCsv(platformRaw);
+      const isEnterpriseFamily = isEnterpriseProductTokens(productsTokens);
 
       const md5 = Array.isArray(p?.MD5sums) ? p.MD5sums : [];
       const sha256 = Array.isArray(p?.SHA256sums) ? p.SHA256sums : [];
@@ -904,6 +938,7 @@ function normalizeDataset(data) {
         name,
         qfeId,
         version,
+        isEnterpriseFamily,
         productsRaw,
         productsTokens,
         productsDisplay,
@@ -940,13 +975,17 @@ function buildOptions(patches) {
   const versionCounts = new Map();
   const platformCounts = new Map();
   const typeCounts = new Map();
+  let enterpriseFamilyCount = 0;
 
   for (const p of patches) {
     versionCounts.set(p.version, (versionCounts.get(p.version) || 0) + 1);
     for (const t of p.productsTokens) productCounts.set(t, (productCounts.get(t) || 0) + 1);
     for (const t of p.platformTokens) platformCounts.set(t, (platformCounts.get(t) || 0) + 1);
     for (const t of p.types) typeCounts.set(t, (typeCounts.get(t) || 0) + 1);
+    if (p.isEnterpriseFamily) enterpriseFamilyCount += 1;
   }
+
+  if (enterpriseFamilyCount) productCounts.set(ENTERPRISE_PRODUCT_VALUE, enterpriseFamilyCount);
 
   function toSortedList(m) {
     return Array.from(m.entries())
@@ -967,7 +1006,7 @@ function buildOptions(patches) {
 
   const productsAll = toSortedList(productCounts);
   const priority = [
-    "ArcGIS Enterprise",
+    ENTERPRISE_PRODUCT_VALUE,
     "ArcGIS Server",
     "Portal for ArcGIS",
     "ArcGIS Data Store",
@@ -1291,6 +1330,21 @@ function anyTokenSelected(tokens, selectedSet) {
   return false;
 }
 
+function productMatchesSelection(patch, selectedValue) {
+  const selected = String(selectedValue || "").trim();
+  if (!selected) return false;
+  if (selected === ENTERPRISE_PRODUCT_VALUE) return !!patch?.isEnterpriseFamily;
+  return (patch?.productsTokens || []).includes(selected);
+}
+
+function anyProductSelected(patch, selectedSet) {
+  if (!selectedSet || !selectedSet.size) return true;
+  for (const selectedValue of selectedSet) {
+    if (productMatchesSelection(patch, selectedValue)) return true;
+  }
+  return false;
+}
+
 function passesFiltersWithContext(p, qLower, fromMs, toMs) {
   // Fast, side-effect-free predicate used by applyAndRender.
   const f = state.filters;
@@ -1301,7 +1355,7 @@ function passesFiltersWithContext(p, qLower, fromMs, toMs) {
 
   if (f.critical !== "all" && p.criticalKind !== f.critical) return false;
 
-  if (!anyTokenSelected(p.productsTokens, f.products)) return false;
+  if (!anyProductSelected(p, f.products)) return false;
 
   if (f.versions.size && !f.versions.has(p.version)) return false;
 

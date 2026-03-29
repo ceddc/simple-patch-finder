@@ -31,6 +31,8 @@
       })();
     </script>
     <link rel="canonical" href="https://simplepatchfinder.ceddc.dev/" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS" href="./rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS" href="./rss-enterprise.xml" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Simple Patch Finder" />
@@ -208,12 +210,35 @@
         <div slot="header-actions-start" class="results-mobile-brand" aria-hidden="true">
           <img class="brand-logo brand-logo--mobile" src="./map.svg" alt="" />
         </div>
-        <div slot="header-actions-end" class="results-meta">
-          <div class="hint" id="text-count">Loading...</div>
-          <div class="results-actions">
-            <calcite-button
-              id="btn-toggle-panel"
-              appearance="outline-fill"
+          <div slot="header-actions-end" class="results-meta">
+            <div class="hint" id="text-count">Loading...</div>
+            <div class="results-actions">
+              <div class="results-feed-links" aria-label="RSS feeds">
+                <span class="results-feed-label">RSS:</span>
+                <a class="feed-link-pill" href="./rss.xml" target="_blank" rel="noopener noreferrer">
+                  <span class="rss-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                      <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                      <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <span>All</span>
+                </a>
+                <a class="feed-link-pill" href="./rss-enterprise.xml" target="_blank" rel="noopener noreferrer">
+                  <span class="rss-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                      <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                      <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <span>Enterprise</span>
+                </a>
+              </div>
+              <calcite-button
+               id="btn-toggle-panel"
+               appearance="outline-fill"
               kind="neutral"
               scale="s"
               icon-start="panel-left"
@@ -286,11 +311,46 @@
                         <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> every 3 hours (the same dataset used by Esri patch notification tools).</li>
                         <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
                         <li>The action also writes <span class="mono">patches.meta.json</span> so the UI can display the last refresh time.</li>
+                        <li>The published RSS files are <span class="mono">./rss.xml</span> (all patches) and <span class="mono">./rss-enterprise.xml</span> (ArcGIS Enterprise server-side components).</li>
                       </ul>
                     </div>
 
-                  <div>
-                    <div class="about-h">FAQ</div>
+                  <div id="feed-links">
+                    <div class="about-h">RSS Feeds</div>
+                    <div class="about-b rss-copy">
+                      Subscribe to the general patch feed or the ArcGIS Enterprise server-side components feed.
+                      Feed files are only rewritten when newly seen patches are added to that feed.
+                    </div>
+                    <ul class="about-list rss-list">
+                      <li>
+                        <a class="feed-link-pill" href="./rss.xml" target="_blank" rel="noopener noreferrer">
+                          <span class="rss-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                              <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                              <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                              <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                            </svg>
+                          </span>
+                          <span>All patches RSS</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a class="feed-link-pill" href="./rss-enterprise.xml" target="_blank" rel="noopener noreferrer">
+                          <span class="rss-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                              <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                              <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                              <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                            </svg>
+                          </span>
+                          <span>ArcGIS Enterprise RSS</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                   <div>
+                     <div class="about-h">FAQ</div>
                     <ol class="about-list">
                       <li><strong>Where does the data come from?</strong> The upstream <span class="mono">patches.json</span> dataset published by Esri.</li>
                       <li><strong>Does this replace Esri Support?</strong> No. Use the Patch page link for the official entry.</li>

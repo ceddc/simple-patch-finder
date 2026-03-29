@@ -141,6 +141,10 @@ const state = {
 
 const DEFAULT_PAGE_TITLE = String(document.title || "ArcGIS Patch Download Search (Unofficial) | Enterprise, Server, Data Store");
 const TITLE_BRAND = "Simple Patch Finder";
+const DEFAULT_META_DESCRIPTION = String(
+  document.querySelector('meta[name="description"]')?.getAttribute("content") ||
+    "Search ArcGIS patches and security updates across Enterprise, Server, Portal, Data Store, Pro, and Desktop. Filter by product, version, platform, date, and type."
+);
 
 let activePatch = null;
 let patchRoute = { pid: "", pn: "" };
@@ -301,68 +305,306 @@ function selectedSingleProduct() {
   return isKnownProductValue(product) ? product : "";
 }
 
-function buildSeoCanonicalUrl() {
+function ensureMetaEl(attrName, attrValue) {
+  let el = document.querySelector(`meta[${attrName}="${attrValue}"]`);
+  if (el) return el;
+  el = document.createElement("meta");
+  el.setAttribute(attrName, attrValue);
+  document.head.appendChild(el);
+  return el;
+}
+
+function setMetaContent(attrName, attrValue, content) {
+  try {
+    const el = ensureMetaEl(attrName, attrValue);
+    if (el.getAttribute("content") !== content) el.setAttribute("content", content);
+  } catch {
+    // ignore
+  }
+}
+
+function titleCaseWords(raw) {
+  return String(raw || "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => {
+      if (/^[A-Z0-9]{2,}$/.test(word)) return word;
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+function humanizeFacetToken(token) {
+  const raw = String(token || "").trim();
+  if (!raw) return "";
+  if (/^\d+(?:\.\d+)+$/.test(raw)) return raw;
+  if (/^[a-z0-9]{1,4}$/i.test(raw) && !raw.includes("-")) return raw.toUpperCase();
+  return titleCaseWords(raw.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim());
+}
+
+function resolveDisplayValue(token, items) {
+  const resolved = resolveOptionValueFromToken(token, items);
+  return resolved || humanizeFacetToken(token);
+}
+
+function selectedSingleProductLabel() {
+  if (!state.filters.products || state.filters.products.size !== 1) return "";
+  const product = String(Array.from(state.filters.products)[0] || "").trim();
+  if (!product) return "";
+  return resolveDisplayValue(product, state.options.products);
+}
+
+function getIndexableSingleProductValue() {
+  if (!state.filters.products || state.filters.products.size !== 1) return "";
+  const token = String(Array.from(state.filters.products)[0] || "").trim();
+  if (!token) return "";
+  if (!state.options.products.length) return humanizeFacetToken(token);
+  return resolveOptionValueFromToken(token, state.options.products);
+}
+
+function hasAdditionalListingFilters() {
+  const f = state.filters;
+  return Boolean(
+    (f.q && f.q.trim()) ||
+      f.versions.size ||
+      f.platforms.size ||
+      f.types.size ||
+      (f.critical && f.critical !== "all") ||
+      f.from ||
+      f.to
+  );
+}
+
+function hasAnyListingFilters() {
+  const f = state.filters;
+  return Boolean(f.products.size || hasAdditionalListingFilters());
+}
+
+function isExactProductListingRoute() {
+  return !patchRoute.pid && !!getIndexableSingleProductValue() && state.filters.products.size === 1 && !hasAdditionalListingFilters();
+}
+
+function currentPatchForSeo() {
+  if (activePatch) return activePatch;
+  if (!patchRoute.pid || !state.all.length) return null;
+  return findPatchByRoute(patchRoute);
+}
+
+function canonicalUrlForProduct(product, page = 1) {
   const base = `${location.origin}${location.pathname}`;
-  const params = new URLSearchParams(location.search);
-  const page = normalizePageNumber(params.get("page"));
+  const out = new URLSearchParams();
+  out.set("p", slugifyFilterToken(product));
+  if (page > 1) out.set("page", String(page));
+  return `${base}?${out.toString()}`;
+}
 
-  // Canonicalize only the routes we intentionally want indexed:
-  // - patch details: pid(+pn)
-  // - single product landing: p=<one product>
-  // - paginated listing pages: ?page=<n> and ?p=<product>&page=<n>
-  // Everything else canonicalizes to the homepage.
-  const pid = String(params.get("pid") || "").trim();
-  const pn = String(params.get("pn") || "").trim().toLowerCase();
-  if (pid && isLikelyPid(pid)) {
-    const safePn = pn && isLikelySlug(pn) ? pn : "";
+function canonicalUrlForHome(page = 1) {
+  const base = `${location.origin}${location.pathname}`;
+  if (page <= 1) return base;
+  const out = new URLSearchParams();
+  out.set("page", String(page));
+  return `${base}?${out.toString()}`;
+}
 
-    // Preserve valid patch route canonicals on first load, before dataset is
-    // available for exact matching/normalization.
-    if (!state.all.length) {
-      const out = new URLSearchParams();
-      out.set("pid", pid);
-      if (safePn) out.set("pn", safePn);
-      return `${base}?${out.toString()}`;
+function canonicalUrlForPatch(route) {
+  const base = `${location.origin}${location.pathname}`;
+  const out = new URLSearchParams();
+  out.set("pid", String(route?.pid || "").trim());
+  if (route?.pn) out.set("pn", String(route.pn).trim());
+  return `${base}?${out.toString()}`;
+}
+
+function latestReleaseDateText(patches) {
+  let best = null;
+  for (const patch of patches || []) {
+    if (!patch) continue;
+    if (!best) {
+      best = patch;
+      continue;
     }
+    if (Number(patch.releaseDateMs || 0) > Number(best.releaseDateMs || 0)) best = patch;
+  }
+  return String(best?.releaseDateText || "").trim();
+}
 
-    const match = findPatchByRoute({ pid, pn: safePn });
-    if (match) {
-      const out = new URLSearchParams();
-      out.set("pid", String(match.qfeId || "").trim());
-      out.set("pn", slugifyPatchName(match.name || ""));
-      return `${base}?${out.toString()}`;
-    }
+function truncateText(text, max = 160) {
+  const raw = String(text || "").replace(/\s+/g, " ").trim();
+  if (!raw || raw.length <= max) return raw;
+  const sliced = raw.slice(0, max - 1);
+  const cut = sliced.lastIndexOf(" ");
+  return `${(cut > 60 ? sliced.slice(0, cut) : sliced).trim()}…`;
+}
+
+function compactList(labels, max = 3) {
+  const clean = Array.from(new Set((labels || []).map((label) => String(label || "").trim()).filter(Boolean)));
+  if (clean.length <= max) return clean.join(", ");
+  return `${clean.slice(0, max).join(", ")} +${clean.length - max} more`;
+}
+
+function pluralize(count, singular, plural = `${singular}s`) {
+  return `${count.toLocaleString()} ${count === 1 ? singular : plural}`;
+}
+
+function currentFilterLabels() {
+  const f = state.filters;
+  return {
+    products: Array.from(f.products || []).map((token) => resolveDisplayValue(token, state.options.products)),
+    versions: Array.from(f.versions || []).map((token) => resolveDisplayValue(token, state.options.versions)),
+    platforms: Array.from(f.platforms || []).map((token) => resolveDisplayValue(token, state.options.platforms)),
+    types: Array.from(f.types || []).map((token) => resolveDisplayValue(token, state.options.types)),
+  };
+}
+
+function buildFilteredRouteTitle(page) {
+  const f = state.filters;
+  const labels = currentFilterLabels();
+  const pageSuffix = page > 1 ? ` - Page ${page}` : "";
+
+  if (f.q && f.q.trim()) {
+    const context = [];
+    if (f.critical !== "all") context.push(criticalLabel(f.critical).label);
+    if (labels.products.length === 1) context.push(labels.products[0]);
+    else if (labels.products.length > 1) context.push(`${labels.products.length} Products`);
+    if (labels.versions.length === 1) context.push(labels.versions[0]);
+    const inContext = context.length ? ` in ${context.join(" ")}` : "";
+    return `Patch results for "${f.q.trim()}"${inContext}${pageSuffix} | ${TITLE_BRAND}`;
   }
 
-  const products = decodeList(params.get("p"));
-  if (products.length === 1) {
-    const out = new URLSearchParams();
-    const token = String(products[0] || "").trim();
+  const bits = [];
+  if (f.critical !== "all") bits.push(criticalLabel(f.critical).label);
+  if (labels.products.length === 1) bits.push(labels.products[0]);
+  else if (labels.products.length > 1) bits.push(`${labels.products.length} Products`);
+  if (labels.versions.length === 1) bits.push(labels.versions[0]);
+  else if (labels.versions.length > 1) bits.push(`${labels.versions.length} Versions`);
+  if (labels.platforms.length === 1) bits.push(labels.platforms[0]);
+  if (labels.types.length === 1) bits.push(labels.types[0]);
 
-    if (!state.options.products.length) {
-      const slug = slugifyFilterToken(token);
-      if (slug) {
-        out.set("p", slug);
-        if (page > 1) out.set("page", String(page));
-        return `${base}?${out.toString()}`;
-      }
-    }
+  const core = bits.length ? `${bits.join(" ")} Patches` : "Filtered ArcGIS Patches";
+  return `${core}${pageSuffix} | ${TITLE_BRAND}`;
+}
 
-    const resolved = resolveOptionValueFromToken(token, state.options.products);
-    if (resolved) {
-      out.set("p", slugifyFilterToken(resolved));
-      if (page > 1) out.set("page", String(page));
-      return `${base}?${out.toString()}`;
-    }
+function buildFilteredRouteDescription(page) {
+  const f = state.filters;
+  const labels = currentFilterLabels();
+  const parts = [];
+
+  if (f.q && f.q.trim()) parts.push(`search "${f.q.trim()}"`);
+  if (f.critical !== "all") parts.push(`${criticalLabel(f.critical).label.toLowerCase()} patches`);
+  if (labels.products.length === 1) parts.push(labels.products[0]);
+  else if (labels.products.length > 1) parts.push(compactList(labels.products, 2));
+  if (labels.versions.length === 1) parts.push(`version ${labels.versions[0]}`);
+  else if (labels.versions.length > 1) parts.push(`${labels.versions.length} versions`);
+  if (labels.platforms.length === 1) parts.push(labels.platforms[0]);
+  if (labels.types.length === 1) parts.push(`${labels.types[0]} files`);
+  if (f.from && f.to) parts.push(`released ${f.from} to ${f.to}`);
+  else if (f.from) parts.push(`released after ${f.from}`);
+  else if (f.to) parts.push(`released through ${f.to}`);
+
+  const summary = parts.length ? parts.join(", ") : "selected filters";
+  const countText = state.filtered.length ? `${pluralize(state.filtered.length, "matching patch")}. ` : "";
+  const pageText = page > 1 ? ` Page ${page} of results. ` : " ";
+  return truncateText(`Filtered ArcGIS patch results for ${summary}.${pageText}${countText}Open the official Esri patch page for full details and downloads.`);
+}
+
+function buildSeoMetadata() {
+  const page = normalizePageNumber(state.resultsPage);
+  const patch = currentPatchForSeo();
+  const base = `${location.origin}${location.pathname}`;
+  const product = getIndexableSingleProductValue();
+  const productLabel = selectedSingleProductLabel() || product;
+  const isHomeListing = !patchRoute.pid && !hasAnyListingFilters();
+  const isExactProduct = isExactProductListingRoute();
+  const hasPatchRoute = !!patchRoute.pid;
+  const hasPendingPatch = hasPatchRoute && !state.all.length && !patch;
+  const isInvalidPatch = hasPatchRoute && state.all.length && !patch;
+
+  if (patch) {
+    const patchName = String(patch.name || "").trim();
+    const patchId = String(patch.qfeId || "").trim();
+    const primaryProduct = String((patch.productsTokens || [])[0] || "ArcGIS").trim() || "ArcGIS";
+    const productsText = compactList(patch.productsTokens || [], 3);
+    const title = patchName && patchId
+      ? `${patchName} (${patchId}) | ${primaryProduct} Patch Details | ${TITLE_BRAND}`
+      : patchName
+        ? `${patchName} | Patch Details | ${TITLE_BRAND}`
+        : `${patchId || "ArcGIS Patch"} | Patch Details | ${TITLE_BRAND}`;
+    const description = truncateText(
+      `Patch details for ${patchName || patchId || "this ArcGIS patch"}${patchId && patchName ? ` (${patchId})` : ""}.${patch.releaseDateText ? ` Released ${patch.releaseDateText}.` : ""} ${productsText ? `Affects ${productsText}. ` : ""}Open the official Esri patch page for downloads, versions, and related files.`
+    );
+    return {
+      title,
+      description,
+      robots: "index,follow",
+      canonicalHref: canonicalUrlForPatch(patchRouteFromPatch(patch)),
+      ogUrl: canonicalUrlForPatch(patchRouteFromPatch(patch)),
+    };
   }
 
-  if (isCanonicalHomeListingRoute(params) && page > 1) {
-    const out = new URLSearchParams();
-    out.set("page", String(page));
-    return `${base}?${out.toString()}`;
+  if (hasPendingPatch) {
+    return {
+      title: `${patchRoute.pid} | Patch Details | ${TITLE_BRAND}`,
+      description: truncateText("Patch details for this ArcGIS patch. Open the official Esri patch page for downloads, versions, and related files."),
+      robots: "index,follow",
+      canonicalHref: canonicalUrlForPatch(patchRoute),
+      ogUrl: canonicalUrlForPatch(patchRoute),
+    };
   }
 
-  return base;
+  if (isInvalidPatch) {
+    return {
+      title: `Patch not found | ${TITLE_BRAND}`,
+      description: truncateText("This patch link could not be matched. Search the latest ArcGIS patches and security updates across Enterprise, Server, Portal, Data Store, Pro, and Desktop."),
+      robots: "noindex,follow",
+      canonicalHref: base,
+      ogUrl: buildShareUrl(),
+    };
+  }
+
+  if (isExactProduct && product) {
+    const countText = state.filtered.length ? pluralize(state.filtered.length, "patch") : "latest patches";
+    const latestRelease = latestReleaseDateText(state.filtered);
+    const pageTitle = page > 1 ? `Page ${page} of ${productLabel} Patches | ${TITLE_BRAND}` : `${productLabel} Patches | Latest Esri Fixes & Security Updates`;
+    const description = truncateText(
+      `Browse ${page > 1 ? `page ${page} of ` : ""}${countText} for ${productLabel}.${latestRelease ? ` Latest release: ${latestRelease}.` : ""} Filter by version, platform, release date, and patch type, then open the official Esri patch page.`
+    );
+    return {
+      title: pageTitle,
+      description,
+      robots: "index,follow",
+      canonicalHref: canonicalUrlForProduct(product, page),
+      ogUrl: canonicalUrlForProduct(product, page),
+    };
+  }
+
+  if (isHomeListing) {
+    const latestRelease = latestReleaseDateText(state.filtered.length ? state.filtered : state.all);
+    const title = page > 1 ? `Page ${page} of ArcGIS Patches | ${TITLE_BRAND}` : DEFAULT_PAGE_TITLE;
+    const description = truncateText(
+      page > 1
+        ? `Browse page ${page} of ArcGIS patches and security updates across Enterprise, Server, Portal, Data Store, Pro, and Desktop.${latestRelease ? ` Latest release: ${latestRelease}.` : ""}`
+        : `${DEFAULT_META_DESCRIPTION}${latestRelease ? ` Latest release: ${latestRelease}.` : ""}`
+    );
+    return {
+      title,
+      description,
+      robots: "index,follow",
+      canonicalHref: canonicalUrlForHome(page),
+      ogUrl: canonicalUrlForHome(page),
+    };
+  }
+
+  const canonicalHref = product ? canonicalUrlForProduct(product, 1) : base;
+  return {
+    title: buildFilteredRouteTitle(page),
+    description: buildFilteredRouteDescription(page),
+    robots: "noindex,follow",
+    canonicalHref,
+    ogUrl: buildShareUrl(),
+  };
+}
+
+function buildSeoCanonicalUrl() {
+  return buildSeoMetadata().canonicalHref;
 }
 
 function ensureCanonicalLinkEl() {
@@ -375,7 +617,8 @@ function ensureCanonicalLinkEl() {
 }
 
 function updateRouteSeoMeta() {
-  const href = buildSeoCanonicalUrl();
+  const meta = buildSeoMetadata();
+  const href = meta.canonicalHref;
 
   try {
     const canonical = ensureCanonicalLinkEl();
@@ -384,37 +627,17 @@ function updateRouteSeoMeta() {
     // ignore
   }
 
-  try {
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl && ogUrl.getAttribute("content") !== href) ogUrl.setAttribute("content", href);
-  } catch {
-    // ignore
-  }
+  setMetaContent("name", "description", meta.description);
+  setMetaContent("name", "robots", meta.robots);
+  setMetaContent("property", "og:url", meta.ogUrl || href);
+  setMetaContent("property", "og:title", meta.title);
+  setMetaContent("property", "og:description", meta.description);
+  setMetaContent("name", "twitter:title", meta.title);
+  setMetaContent("name", "twitter:description", meta.description);
 }
 
 function updatePageTitle() {
-  const pageSuffix = state.resultsPage > 1 ? ` - Page ${state.resultsPage}` : "";
-
-  if (activePatch) {
-    const name = String(activePatch.name || "").trim();
-    const pid = String(activePatch.qfeId || "").trim();
-    if (name && pid) {
-      document.title = `${name} (${pid}) | ${TITLE_BRAND}`;
-      return;
-    }
-    if (name) {
-      document.title = `${name} | ${TITLE_BRAND}`;
-      return;
-    }
-  }
-
-  const product = selectedSingleProduct();
-  if (product) {
-    document.title = `${product} patches${pageSuffix} | ${TITLE_BRAND}`;
-    return;
-  }
-
-  document.title = pageSuffix ? `${DEFAULT_PAGE_TITLE}${pageSuffix}` : DEFAULT_PAGE_TITLE;
+  document.title = buildSeoMetadata().title;
 }
 
 function findPatchByRoute(route) {

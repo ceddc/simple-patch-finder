@@ -151,14 +151,6 @@ let patchRoute = { pid: "", pn: "" };
 
 // --- URL state (shareable links) ---
 
-function encodeList(values) {
-  // Encode multi-selects into a single query param value.
-  // We use a delimiter ('|') so URLs stay compact and stable.
-  return Array.from(values || [])
-    .map((v) => encodeURIComponent(String(v)))
-    .join("|");
-}
-
 function decodeList(s) {
   if (!s) return [];
   return String(s)
@@ -261,12 +253,6 @@ function clampPageForCount(page, totalRows) {
   return Math.min(normalizePageNumber(page), getMaxPageForCount(totalRows));
 }
 
-function isCanonicalHomeListingRoute(params) {
-  if (!params) return true;
-  const keys = ["q", "p", "v", "os", "t", "c", "from", "to", "pid", "pn"];
-  return keys.every((key) => !String(params.get(key) || "").trim());
-}
-
 function isLikelyPid(value) {
   return /^[A-Za-z0-9._-]{2,80}$/.test(String(value || ""));
 }
@@ -296,13 +282,6 @@ function patchRouteFromPatch(p) {
   const pid = String(p.qfeId || "").trim();
   const pn = slugifyPatchName(p.name || "");
   return normalizePatchRoute(pid, pn);
-}
-
-function selectedSingleProduct() {
-  if (!state.filters.products || state.filters.products.size !== 1) return "";
-  const product = String(Array.from(state.filters.products)[0] || "").trim();
-  if (!product) return "";
-  return isKnownProductValue(product) ? product : "";
 }
 
 function ensureMetaEl(attrName, attrValue) {
@@ -347,16 +326,19 @@ function resolveDisplayValue(token, items) {
   return resolved || humanizeFacetToken(token);
 }
 
+function getSingleSelectedValue(values) {
+  if (!(values instanceof Set) || values.size !== 1) return "";
+  return String(Array.from(values)[0] || "").trim();
+}
+
 function selectedSingleProductLabel() {
-  if (!state.filters.products || state.filters.products.size !== 1) return "";
-  const product = String(Array.from(state.filters.products)[0] || "").trim();
+  const product = getSingleSelectedValue(state.filters.products);
   if (!product) return "";
   return resolveDisplayValue(product, state.options.products);
 }
 
 function getIndexableSingleProductValue() {
-  if (!state.filters.products || state.filters.products.size !== 1) return "";
-  const token = String(Array.from(state.filters.products)[0] || "").trim();
+  const token = getSingleSelectedValue(state.filters.products);
   if (!token) return "";
   if (!state.options.products.length) return humanizeFacetToken(token);
   return resolveOptionValueFromToken(token, state.options.products);
@@ -601,10 +583,6 @@ function buildSeoMetadata() {
     canonicalHref,
     ogUrl: buildShareUrl(),
   };
-}
-
-function buildSeoCanonicalUrl() {
-  return buildSeoMetadata().canonicalHref;
 }
 
 function ensureCanonicalLinkEl() {
@@ -1376,16 +1354,6 @@ function readSelectedSet(comboboxEl) {
   return new Set();
 }
 
-function clearCombobox(comboboxEl) {
-  try {
-    comboboxSyncing.add(comboboxEl);
-    comboboxEl.value = [];
-  } finally {
-    requestAnimationFrame(() => comboboxSyncing.delete(comboboxEl));
-  }
-  if ("filterText" in comboboxEl) comboboxEl.filterText = "";
-}
-
 function setComboboxValues(comboboxEl, values) {
   try {
     comboboxSyncing.add(comboboxEl);
@@ -1730,7 +1698,6 @@ function applyAndRender() {
     baseCountText = `${state.all.length.toLocaleString()} patches`;
     updateDatasetHint();
     syncLocationToFilters();
-    updatePageTitle();
     return;
   }
 
@@ -1749,7 +1716,6 @@ function applyAndRender() {
   updateDatasetHint();
 
   syncLocationToFilters();
-  updatePageTitle();
 }
 
 function clearPatchRoute() {
@@ -1758,7 +1724,6 @@ function clearPatchRoute() {
   setDialogShareButtonState("default");
   updateDialogShareActionState();
   syncLocationToFilters();
-  updatePageTitle();
 }
 
 function openPatch(p, opts = {}) {
@@ -1774,7 +1739,6 @@ function openPatch(p, opts = {}) {
   els.dlg.open = true;
 
   if (syncRoute) syncLocationToFilters();
-  updatePageTitle();
 }
 
 function openPatchFromRouteIfNeeded() {

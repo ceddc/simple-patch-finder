@@ -139,8 +139,8 @@ const state = {
   resultsPage: 1,
 };
 
-const DEFAULT_PAGE_TITLE = String(document.title || "ArcGIS Patch Download Search (Unofficial) | Enterprise, Server, Data Store");
-const TITLE_BRAND = "Simple Patch Finder";
+const DEFAULT_PAGE_TITLE = String(document.title || "Simple Patch Finder for ArcGIS & Esri Patches | Latest Downloads");
+const TITLE_BRAND = "Simple Patch Finder for ArcGIS & Esri";
 const DEFAULT_META_DESCRIPTION = String(
   document.querySelector('meta[name="description"]')?.getAttribute("content") ||
     "Search ArcGIS patches and security updates across Enterprise, Server, Portal, Data Store, Pro, and Desktop. Filter by product, version, platform, date, and type."

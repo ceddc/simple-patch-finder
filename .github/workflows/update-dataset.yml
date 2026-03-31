@@ -53,6 +53,7 @@ jobs:
 
             meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
             print({
+                "checked_at_utc": meta.get("checked_at_utc"),
                 "updated_at_utc": meta.get("updated_at_utc"),
                 "patches_sha256": meta.get("patches_sha256"),
                 "bytes": meta.get("bytes"),
@@ -103,6 +104,7 @@ jobs:
 
             meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
             print({
+                "checked_at_utc": meta.get("checked_at_utc"),
                 "updated_at_utc": meta.get("updated_at_utc"),
                 "patches_sha256": meta.get("patches_sha256"),
                 "bytes": meta.get("bytes"),
@@ -172,6 +174,7 @@ jobs:
               from pathlib import Path
 
               meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+              print(f"- Dataset checked_at_utc: {meta.get('checked_at_utc', 'unknown')}")
               print(f"- Dataset updated_at_utc: {meta.get('updated_at_utc', 'unknown')}")
               print(f"- Dataset sha256: {meta.get('patches_sha256', 'unknown')}")
               print(f"- Dataset bytes: {meta.get('bytes', 'unknown')}")

@@ -975,7 +975,7 @@ function updateDatasetHint() {
   const parts = [];
   if (datasetUpdatedAtUtc) {
     const t = formatLocalDateTime(datasetUpdatedAtUtc);
-    if (t) parts.push(`Last updated: ${t}`);
+    if (t) parts.push(`Last checked: ${t}`);
   }
 
   // Don't add suffix to initial Loading/Missing states.
@@ -988,7 +988,7 @@ async function loadDatasetMeta() {
     const res = await fetch("./patches.meta.json", { cache: "no-store" });
     if (!res.ok) return;
     const meta = await res.json();
-    const utc = meta && meta.updated_at_utc;
+    const utc = meta && (meta.checked_at_utc || meta.updated_at_utc);
     if (typeof utc === "string" && utc) {
       datasetUpdatedAtUtc = utc;
       updateDatasetHint();

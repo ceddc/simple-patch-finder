@@ -47,18 +47,18 @@ jobs:
             echo "patches.json missing before refresh"
           fi
           if [[ -f patches.meta.json ]]; then
-            python3 - <<'PY'
-            import json
-            from pathlib import Path
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
 
-            meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
-            print({
-                "checked_at_utc": meta.get("checked_at_utc"),
-                "updated_at_utc": meta.get("updated_at_utc"),
-                "patches_sha256": meta.get("patches_sha256"),
-                "bytes": meta.get("bytes"),
-            })
-            PY
+          meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+          print({
+              "checked_at_utc": meta.get("checked_at_utc"),
+              "updated_at_utc": meta.get("updated_at_utc"),
+              "patches_sha256": meta.get("patches_sha256"),
+              "bytes": meta.get("bytes"),
+          })
+          PY
           else
             echo "patches.meta.json missing before refresh"
           fi
@@ -98,18 +98,18 @@ jobs:
               print({'dataset_changed': 'unknown'})
           PY
           if [[ -f patches.meta.json ]]; then
-            python3 - <<'PY'
-            import json
-            from pathlib import Path
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
 
-            meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
-            print({
-                "checked_at_utc": meta.get("checked_at_utc"),
-                "updated_at_utc": meta.get("updated_at_utc"),
-                "patches_sha256": meta.get("patches_sha256"),
-                "bytes": meta.get("bytes"),
-            })
-            PY
+          meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+          print({
+              "checked_at_utc": meta.get("checked_at_utc"),
+              "updated_at_utc": meta.get("updated_at_utc"),
+              "patches_sha256": meta.get("patches_sha256"),
+              "bytes": meta.get("bytes"),
+          })
+          PY
           fi
           echo "::endgroup::"
 
@@ -169,16 +169,16 @@ jobs:
             echo "- Ended on SHA: $(git rev-parse HEAD 2>/dev/null || echo unknown)"
             echo "- Commit created: ${WORKFLOW_COMMIT_CREATED:-no}"
             if [[ -f patches.meta.json ]]; then
-              python3 - <<'PY'
-              import json
-              from pathlib import Path
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
 
-              meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
-              print(f"- Dataset checked_at_utc: {meta.get('checked_at_utc', 'unknown')}")
-              print(f"- Dataset updated_at_utc: {meta.get('updated_at_utc', 'unknown')}")
-              print(f"- Dataset sha256: {meta.get('patches_sha256', 'unknown')}")
-              print(f"- Dataset bytes: {meta.get('bytes', 'unknown')}")
-              PY
+          meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+          print(f"- Dataset checked_at_utc: {meta.get('checked_at_utc', 'unknown')}")
+          print(f"- Dataset updated_at_utc: {meta.get('updated_at_utc', 'unknown')}")
+          print(f"- Dataset sha256: {meta.get('patches_sha256', 'unknown')}")
+          print(f"- Dataset bytes: {meta.get('bytes', 'unknown')}")
+          PY
             fi
             echo ""
             echo "### Generated files"

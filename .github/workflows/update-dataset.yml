@@ -28,10 +28,108 @@ jobs:
           git checkout -B main
           git pull --rebase origin main
 
+          echo "WORKFLOW_START_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "WORKFLOW_STARTED_AT_UTC=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> "$GITHUB_ENV"
+
+          echo "::group::Workflow context"
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref_name }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Starting SHA: $(git rev-parse HEAD)"
+          date -u +"UTC now: %Y-%m-%dT%H:%M:%SZ"
+          echo "::endgroup::"
+
+          echo "::group::Dataset before refresh"
+          if [[ -f patches.json ]]; then
+            ls -lh patches.json
+            sha256sum patches.json
+          else
+            echo "patches.json missing before refresh"
+          fi
+          if [[ -f patches.meta.json ]]; then
+            python3 - <<'PY'
+            import json
+            from pathlib import Path
+
+            meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+            print({
+                "updated_at_utc": meta.get("updated_at_utc"),
+                "patches_sha256": meta.get("patches_sha256"),
+                "bytes": meta.get("bytes"),
+            })
+            PY
+          else
+            echo "patches.meta.json missing before refresh"
+          fi
+          echo "::endgroup::"
+
           mkdir -p .tmp
           ./scripts/fetch_patches.sh --previous ".tmp/previous-patches.json"
+
+          echo "::group::Dataset after refresh"
+          if [[ -f .tmp/previous-patches.json ]]; then
+            echo "Previous snapshot:"
+            ls -lh .tmp/previous-patches.json
+            sha256sum .tmp/previous-patches.json
+          else
+            echo "No previous snapshot captured"
+          fi
+          if [[ -f patches.json ]]; then
+            echo "Current dataset:"
+            ls -lh patches.json
+            sha256sum patches.json
+          fi
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          prev = Path('.tmp/previous-patches.json')
+          curr = Path('patches.json')
+          if prev.exists() and curr.exists():
+              prev_sha = hashlib.sha256(prev.read_bytes()).hexdigest()
+              curr_sha = hashlib.sha256(curr.read_bytes()).hexdigest()
+              print({
+                  'dataset_changed': prev_sha != curr_sha,
+                  'previous_sha256': prev_sha,
+                  'current_sha256': curr_sha,
+              })
+          else:
+              print({'dataset_changed': 'unknown'})
+          PY
+          if [[ -f patches.meta.json ]]; then
+            python3 - <<'PY'
+            import json
+            from pathlib import Path
+
+            meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+            print({
+                "updated_at_utc": meta.get("updated_at_utc"),
+                "patches_sha256": meta.get("patches_sha256"),
+                "bytes": meta.get("bytes"),
+            })
+            PY
+          fi
+          echo "::endgroup::"
+
           python3 scripts/generate_sitemap.py
           python3 scripts/generate_rss.py --previous ".tmp/previous-patches.json"
+
+          echo "::group::Generated artifacts"
+          ls -lh patches.json patches.meta.json sitemap.xml rss.xml rss-enterprise.xml rss-security-critical.xml
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          for name in ["rss.xml", "rss-enterprise.xml", "rss-security-critical.xml"]:
+              path = Path(name)
+              if not path.exists():
+                  print({"feed": name, "exists": False})
+                  continue
+              root = ET.parse(path).getroot()
+              items = root.findall('./channel/item')
+              print({"feed": name, "exists": True, "items": len(items), "bytes": path.stat().st_size})
+          PY
+          echo "::endgroup::"
 
       - name: Commit if changed
         run: |
@@ -41,10 +139,45 @@ jobs:
 
           git add patches.json patches.meta.json sitemap.xml rss.xml rss-enterprise.xml rss-security-critical.xml
 
+          echo "::group::Git diff summary"
+          git status --short
+          git diff --cached --stat || true
+          echo "::endgroup::"
+
           if git diff --cached --quiet; then
             echo "No dataset/feed changes"
+            echo "WORKFLOW_COMMIT_CREATED=no" >> "$GITHUB_ENV"
             exit 0
           fi
 
           git commit -m "chore: update dataset and feeds"
           git push origin main || (git pull --rebase origin main && git push origin main)
+          echo "WORKFLOW_COMMIT_CREATED=yes" >> "$GITHUB_ENV"
+
+      - name: Job summary
+        if: always()
+        run: |
+          set +e
+          {
+            echo "## Dataset workflow summary"
+            echo "- Event: ${{ github.event_name }}"
+            echo "- Ref: ${{ github.ref_name }}"
+            echo "- Started at (UTC): ${WORKFLOW_STARTED_AT_UTC:-unknown}"
+            echo "- Started from SHA: ${WORKFLOW_START_SHA:-unknown}"
+            echo "- Ended on SHA: $(git rev-parse HEAD 2>/dev/null || echo unknown)"
+            echo "- Commit created: ${WORKFLOW_COMMIT_CREATED:-no}"
+            if [[ -f patches.meta.json ]]; then
+              python3 - <<'PY'
+              import json
+              from pathlib import Path
+
+              meta = json.loads(Path("patches.meta.json").read_text(encoding="utf-8"))
+              print(f"- Dataset updated_at_utc: {meta.get('updated_at_utc', 'unknown')}")
+              print(f"- Dataset sha256: {meta.get('patches_sha256', 'unknown')}")
+              print(f"- Dataset bytes: {meta.get('bytes', 'unknown')}")
+              PY
+            fi
+            echo ""
+            echo "### Generated files"
+            ls -lh patches.json patches.meta.json sitemap.xml rss.xml rss-enterprise.xml rss-security-critical.xml | sed 's/^/- `/' | sed 's/$/`/'
+          } >> "$GITHUB_STEP_SUMMARY"

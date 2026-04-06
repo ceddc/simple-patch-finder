@@ -27,8 +27,11 @@
           if (location.href !== dest) location.replace(dest);
 
           var params = new URLSearchParams(location.search || "");
-          var pid = String(params.get("pid") || "").trim();
-          var pn = String(params.get("pn") || "").trim().toLowerCase();
+          var readParam = function (name) {
+            return String(params.get(name) || params.get("amp;" + name) || "").trim();
+          };
+          var pid = readParam("pid");
+          var pn = readParam("pn").toLowerCase();
           if (!pid) return;
 
           var cleanParams = new URLSearchParams();

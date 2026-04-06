@@ -269,9 +269,14 @@ function isKnownProductValue(value) {
   return !!resolveOptionValueFromToken(wanted, opts);
 }
 
+function readQueryParam(params, name) {
+  if (!params || !name) return "";
+  return String(params.get(name) || params.get(`amp;${name}`) || "").trim();
+}
+
 function readPatchRouteFromParams(params) {
   if (!params) return { pid: "", pn: "" };
-  const route = normalizePatchRoute(params.get("pid"), params.get("pn"));
+  const route = normalizePatchRoute(readQueryParam(params, "pid"), readQueryParam(params, "pn"));
   if (!isLikelyPid(route.pid)) return { pid: "", pn: "" };
   if (route.pn && !isLikelySlug(route.pn)) return { pid: route.pid, pn: "" };
   return route;

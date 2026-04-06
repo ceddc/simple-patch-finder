@@ -5,8 +5,15 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 29 Mar 2026 06:38:30 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 21:24:54 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 11.1 Branch Versioning SAP HANA General Patch (S-111-P-1351)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1351&amp;pn=arcgis-server-11-1-branch-versioning-sap-hana-general-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:fff8b328d40bed7777094eb58c3fca04750438bc391e07fcd7d687da6addb77b</guid>
+      <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Release date: 04/06/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-1-branch-versioning-sap-hana-general-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Reconcile and Post Consistency Patch (S-111-P-1423)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1423&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:7d9dc761dcae395b39b101f589c5084e41b7a01ea9d0ed224dbe80aec66b5244</guid>
       <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
       <description>Version: 10.9.1 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-111-P-1264)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1264&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:bcb0a3ca8f30cf560acb8161f98a9525c2b24b783ece2a81a0d25eaa707313ed</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
     </item>
   </channel>
 </rss>

@@ -634,7 +634,7 @@ function findPatchByRoute(route) {
 }
 
 function serializeFiltersToParams() {
-  // Only emit non-default filters to keep URLs short/stable.
+  // Only emit non-default listing filters to keep URLs short/stable.
   const f = state.filters;
   const params = new URLSearchParams();
   if (f.q) params.set("q", f.q);
@@ -645,15 +645,38 @@ function serializeFiltersToParams() {
   if (f.critical && f.critical !== "all") params.set("c", f.critical);
   if (f.from) params.set("from", f.from);
   if (f.to) params.set("to", f.to);
-  if (patchRoute.pid) params.set("pid", patchRoute.pid);
-  if (patchRoute.pn) params.set("pn", patchRoute.pn);
-  if (!patchRoute.pid && state.resultsPage > 1) params.set("page", String(state.resultsPage));
+  if (state.resultsPage > 1) params.set("page", String(state.resultsPage));
   return params;
 }
 
+function serializeCurrentRouteParams() {
+  if (patchRoute.pid) {
+    const params = new URLSearchParams();
+    params.set("pid", patchRoute.pid);
+    if (patchRoute.pn) params.set("pn", patchRoute.pn);
+    return params;
+  }
+
+  const product = getIndexableSingleProductValue();
+  if (isExactProductListingRoute() && product) {
+    const params = new URLSearchParams();
+    params.set("p", slugifyFilterToken(product));
+    if (state.resultsPage > 1) params.set("page", String(state.resultsPage));
+    return params;
+  }
+
+  if (!hasAnyListingFilters()) {
+    const params = new URLSearchParams();
+    if (state.resultsPage > 1) params.set("page", String(state.resultsPage));
+    return params;
+  }
+
+  return serializeFiltersToParams();
+}
+
 function buildShareUrl() {
-  // Full, absolute URL used by the Share button and for copying.
-  const params = serializeFiltersToParams();
+  // Share the current route exactly as it should appear in the address bar.
+  const params = serializeCurrentRouteParams();
   const base = `${location.origin}${location.pathname}`;
   const qs = params.toString();
   return qs ? `${base}?${qs}` : base;
@@ -671,10 +694,9 @@ function buildPatchPermalinkUrl(patch) {
 }
 
 function syncLocationToFilters(opts = {}) {
-  // Keep the address bar in sync with current filters (shareable URL), without navigation.
-  // Only include non-default filters to keep URLs short and stable.
+  // Keep the address bar in sync with the current route, without navigation.
   const historyMode = opts.history === "push" ? "push" : "replace";
-  const params = serializeFiltersToParams();
+  const params = serializeCurrentRouteParams();
   const qs = params.toString();
   const desired = `${location.pathname}${qs ? `?${qs}` : ""}${location.hash || ""}`;
   const current = `${location.pathname}${location.search}${location.hash || ""}`;
@@ -697,6 +719,25 @@ function syncLocationToFilters(opts = {}) {
 function hydrateFiltersFromLocation() {
   // Hydrate filter state from query params (supports shareable URLs).
   const params = new URLSearchParams(location.search);
+  patchRoute = readPatchRouteFromParams(params);
+
+  if (patchRoute.pid) {
+    state.filters.q = "";
+    state.filters.products = new Set();
+    state.filters.versions = new Set();
+    state.filters.platforms = new Set();
+    state.filters.types = new Set();
+    state.filters.critical = "all";
+    state.filters.from = "";
+    state.filters.to = "";
+    state.resultsPage = 1;
+    preserveNextResultsPage = true;
+
+    updateRouteSeoMeta();
+    updatePageTitle();
+    return;
+  }
+
   const q = String(params.get("q") || "").trim();
   const products = new Set(decodeList(params.get("p")));
   const versions = new Set(decodeList(params.get("v")));
@@ -715,7 +756,6 @@ function hydrateFiltersFromLocation() {
   state.filters.from = from;
   state.filters.to = to;
   state.resultsPage = normalizePageNumber(params.get("page"));
-  patchRoute = readPatchRouteFromParams(params);
   preserveNextResultsPage = true;
 
   updateRouteSeoMeta();

@@ -25,6 +25,20 @@
           if (targetPath === "/index.html") targetPath = "/";
           var dest = canonicalOrigin + targetPath + (location.search || "") + (location.hash || "");
           if (location.href !== dest) location.replace(dest);
+
+          var params = new URLSearchParams(location.search || "");
+          var pid = String(params.get("pid") || "").trim();
+          var pn = String(params.get("pn") || "").trim().toLowerCase();
+          if (!pid) return;
+
+          var cleanParams = new URLSearchParams();
+          cleanParams.set("pid", pid);
+          if (pn) cleanParams.set("pn", pn);
+
+          var cleanSearch = "?" + cleanParams.toString();
+          if (cleanSearch !== (location.search || "")) {
+            history.replaceState({}, "", pathname + cleanSearch + (location.hash || ""));
+          }
         } catch {
           // ignore
         }

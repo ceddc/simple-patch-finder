@@ -5,8 +5,22 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 06 Apr 2026 21:24:54 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2026 18:38:26 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-115-P-1416)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:74352714c92de88fe941a6ec86ab55fba895c8bb1a81539d5a4c11c0a49a3d20</guid>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 04/13/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-120-P-1417)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:fa4fa55414be2771b4dd68970f632ab326ba3d16b454bc29befdca4b572717de</guid>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 04/13/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server 11.1 Branch Versioning SAP HANA General Patch (S-111-P-1351)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1351&amp;pn=arcgis-server-11-1-branch-versioning-sap-hana-general-patch</link>
@@ -342,20 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:78892cc2d30a25149ff862a0c1de77be247ce9c313d3402c1d7ac87afc5c62dc</guid>
       <pubDate>Tue, 09 Sep 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.3 | Release date: 09/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-3</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.5 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 1 (S-115-P-1295)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1295&amp;pn=arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-1</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:816732e41a8c294ed5b22e5e887830fbe98d6ca208bfe6837c7f08f94e894bac</guid>
-      <pubDate>Fri, 29 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 08/29/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-1</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-1091-P-1289)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-1289&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:7d9dc761dcae395b39b101f589c5084e41b7a01ea9d0ed224dbe80aec66b5244</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
     </item>
   </channel>
 </rss>

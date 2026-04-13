@@ -5,8 +5,22 @@
     <description>Latest security and critical patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 29 Mar 2026 06:38:30 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2026 18:38:26 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-115-P-1416)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:74352714c92de88fe941a6ec86ab55fba895c8bb1a81539d5a4c11c0a49a3d20</guid>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 04/13/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-120-P-1417)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:fa4fa55414be2771b4dd68970f632ab326ba3d16b454bc29befdca4b572717de</guid>
+      <pubDate>Mon, 13 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 04/13/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2025 Update 3 Patch (PFA-1091-P-1274B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-1274B&amp;pn=portal-for-arcgis-security-2025-update-3-patch</link>
@@ -342,20 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:14839df7f040fa5a42ce1b4a7ee1a86d453e13d91dddf56b6e8389b80b6df125</guid>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       <description>Version: 10.7.1 | Criticality: Security | Release date: 07/22/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-map-service-security-2022-update-1-patch-8042</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Map Service Security 2022 Update 1 Patch (S-1081-P-800)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-1081-P-800&amp;pn=arcgis-server-map-service-security-2022-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:b2084b7b90868a93bb3c6807902212f1e80c0187f98d3490c35fc529819c1630</guid>
-      <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.8.1 | Criticality: Security | Release date: 07/22/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-map-service-security-2022-update-1-patch-8042</description>
-    </item>
-    <item>
-      <title>ArcGIS GeoEnrichment Server Log4j Patch (GES-1081-P-764)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=GES-1081-P-764&amp;pn=arcgis-geoenrichment-server-log4j-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:2e46a751585a6753058aefd39494850e7e8b60c65321f933def6a1d550d8f82c</guid>
-      <pubDate>Thu, 05 May 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.8.1 | Criticality: Security | Release date: 05/05/2022 | Products: ArcGIS Business Analyst Enterprise | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-geoenrichment-server-log4j-patch-8026</description>
     </item>
   </channel>
 </rss>

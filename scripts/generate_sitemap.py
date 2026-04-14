@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Generate a single sitemap.xml for search engines.
+"""Generate a focused sitemap.xml for search engines.
 
 The sitemap includes:
 - homepage
-- paginated homepage listing URLs (?page=...)
 - single-product landing URLs (?p=...)
-- paginated single-product listing URLs (?p=...&page=...)
-- patch deep links (?pid=...&pn=...)
+- the latest patch deep links (?pid=...&pn=...)
 
 Metadata included per URL:
 - lastmod
@@ -29,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PATCHES_JSON = ROOT / "patches.json"
 PATCHES_META_JSON = ROOT / "patches.meta.json"
 SITEMAP_XML = ROOT / "sitemap.xml"
-PAGE_SIZE = 25
+LATEST_PATCH_LIMIT = 10
 
 # Keep this set in sync with js/app.js and scripts/generate_rss.py.
 ENTERPRISE_FAMILY_TOKENS = {
@@ -145,12 +143,6 @@ def read_dataset_lastmod() -> str:
         return ""
 
 
-def get_max_page(total_rows: int) -> int:
-    if total_rows <= 0:
-        return 1
-    return max(1, (total_rows + PAGE_SIZE - 1) // PAGE_SIZE)
-
-
 def write_urlset(path: Path, entries: list[UrlEntry]) -> None:
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -181,11 +173,8 @@ def build_entries() -> list[UrlEntry]:
 
     dataset_lastmod = read_dataset_lastmod()
     product_lastmods: dict[str, str] = {}
-    product_counts: dict[str, int] = {}
     patch_entries: dict[str, UrlEntry] = {}
-    total_rows = 0
     enterprise_lastmod = ""
-    enterprise_count = 0
 
     for g in groups:
         patches = g.get("patches") if isinstance(g, dict) else []
@@ -195,7 +184,6 @@ def build_entries() -> list[UrlEntry]:
                 continue
 
             rel = parse_release_date(str(p.get("ReleaseDate", ""))) or dataset_lastmod
-            total_rows += 1
             products = tokenize_csv(str(p.get("Products", "")))
 
             for prod in products:
@@ -204,11 +192,9 @@ def build_entries() -> list[UrlEntry]:
                 product_lastmods[prod] = newer_lastmod(
                     product_lastmods.get(prod, ""), rel
                 )
-                product_counts[prod] = product_counts.get(prod, 0) + 1
 
             if any(prod in ENTERPRISE_FAMILY_TOKENS for prod in products):
                 enterprise_lastmod = newer_lastmod(enterprise_lastmod, rel)
-                enterprise_count += 1
 
             pid = str(p.get("QFE_ID", "")).strip()
             name = str(p.get("Name", "")).strip()
@@ -242,19 +228,8 @@ def build_entries() -> list[UrlEntry]:
         )
     ]
 
-    for page in range(2, get_max_page(total_rows) + 1):
-        entries.append(
-            UrlEntry(
-                loc=f"{BASE_URL}?page={page}",
-                lastmod=dataset_lastmod,
-                changefreq="hourly",
-                priority="0.9",
-            )
-        )
-
-    if enterprise_count:
+    if enterprise_lastmod:
         product_lastmods["ArcGIS Enterprise"] = enterprise_lastmod
-        product_counts["ArcGIS Enterprise"] = enterprise_count
 
     for prod in sorted(product_lastmods):
         pslug = slugify_filter_token(prod)
@@ -269,17 +244,12 @@ def build_entries() -> list[UrlEntry]:
             )
         )
 
-        for page in range(2, get_max_page(product_counts.get(prod, 0)) + 1):
-            entries.append(
-                UrlEntry(
-                    loc=f"{BASE_URL}?p={quote(pslug, safe='')}&page={page}",
-                    lastmod=product_lastmods[prod],
-                    changefreq="hourly",
-                    priority="0.7",
-                )
-            )
-
-    entries.extend(patch_entries[k] for k in sorted(patch_entries))
+    latest_patch_entries = sorted(
+        patch_entries.values(),
+        key=lambda entry: (entry.lastmod, entry.loc),
+        reverse=True,
+    )[:LATEST_PATCH_LIMIT]
+    entries.extend(latest_patch_entries)
     return entries
 
 

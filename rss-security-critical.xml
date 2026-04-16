@@ -5,21 +5,21 @@
     <description>Latest security and critical patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 15 Apr 2026 01:02:38 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Apr 2026 21:28:33 +0000</lastBuildDate>
     <language>en-us</language>
     <item>
-      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-115-P-1416)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:996c60ffc019547bd4216d14023a77fb7628a24938330d5c21042f3e8d5a2ef3</guid>
-      <pubDate>Tue, 14 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Criticality: Security | Release date: 04/14/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-115-P-1416B)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416B&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:47e0dcd4ea51beca2c2cb8cf0a13544a18b0d7676d7d3060fda86c6b0a16459d</guid>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 04/16/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
     </item>
     <item>
-      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-120-P-1417)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:4f2427aeca7f200e51a2fe6206a744804df902734fcad56cc597df1e02f5e760</guid>
-      <pubDate>Tue, 14 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 12.0 | Criticality: Security | Release date: 04/14/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-120-P-1417B)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417B&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:d8467e9ed5f3a1895c911ece3c7638b1d8de31a9abcb512581f5c675261317cf</guid>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 04/16/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2025 Update 3 Patch (PFA-1091-P-1274B)</title>

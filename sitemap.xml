@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-04-15T18:38:06Z</lastmod>
+    <lastmod>2026-04-16T21:28:33Z</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-enterprise</loc>
-    <lastmod>2026-04-15</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -266,7 +266,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=portal-for-arcgis</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -275,6 +275,18 @@
     <lastmod>2019-06-13</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417B&amp;pn=portal-for-arcgis-security-2026-update-1-patch</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416B&amp;pn=portal-for-arcgis-security-2026-update-1-patch</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1398&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</loc>
@@ -291,18 +303,6 @@
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1396&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</loc>
     <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417&amp;pn=portal-for-arcgis-security-2026-update-1-patch</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416&amp;pn=portal-for-arcgis-security-2026-update-1-patch</loc>
-    <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

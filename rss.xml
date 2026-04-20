@@ -5,21 +5,28 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 17 Apr 2026 04:17:58 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2026 21:30:30 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-114-P-1449)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1449&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:1c5cffc16f40e929a7f6ccf205e88328c41d29e7b3ccc11ee43acc46ef9e47d9</guid>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.4 | Criticality: Security | Release date: 04/20/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-115-P-1416B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416B&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:47e0dcd4ea51beca2c2cb8cf0a13544a18b0d7676d7d3060fda86c6b0a16459d</guid>
-      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Criticality: Security | Release date: 04/16/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:3b41c4fd42fb6eb3aac6b7b02f8d7f245daafcc385a1d32edf4e3c18fc54a23c</guid>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 04/20/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-120-P-1417B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1417B&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:d8467e9ed5f3a1895c911ece3c7638b1d8de31a9abcb512581f5c675261317cf</guid>
-      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 12.0 | Criticality: Security | Release date: 04/16/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:611116df1dbfd5d359a2e66e539fceabd0645e4c14177b865147d693263195fd</guid>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 04/20/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Parcel Fabric Build Extent Patch 2 (S-111-P-1396)</title>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:630f68ff0ac86560aefc9b29b05f384f94778c47b9abe142478c5396cc53be7d</guid>
       <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.5 | Release date: 09/24/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-branch-versioning-licensing-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 10.9.1 General Branch Versioning Reconcile Patch (S-1091-P-1299)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-1299&amp;pn=arcgis-server-10-9-1-general-branch-versioning-reconcile-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:b00b81323982dbf315faf4dc372c8865f4e1076221593d94fd011d3e5e3988a7</guid>
-      <pubDate>Thu, 18 Sep 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Release date: 09/18/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-10-9-1-general-branch-versioning-reconcile-patch</description>
     </item>
   </channel>
 </rss>

@@ -5,8 +5,15 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 20 Apr 2026 21:30:30 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2026 01:02:15 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:2b81edcb624845649e73b1658525fa722cdd274decf477a3de8c018284ab66e3</guid>
+      <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 04/20/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-data-management-2026-update-1-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-114-P-1449)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1449&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:f559adf14eef81c28933488137ebb06b7473d1abb4c64f5137efe6ef07ca3c37</guid>
       <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.3 | Release date: 09/24/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-branch-versioning-licensing-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Branch Versioning Licensing Patch (S-115-P-1306)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1306&amp;pn=arcgis-server-branch-versioning-licensing-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:630f68ff0ac86560aefc9b29b05f384f94778c47b9abe142478c5396cc53be7d</guid>
-      <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 09/24/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-branch-versioning-licensing-patch</description>
     </item>
   </channel>
 </rss>

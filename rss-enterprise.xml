@@ -5,42 +5,42 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Tue, 21 Apr 2026 18:37:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 May 2026 18:47:44 +0000</lastBuildDate>
     <language>en-us</language>
     <item>
       <title>ArcGIS Server Security 2026 Update 1 Patch (S-111-P-1418)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1418&amp;pn=arcgis-server-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:552ed974c4d57b2dd3fed511dd94ec6ce1e9a5f5ac3441bd6b33273988f15954</guid>
-      <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Criticality: Security | Release date: 04/21/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:5a93c3ddd897a6ea06fecf0b20ec6f53b125909cb70b9537f76b9632d8853295</guid>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 05/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 1 Patch (S-113-P-1419)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1419&amp;pn=arcgis-server-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:5e7a593aae515bf58ae2efbb05343e322818b994782b1f191ef26908cb1c9947</guid>
-      <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Criticality: Security | Release date: 04/21/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:de4094e63651b8ac93f37a2cde47faea0f68ccb45273a6e2d60ac697f7eb5ed3</guid>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 05/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
     </item>
     <item>
-      <title>ArcGIS Server Security 2026 Update 1 Patch (S-114-P-1420)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1420&amp;pn=arcgis-server-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:c24397c2ed53a6dddf5f6c1c24d2c1cbad99a25e5d1490d0a5db12747ea826d5</guid>
-      <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Criticality: Security | Release date: 04/21/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
+      <title>ArcGIS Server Security 2026 Update 1 Patch (S-114-P-1420B)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1420B&amp;pn=arcgis-server-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:3f467bc8d05a1466540b8d6d9da5ccbb6d3c093c3d9f83539275fd07eb0e9ab8</guid>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.4 | Criticality: Security | Release date: 05/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 1 Patch (S-115-P-1421)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1421&amp;pn=arcgis-server-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:f3c00cf3d93a6ff291b40f93e4d7506b4ad4e50ee95ec9032cb496747db8cef1</guid>
-      <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Criticality: Security | Release date: 04/21/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:a9ab04cfac518970d6e4dca83b6ef9376d2d51a2b1b098486bc5a218a0c8c141</guid>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 05/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 1 Patch (S-120-P-1422)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-120-P-1422&amp;pn=arcgis-server-security-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:db7f28ddb3d382c585e1b9c31a7d85bc99378d72b054995905597749590e3179</guid>
-      <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-      <description>Version: 12.0 | Criticality: Security | Release date: 04/21/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:d79a18e17d284626555d3c297dbf063c046a0db9d75110ef4bbdfac2a287a89b</guid>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 05/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411)</title>

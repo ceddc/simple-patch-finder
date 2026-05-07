@@ -5,8 +5,15 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 07 May 2026 01:08:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2026 04:26:11 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS GeoEvent Server 11.5 Patch 1 (Windows | Linux) (QFE-GeoEvent-11.5.56810)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-GeoEvent-11.5.56810&amp;pn=arcgis-geoevent-server-11-5-patch-1-windows-linux</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:c81ad7829b512dfa1e40edcd07c7e84687691963989806444cfa4affb20bad83</guid>
+      <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 05/07/2026 | Products: ArcGIS Enterprise, ArcGIS GeoEvent Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-geoevent-server-11-5-patch-1</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-114-P-1449)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1449&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:a929f249699f5b012422e6d61ecbbd25a568d56a92e975882edf17859884f21a</guid>
       <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.5 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Mission Manager Location Services and Projection Patch (PFA-114-P-1326)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1326&amp;pn=portal-for-arcgis-mission-manager-location-services-and-projection-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:c9b4ef49372a7909c6939966a0f821f7ca5ab07e8489587dba8918e0cc391bbe</guid>
-      <pubDate>Thu, 16 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Release date: 10/16/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-mission-manager-location-services-and-projection-patch</description>
     </item>
   </channel>
 </rss>

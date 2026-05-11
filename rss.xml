@@ -5,8 +5,15 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 07 May 2026 18:50:04 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 May 2026 16:12:07 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 11.5 Branch Versioning SAP HANA General Patch (S-115-P-1353)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1353&amp;pn=arcgis-server-11-5-branch-versioning-sap-hana-general-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:6c2cadff097a960ad74cfd362713656f4d92372499a1e7ce6f9d6781ed85c8b4</guid>
+      <pubDate>Mon, 11 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 05/11/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-5-branch-versioning-sap-hana-general-patch</description>
+    </item>
     <item>
       <title>ArcGIS GeoEvent Server 11.5 Patch 1 (Windows | Linux) (QFE-GeoEvent-11.5.56810)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-GeoEvent-11.5.56810&amp;pn=arcgis-geoevent-server-11-5-patch-1-windows-linux</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:d5166663e9f514eede18125a8d05e923b1641cee484232abbf2d940e6c7d3c35</guid>
       <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.4 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Web Adaptor (IIS) Stability Patch (WAI-115-P-1303)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=WAI-115-P-1303&amp;pn=arcgis-web-adaptor-iis-stability-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:a929f249699f5b012422e6d61ecbbd25a568d56a92e975882edf17859884f21a</guid>
-      <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
     </item>
   </channel>
 </rss>

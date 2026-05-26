@@ -5,8 +5,22 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 21 May 2026 18:52:55 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 16:30:08 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 11.3 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 4 (S-113-P-1439)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1439&amp;pn=arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:da85557fe9ed6c195492285923907df8604a3d4106a73a29348a8710a54bf96a</guid>
+      <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 05/26/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS 12.0 Mission Manager Presence and Template Patch (PFA-120-P-1407)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1407&amp;pn=portal-for-arcgis-12-0-mission-manager-presence-and-template-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:b2715996e154593be6e1fbfa5aa846a82787c76b24e9c5aa4335d42725f93119</guid>
+      <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Release date: 05/26/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-12-0-mission-manager-presence-and-template-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server 11.5 Utility Network Patch 2 (S-115-P-1381)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1381&amp;pn=arcgis-server-11-5-utility-network-patch-2</link>
@@ -342,20 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:324ed3c3c19e40a9182d0917293b94d1bb5200f7be7d97053cb599448fc540e8</guid>
       <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.5 | Release date: 11/04/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-parcel-fabric-build-extent-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.1 Utility Network and Data Management Patch 4 (S-111-P-1314)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1314&amp;pn=arcgis-server-11-1-utility-network-and-data-management-patch-4</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:fecff4adb43370dae8af85466334227fc32351ae497cb475372b953ffcf2c7bb</guid>
-      <pubDate>Wed, 22 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 10/22/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-1-utility-network-and-data-management-patch-4</description>
-    </item>
-    <item>
-      <title>ArcGIS Web Adaptor (IIS) Stability Patch (WAI-113-P-1302)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=WAI-113-P-1302&amp;pn=arcgis-web-adaptor-iis-stability-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:5051ea00466fda01b6c183908403773a90e3fbf04fbeebc396f2f3596c27b500</guid>
-      <pubDate>Mon, 20 Oct 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 10/20/2025 | Products: ArcGIS Enterprise, ArcGIS Web Adaptor (IIS) | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-web-adaptor-iis-stability-patch</description>
     </item>
   </channel>
 </rss>

@@ -5,8 +5,43 @@
     <description>Latest security and critical patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 07 May 2026 01:08:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 May 2026 19:02:25 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 2 Patch (S-111-P-1458)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1458&amp;pn=arcgis-server-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:58a955fd512453be82a4b76674d6c717bab2b4eb1490813298f87b359df85280</guid>
+      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 2 Patch (S-113-P-1457)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1457&amp;pn=arcgis-server-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:3cc5f7e4127765fdcbb9ba5dcc4f9254a43b00b377c1b3ee88f28dc9ee1aebd3</guid>
+      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 2 Patch (S-114-P-1456)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1456&amp;pn=arcgis-server-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:deb60363d1eb80134b159ecb40f5f39b0a87cfae003f727fd44b1aa44156e7ac</guid>
+      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.4 | Criticality: Security | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 2 Patch (S-115-P-1455)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1455&amp;pn=arcgis-server-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:dfe5f0d6212cbc0051c83721453bdf53c1056a6b550e6261a03dcc3e685bf063</guid>
+      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 2 Patch (S-120-P-1454)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-120-P-1454&amp;pn=arcgis-server-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:a72a0bdeddef66b4aa0fa0e39415b47ea6b019226d9f7b301f341a17eb7b99d2</guid>
+      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-114-P-1449)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1449&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
@@ -321,41 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:175494098c021edaacae9cb4373592f4c5b83500b08e49baab0528832785b0f4</guid>
       <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
       <description>Version: 10.9 | Criticality: Security | Release date: 10/14/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-directory-traversal-vulnerability-patch-8063</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Directory Traversal Vulnerability Patch (S-11-P-822B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-11-P-822B&amp;pn=arcgis-server-directory-traversal-vulnerability-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:a76d7f45341f9de4f0675e4b68d909e3a77444837399398d48f99a2ce6ad327b</guid>
-      <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 11.0 | Criticality: Security | Release date: 10/14/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-directory-traversal-vulnerability-patch-8063</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-1081-P-803)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1081-P-803&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:6fb3e5f1c6b74bfcdea1245af49aa30c6618408616a9dfbcd0d4bf4e1ac82894</guid>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.8.1 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-109-P-804)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-109-P-804&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:257a4a7ac3bf49ce7bb7b438f2c590166917b2587a7615ca707f8e4432b0fa19</guid>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.9 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-1091-P-805)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-805&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:29535a99e9b8c0376febad90d3603525efe4b85a839432af89900d8a3be66d25</guid>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Security 2022 Update 2 Patch (S-1071-P-826)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-1071-P-826&amp;pn=arcgis-server-security-2022-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:f0233580cf0348c06adb2ff0dd5da256766ad29a67446da058d0a8bf51ba2320</guid>
-      <pubDate>Tue, 04 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.7.1 | Criticality: Security | Release date: 10/04/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-security-2022-update-2-patch-8064</description>
     </item>
   </channel>
 </rss>

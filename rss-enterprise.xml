@@ -5,8 +5,15 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 27 May 2026 21:51:35 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2026 21:52:17 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-112-P-1235)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-112-P-1235&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:b2c495671131ede8e7aaa637874a5c8fd97d7dd1cae6db322bbdd097ccf1c121</guid>
+      <pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.2 | Criticality: Security | Release date: 05/28/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411B&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:23394a273fe7718ecc2ba0d64a90ec1548638931f7097521fe70047bb9447d52</guid>
       <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.4 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Security 2025 Update 2 Patch (S-115-P-1360)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1360&amp;pn=arcgis-server-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:bb0b3480d687750966e44bb754dd1dd5aca8cc075dc4aea6bf6fe9e60fb9f68e</guid>
-      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
     </item>
   </channel>
 </rss>

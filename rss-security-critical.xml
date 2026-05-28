@@ -5,8 +5,15 @@
     <description>Latest security and critical patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 27 May 2026 19:02:25 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2026 21:52:17 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-112-P-1235)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-112-P-1235&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:b2c495671131ede8e7aaa637874a5c8fd97d7dd1cae6db322bbdd097ccf1c121</guid>
+      <pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.2 | Criticality: Security | Release date: 05/28/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 2 Patch (S-111-P-1458)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1458&amp;pn=arcgis-server-security-2026-update-2-patch</link>
@@ -211,41 +218,6 @@
       <description>Version: 11.4 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
     </item>
     <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-1091-P-1233)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-1233&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:7e44f7df428fd6a4d33f8e6d9cae2d8488d7f0ce2849519039aa57a01a77b7a8</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Criticality: Security | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-111-P-1234)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1234&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:0d9645327be4ba112a453e4af21364cbb5ec275594ce3dd586f4e669ab12ea2d</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Criticality: Security | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-112-P-1235)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-112-P-1235&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:0533ed2f84741c835cdc8d5e48a32ab0b77fd97cced88c4948a2dd36b57516e6</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.2 | Criticality: Security | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-113-P-1236B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1236B&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:9700574ebc70a5076370b4fd7972705c5fe06b92f857817283a034ea25f4040c</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Criticality: Security | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Security 2025 Update 2 Patch (PFA-114-P-1237)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1237&amp;pn=portal-for-arcgis-security-2025-update-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:17ee0a9ee7767ea74592a041482cbd4fd9f876a959a47d032ba4e44d602cda4d</guid>
-      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Criticality: Security | Release date: 06/12/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
       <title>ArcGIS Server Security 2025 Update 1 (S-1091-P-1137)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-1137&amp;pn=arcgis-server-security-2025-update-1</link>
       <guid isPermaLink="false">urn:simple-patch-finder:4294a6f590a352c23c4ecc06d46a8c1f3b7828768d5ea490ae27f22c7f06e9e6</guid>
@@ -356,6 +328,34 @@
       <guid isPermaLink="false">urn:simple-patch-finder:175494098c021edaacae9cb4373592f4c5b83500b08e49baab0528832785b0f4</guid>
       <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
       <description>Version: 10.9 | Criticality: Security | Release date: 10/14/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-directory-traversal-vulnerability-patch-8063</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Directory Traversal Vulnerability Patch (S-11-P-822B)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-11-P-822B&amp;pn=arcgis-server-directory-traversal-vulnerability-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:a76d7f45341f9de4f0675e4b68d909e3a77444837399398d48f99a2ce6ad327b</guid>
+      <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
+      <description>Version: 11.0 | Criticality: Security | Release date: 10/14/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-directory-traversal-vulnerability-patch-8063</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-1081-P-803)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1081-P-803&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:6fb3e5f1c6b74bfcdea1245af49aa30c6618408616a9dfbcd0d4bf4e1ac82894</guid>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      <description>Version: 10.8.1 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-109-P-804)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-109-P-804&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:257a4a7ac3bf49ce7bb7b438f2c590166917b2587a7615ca707f8e4432b0fa19</guid>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      <description>Version: 10.9 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-1091-P-805)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-805&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:29535a99e9b8c0376febad90d3603525efe4b85a839432af89900d8a3be66d25</guid>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      <description>Version: 10.9.1 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
     </item>
   </channel>
 </rss>

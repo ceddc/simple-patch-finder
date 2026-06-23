@@ -5,8 +5,43 @@
     <description>Latest security and critical patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 04 Jun 2026 19:01:30 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jun 2026 18:55:36 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 2 Patch (PFA-111-P-1486)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1486&amp;pn=portal-for-arcgis-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:1802f7fc4c488a4d4f26350fb01079e40b2ad1bbfd559de0230b51f8cb59e957</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 06/23/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 2 Patch (PFA-113-P-1487)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1487&amp;pn=portal-for-arcgis-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:1f23ef87aa11dc58cfe3278a20aba26fe3fe00ca02ef0973a5790bfd79142a3c</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 06/23/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 2 Patch (PFA-115-P-1488)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1488&amp;pn=portal-for-arcgis-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:b42074470782e833241aac624ee1e8e7bdb35ad1f604e3202e2dffaf40528476</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 06/23/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 2 Patch (PFA-120-P-1489)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1489&amp;pn=portal-for-arcgis-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:fe74974ba9456bbc9d29b0180c68fcf74c3f08df9da74d397b9e32cd145b3f04</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 06/23/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 2 Patch (PFA-121-P-1490)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1490&amp;pn=portal-for-arcgis-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:f60aa9319fc5b135744b87773a84078a5954c8eab5ed877bb1e5f011307bdd20</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Criticality: Security | Release date: 06/23/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-114-P-1449)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1449&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
@@ -321,41 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:c6149a4681e4939cf39f2500432fb9ce2252dc8b118f7242eec5311a052ee612</guid>
       <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
       <description>Version: 2022.1 | Criticality: Security | Release date: 06/23/2023 | Products: ArcGIS Insights (Desktop), ArcGIS Insights (Enterprise) | Esri patch page: https://support.esri.com/en-us/patches-updates/2023/arcgis-insights-security-patch-for-arcgis-insights-2022-1-8104</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Directory Traversal Vulnerability Patch (S-109-P-823)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-109-P-823&amp;pn=arcgis-server-directory-traversal-vulnerability-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:175494098c021edaacae9cb4373592f4c5b83500b08e49baab0528832785b0f4</guid>
-      <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.9 | Criticality: Security | Release date: 10/14/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-directory-traversal-vulnerability-patch-8063</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Directory Traversal Vulnerability Patch (S-11-P-822B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-11-P-822B&amp;pn=arcgis-server-directory-traversal-vulnerability-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:a76d7f45341f9de4f0675e4b68d909e3a77444837399398d48f99a2ce6ad327b</guid>
-      <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 11.0 | Criticality: Security | Release date: 10/14/2022 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/arcgis-server-directory-traversal-vulnerability-patch-8063</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-1081-P-803)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1081-P-803&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:6fb3e5f1c6b74bfcdea1245af49aa30c6618408616a9dfbcd0d4bf4e1ac82894</guid>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.8.1 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-109-P-804)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-109-P-804&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:257a4a7ac3bf49ce7bb7b438f2c590166917b2587a7615ca707f8e4432b0fa19</guid>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.9 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS QuickCapture Security Patch (PFA-1091-P-805)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-805&amp;pn=portal-for-arcgis-quickcapture-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:29535a99e9b8c0376febad90d3603525efe4b85a839432af89900d8a3be66d25</guid>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Criticality: Security | Release date: 10/10/2022 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2022/portal-for-arcgis-quickcapture-security-patch-8051</description>
     </item>
   </channel>
 </rss>

@@ -5,8 +5,15 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 29 Jun 2026 16:27:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 22:35:53 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411B)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411B&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:e85a04293de91cf21aaa83ff3abe134a1d39cb88c6a1f5fcf390547a6332d33e</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 07/06/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-data-management-2026-update-1-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS 12.0 Enterprise Sites Update 1 Patch (PFA-120-P-1479)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1479&amp;pn=portal-for-arcgis-12-0-enterprise-sites-update-1-patch</link>
@@ -97,13 +104,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:b2c495671131ede8e7aaa637874a5c8fd97d7dd1cae6db322bbdd097ccf1c121</guid>
       <pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.2 | Criticality: Security | Release date: 05/28/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-security-2025-update-2-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411B&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:2e55fbb93d7cdd11e76a896f70116003e3f8ee0b6a9b376672cb23a6a8bc6917</guid>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-data-management-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 2 Patch (S-111-P-1458)</title>

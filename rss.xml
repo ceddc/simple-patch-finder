@@ -5,8 +5,15 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Mon, 06 Jul 2026 22:35:53 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 20:02:15 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 12.1 Analysis Tools Patch (S-121-P-1492)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1492&amp;pn=arcgis-server-12-1-analysis-tools-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:5d4d06be8a0cf91d1c8fccd5eacc22f42efb9777f123c7798d1c5dd4517483aa</guid>
+      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Release date: 07/09/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-12-1-analysis-tools-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411B&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:94d20c6ab5102a7924a9c7026ca012e8ffb310a49b174024c87504ba19bea156</guid>
       <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
       <description>Version: 12.0 | Release date: 01/23/2026 | Products: ArcGIS Enterprise, ArcGIS Maritime, ArcGIS Maritime for Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-12-0-maritime-server-extension-patch-1</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS 11.3 Map Viewer HTTP/2 Patch (PFA-113-P-1356)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1356&amp;pn=portal-for-arcgis-11-3-map-viewer-http-2-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:d0d2abdf93164f06136ad582760f3fa09e5db814d62c4033920c83e0fd5a0524</guid>
-      <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 12/18/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-11-3-map-viewer-http-2-patch</description>
     </item>
   </channel>
 </rss>

@@ -5,8 +5,15 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 09 Jul 2026 20:02:15 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2026 18:41:34 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Workflow Manager Server 11.5 Patch 1 (QFE-WMXServer-11.5.8410)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-WMXServer-11.5.8410&amp;pn=arcgis-workflow-manager-server-11-5-patch-1</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:88ed16ede85a74c1a584a607d33b4bd26385f1c36d48cb3982b52695749d8619</guid>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 07/21/2026 | Products: ArcGIS Enterprise, ArcGIS Workflow Manager Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-workflow-manager-server-11-5-patch-1</description>
+    </item>
     <item>
       <title>ArcGIS Server 12.1 Analysis Tools Patch (S-121-P-1492)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1492&amp;pn=arcgis-server-12-1-analysis-tools-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:995e9966b41e5f751481be1c745b8d5dab8241bfaadfbb43c31a847a20c33b83</guid>
       <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.1 | Release date: 01/28/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-1-utility-network-and-data-management-patch-5</description>
-    </item>
-    <item>
-      <title>ArcGIS 12.0 Maritime Server extension Patch 1  (Windows Software and Required Deployment Steps) (QFE-MaritimeServer-12.0.3196)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-MaritimeServer-12.0.3196&amp;pn=arcgis-12-0-maritime-server-extension-patch-1-windows-software-and-required-deployment-steps</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:94d20c6ab5102a7924a9c7026ca012e8ffb310a49b174024c87504ba19bea156</guid>
-      <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
-      <description>Version: 12.0 | Release date: 01/23/2026 | Products: ArcGIS Enterprise, ArcGIS Maritime, ArcGIS Maritime for Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-12-0-maritime-server-extension-patch-1</description>
     </item>
   </channel>
 </rss>

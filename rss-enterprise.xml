@@ -5,8 +5,15 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 29 Jul 2026 18:32:55 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2026 15:50:54 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Data Store 12.1 Relational Store Upgrade Patch (DS-121-P-1510)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=DS-121-P-1510&amp;pn=arcgis-data-store-12-1-relational-store-upgrade-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:f96f3e094b09d3b1e2e5712e9a8b831015667aec3cb68836c67188fb9ea05672</guid>
+      <pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Release date: 07/30/2026 | Products: ArcGIS Data Store, ArcGIS Enterprise | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-data-store-12-1-relational-store-upgrade-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411C)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411C&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:b57e0d9087ffe78d9187eb1571ea86ebd6602060d4df5caac696b6d77a9be1d1</guid>
       <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.3 | Release date: 02/03/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-utility-network-and-data-management-patch-2</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.1 Utility Network and Data Management Patch 5 (S-111-P-1378)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1378&amp;pn=arcgis-server-11-1-utility-network-and-data-management-patch-5</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:995e9966b41e5f751481be1c745b8d5dab8241bfaadfbb43c31a847a20c33b83</guid>
-      <pubDate>Wed, 28 Jan 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Release date: 01/28/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-11-1-utility-network-and-data-management-patch-5</description>
     </item>
   </channel>
 </rss>

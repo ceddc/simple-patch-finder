@@ -5,8 +5,15 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 05 Aug 2026 00:47:57 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 18:45:41 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 11.1 Utility Network Patch 6 (S-111-P-1501)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1501&amp;pn=arcgis-server-11-1-utility-network-patch-6</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:8975eb989bc5847feb674ef06cf009e14ee0f22db36e181c40b6ce6178f4e03e</guid>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Release date: 08/05/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-1-utility-network-patch-6</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-111-P-1494)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1494&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:31783fda9cc831a82b35a5e6b6f24ae1c313bff5e33e2b37fb7a06fc234542bb</guid>
       <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
       <description>Version: 12.0 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Data Store 11.5 Reliability Patch (DS-115-P-1395)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=DS-115-P-1395&amp;pn=arcgis-data-store-11-5-reliability-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:d8b81105be90f4eb75114c77454f07cd563837dbe501a9ff679eef1d1e720df3</guid>
-      <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 03/10/2026 | Products: ArcGIS Data Store, ArcGIS Enterprise | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-data-store-11-5-reliability-patch</description>
     </item>
   </channel>
 </rss>

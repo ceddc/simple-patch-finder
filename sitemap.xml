@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-08-05T00:47:57Z</lastmod>
+    <lastmod>2026-08-05T18:45:41Z</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-enterprise</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -194,7 +194,7 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-server</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -277,6 +277,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1501&amp;pn=arcgis-server-11-1-utility-network-patch-6</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1498&amp;pn=portal-for-arcgis-security-2026-update-3-patch</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -327,12 +333,6 @@
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1492&amp;pn=arcgis-server-12-1-analysis-tools-patch</loc>
     <lastmod>2026-07-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1479&amp;pn=portal-for-arcgis-12-0-enterprise-sites-update-1-patch</loc>
-    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

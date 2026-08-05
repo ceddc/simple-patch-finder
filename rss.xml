@@ -5,8 +5,43 @@
     <description>Latest ArcGIS and Esri patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 30 Jul 2026 15:50:54 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 00:47:57 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-111-P-1494)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1494&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:5054ee8064ff41c9fdfedff2cf76039ff58c39ee5356590e8287c30163e335d2</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 08/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-3-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-113-P-1495)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1495&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:9836c8c0efb86f12abd77b41985b86e1981ec8235e4bb34e48bd953d55b36bd4</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 08/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-3-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-115-P-1496)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1496&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:110ddf524555341873dc6e7af9eb6dfbd66ffba3dd7663d172e1cfa2c27af73f</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 08/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-3-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-120-P-1497)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1497&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:c9fac54bf0163683e7009d4edce5f47ddf974677b867eb844d8ab32fd2ca09b4</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 08/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-3-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-121-P-1498)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1498&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:06074b12ea8944d8136e60be12be67c5ecdd45a395de7884d82d6f7a911349ed</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Criticality: Security | Release date: 08/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-3-patch</description>
+    </item>
     <item>
       <title>ArcGIS Data Store 12.1 Relational Store Upgrade Patch (DS-121-P-1510)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=DS-121-P-1510&amp;pn=arcgis-data-store-12-1-relational-store-upgrade-patch</link>
@@ -321,41 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:d8b81105be90f4eb75114c77454f07cd563837dbe501a9ff679eef1d1e720df3</guid>
       <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.5 | Release date: 03/10/2026 | Products: ArcGIS Data Store, ArcGIS Enterprise | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-data-store-11-5-reliability-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.3 Network Diagrams Layouts Improvement Patch (S-113-P-1401)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1401&amp;pn=arcgis-server-11-3-network-diagrams-layouts-improvement-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:353e8b7a755bc5b8ac183d10e11e8a0ff0cb673c32dc54658e1e630fe9540119</guid>
-      <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 03/10/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-network-diagrams-layouts-improvement-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Workflow Manager Server 11.3 Patch 3 (QFE-WMXServer-11.3.6530)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE-WMXServer-11.3.6530&amp;pn=arcgis-workflow-manager-server-11-3-patch-3</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:8fd2f3e8e68d9e721dee832800e7665e58b399637cafa2783633394dc026ea4d</guid>
-      <pubDate>Wed, 25 Feb 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 02/25/2026 | Products: ArcGIS Enterprise, ArcGIS Workflow Manager Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-workflow-manager-server-11-3-patch-3</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS 11.5 Mission Manager Tasking and Template Patch (PFA-115-P-1383B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1383B&amp;pn=portal-for-arcgis-11-5-mission-manager-tasking-and-template-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:427c9c0b63f33f50fd566ba30e1f3c5a1ddb1cb097ef2838f410b5f0691c86cd</guid>
-      <pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 02/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-11-5-mission-manager-tasking-and-template-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.5 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 2 (S-115-P-1390)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1390&amp;pn=arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-2</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:5febc568fe88d5e6ffa0d48e19ad72a56993cf3c950e20b153a25bfead93bfac</guid>
-      <pubDate>Wed, 04 Feb 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 02/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-2</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.3 Utility Network and Data Management Patch 2 (S-113-P-1380)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1380&amp;pn=arcgis-server-11-3-utility-network-and-data-management-patch-2</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:b57e0d9087ffe78d9187eb1571ea86ebd6602060d4df5caac696b6d77a9be1d1</guid>
-      <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 02/03/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-utility-network-and-data-management-patch-2</description>
     </item>
   </channel>
 </rss>

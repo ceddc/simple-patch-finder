@@ -5,8 +5,22 @@
     <description>Latest ArcGIS Enterprise server-side component patches from Simple Patch Finder.</description>
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 05 Aug 2026 21:38:12 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 21:28:12 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 11.5 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 4 (S-115-P-1519)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1519&amp;pn=arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:351fbdb4b899fa5d4003b5e02b366bb7b91ea1f74534b0731efd91941442ead4</guid>
+      <pubDate>Thu, 13 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Release date: 08/13/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411C)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411C&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:c8b4f826a522f86a70cb3fcdd88415b82548f787e6b4d944e4c528b4bdec63ba</guid>
+      <pubDate>Thu, 13 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 08/13/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-data-management-2026-update-1-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server 11.1 Utility Network Patch 6 (S-111-P-1501)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1501&amp;pn=arcgis-server-11-1-utility-network-patch-6</link>
@@ -62,13 +76,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:f96f3e094b09d3b1e2e5712e9a8b831015667aec3cb68836c67188fb9ea05672</guid>
       <pubDate>Thu, 30 Jul 2026 00:00:00 +0000</pubDate>
       <description>Version: 12.1 | Release date: 07/30/2026 | Products: ArcGIS Data Store, ArcGIS Enterprise | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-data-store-12-1-relational-store-upgrade-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411C)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411C&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:3cedcb2a2b29449586dc7f67885dc95ba00c0a55e8dbba4af17839a27f712bbf</guid>
-      <pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 07/29/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-data-management-2026-update-1-patch</description>
     </item>
     <item>
       <title>ArcGIS Workflow Manager Server 11.5 Patch 1 (QFE-WMXServer-11.5.8410)</title>
@@ -349,13 +356,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:f7ee6eb997fa78eff421c4865998a0e058425b514080b9bc85e54085adb0ecef</guid>
       <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.4 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Web App Embedded Element Patch (PFA-115-P-1405)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1405&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:865552bead177a789d56814665d38bc9b88f74083ab28067196aef83fbbd24eb</guid>
-      <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 03/19/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-web-app-embedded-element-patch</description>
     </item>
   </channel>
 </rss>

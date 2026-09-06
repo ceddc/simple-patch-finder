@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simple Patch Finder | Unofficial ArcGIS Patch Search</title>
+    <meta
+      name="description"
+      content="Find ArcGIS patches and follow RSS feeds by version. Unofficial patch search with filters and links to official Esri patch details and downloads."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta name="msvalidate.01" content="DCED9FB754860CB81DEBA0EE29BC5B70" />
+    <script>
+      (function () {
+        try {
+          var canonicalOrigin = "https://simplepatchfinder.ceddc.dev";
+          var legacyHost = "ceddc.github.io";
+          var prefix = "/simple-patch-finder";
+          var pathname = location.pathname || "/";
+          var hasLegacyPrefix = pathname === prefix || pathname.indexOf(prefix + "/") === 0;
+          var shouldRedirect = location.hostname === legacyHost || hasLegacyPrefix || pathname === "/index.html";
+
+          var targetPath = hasLegacyPrefix ? "/" : pathname;
+          if (targetPath === "/index.html") targetPath = "/";
+          var dest = canonicalOrigin + targetPath + (location.search || "") + (location.hash || "");
+          if (shouldRedirect && location.href !== dest) {
+            location.replace(dest);
+            return;
+          }
+
+          var params = new URLSearchParams(location.search || "");
+          var readParam = function (name) {
+            return String(params.get(name) || params.get("amp;" + name) || "").trim();
+          };
+          var pid = readParam("pid");
+          var pn = readParam("pn").toLowerCase();
+          if (!pid) return;
+
+          var cleanParams = new URLSearchParams();
+          cleanParams.set("pid", pid);
+          if (pn) cleanParams.set("pn", pn);
+
+          var cleanSearch = "?" + cleanParams.toString();
+          if (cleanSearch !== (location.search || "")) {
+            history.replaceState({}, "", pathname + cleanSearch + (location.hash || ""));
+          }
+        } catch {
+          // ignore
+        }
+      })();
+    </script>
+    <script src="./js/seo.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS" href="https://simplepatchfinder.ceddc.dev/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS - 12.1" href="https://simplepatchfinder.ceddc.dev/rss-12.1.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS - 12.0" href="https://simplepatchfinder.ceddc.dev/rss-12.0.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS - 11.5" href="https://simplepatchfinder.ceddc.dev/rss-11.5.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS - 11.4" href="https://simplepatchfinder.ceddc.dev/rss-11.4.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - All patches RSS - 11.3" href="https://simplepatchfinder.ceddc.dev/rss-11.3.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS" href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS - 12.1" href="https://simplepatchfinder.ceddc.dev/rss-enterprise-12.1.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS - 12.0" href="https://simplepatchfinder.ceddc.dev/rss-enterprise-12.0.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS - 11.5" href="https://simplepatchfinder.ceddc.dev/rss-enterprise-11.5.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS - 11.4" href="https://simplepatchfinder.ceddc.dev/rss-enterprise-11.4.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - ArcGIS Enterprise RSS - 11.3" href="https://simplepatchfinder.ceddc.dev/rss-enterprise-11.3.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS" href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS - 12.1" href="https://simplepatchfinder.ceddc.dev/rss-security-critical-12.1.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS - 12.0" href="https://simplepatchfinder.ceddc.dev/rss-security-critical-12.0.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS - 11.5" href="https://simplepatchfinder.ceddc.dev/rss-security-critical-11.5.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS - 11.4" href="https://simplepatchfinder.ceddc.dev/rss-security-critical-11.4.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Simple Patch Finder - Security and Critical RSS - 11.3" href="https://simplepatchfinder.ceddc.dev/rss-security-critical-11.3.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Simple Patch Finder" />
+    <meta property="og:url" content="https://simplepatchfinder.ceddc.dev/" />
+    <meta property="og:title" content="Simple Patch Finder | Unofficial ArcGIS Patch Search" />
+    <meta
+      property="og:description"
+      content="Find ArcGIS patches and follow RSS feeds by version. Unofficial patch search with filters and links to official Esri patch details and downloads."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Simple Patch Finder | Unofficial ArcGIS Patch Search" />
+    <meta
+      name="twitter:description"
+      content="Find ArcGIS patches and follow RSS feeds by version. Unofficial patch search with filters and links to official Esri patch details and downloads."
+    />
+    <meta name="theme-color" content="#2c7be5" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Simple Patch Finder",
+        "alternateName": "ArcGIS Patch Download Search",
+        "url": "https://simplepatchfinder.ceddc.dev/",
+        "description": "Unofficial patch download search for the latest Esri ArcGIS patches (ArcGIS Enterprise, ArcGIS Server, ArcGIS Data Store). Filter by product, version, date, and type with links to official Esri pages. Subscribe to all-patch, Enterprise, or security and critical RSS feeds for all versions or versions 12.1 through 11.3.",
+        "hasPart": [
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - All patches RSS",
+            "url": "https://simplepatchfinder.ceddc.dev/rss.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - All patches RSS - 12.1",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-12.1.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - All patches RSS - 12.0",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-12.0.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - All patches RSS - 11.5",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-11.5.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - All patches RSS - 11.4",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-11.4.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - All patches RSS - 11.3",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-11.3.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - ArcGIS Enterprise RSS",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-enterprise.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - ArcGIS Enterprise RSS - 12.1",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-enterprise-12.1.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - ArcGIS Enterprise RSS - 12.0",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-enterprise-12.0.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - ArcGIS Enterprise RSS - 11.5",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-enterprise-11.5.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - ArcGIS Enterprise RSS - 11.4",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-enterprise-11.4.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - ArcGIS Enterprise RSS - 11.3",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-enterprise-11.3.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - Security and Critical RSS",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-security-critical.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - Security and Critical RSS - 12.1",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-security-critical-12.1.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - Security and Critical RSS - 12.0",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-security-critical-12.0.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - Security and Critical RSS - 11.5",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-security-critical-11.5.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - Security and Critical RSS - 11.4",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-security-critical-11.4.xml",
+            "encodingFormat": "application/rss+xml"
+          },
+          {
+            "@type": "DataFeed",
+            "name": "Simple Patch Finder - Security and Critical RSS - 11.3",
+            "url": "https://simplepatchfinder.ceddc.dev/rss-security-critical-11.3.xml",
+            "encodingFormat": "application/rss+xml"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SRT1WQLTTY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-SRT1WQLTTY");
+    </script>
+    <link rel="icon" type="image/png" href="./favicon.png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
+
+    <!-- Calcite (loaded like official tutorial examples) -->
+    <script type="module" src="https://js.arcgis.com/calcite-components/5.0"></script>
+
+    <!-- High-performance grid (sorting + local pagination) -->
+    <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator.min.css" />
+    <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js" defer></script>
+
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
+
+  <body class="calcite-mode-light">
+    <calcite-shell class="shell">
+      <calcite-alert id="share-alert" slot="alerts" kind="success" icon="check-circle" scale="m" auto-close auto-close-duration="4000">
+        <div slot="title">Share link ready</div>
+        <div slot="message">
+          <calcite-link id="share-link" href="#" target="_self"></calcite-link>
+        </div>
+      </calcite-alert>
+
+      <calcite-shell-panel id="panel-start" slot="panel-start">
+        <calcite-panel
+          id="left-panel"
+          heading="Simple Patch Finder"
+          description="Search and filters"
+          scale="m"
+        >
+          <div slot="header-actions-start" class="panel-header-start" aria-hidden="true">
+            <img class="brand-logo" src="./map.svg" alt="" />
+          </div>
+
+          <div class="left-panel-body">
+            <calcite-notice open kind="info" scale="s">
+              <div slot="message">
+                <strong>Unofficial</strong> latest Esri patches | patch download search<br />
+                Agent vibe-coded proof-of-concept.<br />
+                Official website:
+                <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">support.esri.com</calcite-link>
+              </div>
+            </calcite-notice>
+
+            <div class="filters-container">
+              <calcite-block heading="Filters" description="Narrow down patches" expanded>
+                <calcite-action
+                  id="btn-reset-filters"
+                  slot="actions-end"
+                  icon="reset"
+                  text="Reset all"
+                  label="Reset all filters"
+                  scale="s"
+                ></calcite-action>
+
+                <div class="filters-grid">
+                  <calcite-input-text
+                    id="f-q"
+                    label-text="Search"
+                    placeholder="Name, QFE ID, filename..."
+                    clearable
+                    scale="m"
+                  ></calcite-input-text>
+
+                  <calcite-combobox
+                    id="f-versions"
+                    label="Version"
+                    label-text="Version"
+                    selection-mode="multiple"
+                    placeholder="Choose versions"
+                    selection-display="single"
+                    overlay-positioning="fixed"
+                    scale="m"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
+                    id="f-products"
+                    label="Product"
+                    label-text="Product"
+                    selection-mode="multiple"
+                    placeholder="Choose products"
+                    selection-display="single"
+                    overlay-positioning="fixed"
+                    scale="m"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
+                    id="f-platforms"
+                    label="Platform"
+                    label-text="Platform"
+                    selection-mode="multiple"
+                    placeholder="Choose platforms"
+                    selection-display="single"
+                    overlay-positioning="fixed"
+                    scale="s"
+                  ></calcite-combobox>
+
+                  <calcite-combobox
+                    id="f-types"
+                    label="File type"
+                    label-text="File type"
+                    selection-mode="multiple"
+                    placeholder="msp, tar, exe..."
+                    selection-display="single"
+                    overlay-positioning="fixed"
+                    scale="s"
+                  ></calcite-combobox>
+
+                  <div>
+                    <calcite-label layout="inline" scale="s">Criticality</calcite-label>
+                    <calcite-segmented-control id="f-critical" scale="s">
+                      <calcite-segmented-control-item value="all" checked>All</calcite-segmented-control-item>
+                      <calcite-segmented-control-item value="security">Security</calcite-segmented-control-item>
+                      <calcite-segmented-control-item value="critical">Critical</calcite-segmented-control-item>
+                    </calcite-segmented-control>
+                  </div>
+
+                  <div class="two">
+                    <calcite-input-date-picker id="f-from" label-text="From" scale="s"></calcite-input-date-picker>
+                    <calcite-input-date-picker id="f-to" label-text="To" scale="s"></calcite-input-date-picker>
+                  </div>
+                </div>
+              </calcite-block>
+            </div>
+          </div>
+        </calcite-panel>
+      </calcite-shell-panel>
+
+      <calcite-panel class="results-card" heading="ArcGIS patches" heading-level="1" description="Latest Esri patches and download links" scale="m">
+        <div slot="header-actions-start" class="results-mobile-brand" aria-hidden="true">
+          <img class="brand-logo brand-logo--mobile" src="./map.svg" alt="" />
+        </div>
+          <div slot="header-actions-end" class="results-meta">
+            <div class="hint" id="text-count">Loading...</div>
+            <div class="results-actions">
+              <div class="results-feed-links" aria-label="RSS feeds">
+                <span class="results-feed-label">RSS:</span>
+                <calcite-dropdown id="rss-all" placement="bottom-start" overlay-positioning="fixed" max-items="6" width="m">
+                  <calcite-button
+                    slot="trigger"
+                    icon-end="chevron-down"
+                    appearance="outline-fill"
+                    kind="neutral"
+                    scale="m"
+                    label="All patches RSS feeds"
+                  >
+                    <span class="rss-button-label">
+                      <span class="rss-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                          <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                          <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                        </svg>
+                      </span>
+                      <span>All</span>
+                    </span>
+                  </calcite-button>
+                  <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="./rss.xml" target="_blank" rel="noopener noreferrer" label="All patches RSS, all versions (opens in a new tab)">All versions</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-12.1.xml" target="_blank" rel="noopener noreferrer" label="All patches RSS, version 12.1 (opens in a new tab)">12.1</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-12.0.xml" target="_blank" rel="noopener noreferrer" label="All patches RSS, version 12.0 (opens in a new tab)">12.0</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-11.5.xml" target="_blank" rel="noopener noreferrer" label="All patches RSS, version 11.5 (opens in a new tab)">11.5</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-11.4.xml" target="_blank" rel="noopener noreferrer" label="All patches RSS, version 11.4 (opens in a new tab)">11.4</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-11.3.xml" target="_blank" rel="noopener noreferrer" label="All patches RSS, version 11.3 (opens in a new tab)">11.3</calcite-dropdown-item>
+                  </calcite-dropdown-group>
+                </calcite-dropdown>
+                <calcite-dropdown id="rss-enterprise" placement="bottom-start" overlay-positioning="fixed" max-items="6" width="m">
+                  <calcite-button
+                    slot="trigger"
+                    icon-end="chevron-down"
+                    appearance="outline-fill"
+                    kind="neutral"
+                    scale="m"
+                    label="ArcGIS Enterprise RSS feeds"
+                  >
+                    <span class="rss-button-label">
+                      <span class="rss-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                          <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                          <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                        </svg>
+                      </span>
+                      <span>Enterprise</span>
+                    </span>
+                  </calcite-button>
+                  <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="./rss-enterprise.xml" target="_blank" rel="noopener noreferrer" label="ArcGIS Enterprise RSS, all versions (opens in a new tab)">All versions</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-enterprise-12.1.xml" target="_blank" rel="noopener noreferrer" label="ArcGIS Enterprise RSS, version 12.1 (opens in a new tab)">12.1</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-enterprise-12.0.xml" target="_blank" rel="noopener noreferrer" label="ArcGIS Enterprise RSS, version 12.0 (opens in a new tab)">12.0</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-enterprise-11.5.xml" target="_blank" rel="noopener noreferrer" label="ArcGIS Enterprise RSS, version 11.5 (opens in a new tab)">11.5</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-enterprise-11.4.xml" target="_blank" rel="noopener noreferrer" label="ArcGIS Enterprise RSS, version 11.4 (opens in a new tab)">11.4</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-enterprise-11.3.xml" target="_blank" rel="noopener noreferrer" label="ArcGIS Enterprise RSS, version 11.3 (opens in a new tab)">11.3</calcite-dropdown-item>
+                  </calcite-dropdown-group>
+                </calcite-dropdown>
+                <calcite-dropdown id="rss-security-critical" placement="bottom-start" overlay-positioning="fixed" max-items="6" width="m">
+                  <calcite-button
+                    slot="trigger"
+                    icon-end="chevron-down"
+                    appearance="outline-fill"
+                    kind="neutral"
+                    scale="m"
+                    label="Security and critical patches RSS feeds"
+                  >
+                    <span class="rss-button-label">
+                      <span class="rss-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                          <circle cx="6" cy="18" r="2.5" fill="currentColor"></circle>
+                          <path d="M5 10a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                          <path d="M5 4a15 15 0 0 1 15 15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+                        </svg>
+                      </span>
+                      <span>Security</span>
+                    </span>
+                  </calcite-button>
+                  <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="./rss-security-critical.xml" target="_blank" rel="noopener noreferrer" label="Security and critical patches RSS, all versions (opens in a new tab)">All versions</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-security-critical-12.1.xml" target="_blank" rel="noopener noreferrer" label="Security and critical patches RSS, version 12.1 (opens in a new tab)">12.1</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-security-critical-12.0.xml" target="_blank" rel="noopener noreferrer" label="Security and critical patches RSS, version 12.0 (opens in a new tab)">12.0</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-security-critical-11.5.xml" target="_blank" rel="noopener noreferrer" label="Security and critical patches RSS, version 11.5 (opens in a new tab)">11.5</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-security-critical-11.4.xml" target="_blank" rel="noopener noreferrer" label="Security and critical patches RSS, version 11.4 (opens in a new tab)">11.4</calcite-dropdown-item>
+                    <calcite-dropdown-item href="./rss-security-critical-11.3.xml" target="_blank" rel="noopener noreferrer" label="Security and critical patches RSS, version 11.3 (opens in a new tab)">11.3</calcite-dropdown-item>
+                  </calcite-dropdown-group>
+                </calcite-dropdown>
+              </div>
+              <calcite-button
+               id="btn-toggle-panel"
+               appearance="outline-fill"
+               kind="neutral"
+               scale="m"
+               icon-start="panel-left"
+               label="Toggle filters panel"
+             >
+              Filters
+            </calcite-button>
+            <calcite-button
+              id="btn-reset"
+              appearance="solid"
+              kind="brand"
+              scale="m"
+              icon-start="reset"
+              label="Reset all filters"
+            >
+              Reset all
+            </calcite-button>
+            <calcite-button
+              id="btn-share"
+              appearance="solid"
+              kind="brand"
+              scale="m"
+              icon-start="link"
+              label="Copy share link"
+            >
+              Share
+            </calcite-button>
+          </div>
+        </div>
+
+            <div class="table-wrap">
+              <div id="grid" aria-label="ArcGIS patches grid"></div>
+
+              <calcite-block
+                 class="help-block"
+                 heading="About & Help"
+                 description="Data source + FAQ"
+                 collapsible
+                  icon-start="information"
+               >
+                 <div class="help-block-body">
+                  <div>
+                    <div class="about-h">Why This Exists</div>
+                    <div class="about-b">
+                      I wanted a faster way to find the right ArcGIS patch and jump to the official Esri page.
+                      This tool keeps it simple: a searchable patch list with a few practical filters.
+                      Use the official patch page for full details and downloads.
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="about-h">How To Use</div>
+                    <ul class="about-list">
+                      <li>Search by name, version, QFE, or filename.</li>
+                      <li>Filter by product, platform, file type, criticality, and date.</li>
+                      <li>Use the Patch page link to open the official Esri entry (when you have connectivity).</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="about-h">Official Esri Website</div>
+                    <div class="about-b url-full">
+                      <calcite-link href="https://support.esri.com/" target="_blank" rel="noopener noreferrer">https://support.esri.com/</calcite-link>
+                    </div>
+                  </div>
+
+                    <div>
+                      <div class="about-h">Data Workflow</div>
+                      <ul class="about-list">
+                        <li>A GitHub Action downloads the upstream <span class="mono">patches.json</span> every 3 hours (the same dataset used by Esri patch notification tools).</li>
+                        <li>This page loads <span class="mono">./patches.json</span> and renders it in a fast, easy-to-search grid.</li>
+                        <li>The action also writes <span class="mono">patches.meta.json</span> so the UI can display the last refresh time.</li>
+                        <li>The published RSS files are <span class="mono">./rss.xml</span> (all patches), <span class="mono">./rss-enterprise.xml</span> (ArcGIS Enterprise server-side components), and <span class="mono">./rss-security-critical.xml</span> (security + critical patches).</li>
+                      </ul>
+                    </div>
+
+                  <div id="feed-links">
+                    <div class="about-h">RSS Feeds</div>
+                    <div class="about-b rss-copy">
+                      Subscribe to the general patch feed, the ArcGIS Enterprise server-side components feed, or the security + critical feed.
+                      Use the RSS dropdowns to choose all versions, 12.1, 12.0, 11.5, 11.4, or 11.3.
+                    </div>
+                    <ul class="about-list rss-list">
+                      <li>
+                        <calcite-link href="./rss.xml">All patches RSS</calcite-link>
+                      </li>
+                      <li>
+                        <calcite-link href="./rss-enterprise.xml">ArcGIS Enterprise RSS</calcite-link>
+                      </li>
+                      <li>
+                        <calcite-link href="./rss-security-critical.xml">Security + critical RSS</calcite-link>
+                      </li>
+                    </ul>
+                  </div>
+
+                   <div>
+                     <div class="about-h">FAQ</div>
+                    <ol class="about-list">
+                      <li><strong>Where does the data come from?</strong> The upstream <span class="mono">patches.json</span> dataset published by Esri.</li>
+                      <li><strong>Does this replace Esri Support?</strong> No. Use the Patch page link for the official entry.</li>
+                      <li><strong>How do I find the right patch?</strong> Filter by product + version, then check the official patch page for prerequisites and applicability.</li>
+                    </ol>
+                  </div>
+
+                  <div>
+                    <div class="about-h">Feedback</div>
+                    <div class="dim">Please open an issue in the repository.</div>
+                    <div class="url-full" style="margin-top: 6px">
+                      <calcite-link href="https://github.com/ceddc/simple-patch-finder" target="_blank" rel="noopener noreferrer">
+                        <span class="gh-link">
+                          <span class="gh-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+                              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+                            </svg>
+                          </span>
+                          ceddc/simple-patch-finder
+                        </span>
+                      </calcite-link>
+                    </div>
+                  </div>
+                </div>
+              </calcite-block>
+            </div>
+          </calcite-panel>
+
+      <calcite-dialog slot="dialogs" id="dlg" heading="Patch" width-scale="m" placement="center" modal>
+        <calcite-button
+          id="btn-dlg-share"
+          slot="header-actions-end"
+          appearance="solid"
+          kind="brand"
+          scale="s"
+          icon-start="link"
+          label="Copy patch permalink"
+        >
+          Permalink
+        </calcite-button>
+        <div id="dlg-body"></div>
+      </calcite-dialog>
+
+
+    </calcite-shell>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

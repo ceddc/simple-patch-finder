@@ -1,0 +1,8 @@
+# Internal planning notes belong in the private repo
+PLAN.md
+plans/
+.tmp/
+__pycache__/
+AGENTS.md
+output/
+.playwright-cli/

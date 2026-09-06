@@ -1,0 +1,442 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--calcite-color-background);
+  overflow: hidden;
+}
+
+calcite-shell.shell {
+  height: 100vh;
+}
+
+/* Left rail sizing (Calcite Shell Panel style var). */
+calcite-shell-panel#panel-start {
+  --calcite-shell-panel-width: 360px;
+}
+
+@media (max-width: 900px) {
+  calcite-shell-panel#panel-start {
+    --calcite-shell-panel-width: min(92vw, 360px);
+  }
+}
+
+/* Keep the left rail compact: fixed header, scrollable filters. */
+#left-panel {
+  --calcite-panel-space: 8px;
+  --calcite-panel-header-content-space: 12px;
+}
+
+.left-panel-body {
+  display: grid;
+  gap: 4px;
+}
+
+
+.panel-header-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.filters-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
+}
+
+.results-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+}
+
+.results-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+}
+
+.results-feed-links {
+  display: inline-flex;
+  flex-shrink: 0;
+  max-width: 100%;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.results-feed-links calcite-dropdown {
+  flex: 0 0 auto;
+}
+
+.results-feed-label {
+  font-size: 12px;
+  color: var(--calcite-color-text-2);
+}
+
+.rss-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.rss-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  color: #f8991d;
+  flex: 0 0 auto;
+}
+
+.rss-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.results-mobile-brand {
+  display: none;
+  align-items: center;
+}
+
+.brand-logo--mobile {
+  width: 24px;
+  height: 24px;
+}
+
+#btn-toggle-panel {
+  display: none;
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--calcite-font-size-sm, 12px);
+  color: var(--calcite-color-text-2);
+  line-height: 1.2;
+  white-space: nowrap;
+  min-height: 40px;
+}
+
+@media (max-width: 640px) {
+  .results-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 6px;
+    min-height: 0;
+  }
+
+  .results-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    min-height: 0;
+  }
+
+  .hint {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  #btn-toggle-panel {
+    display: inline-flex;
+  }
+
+  .results-mobile-brand {
+    display: inline-flex;
+  }
+}
+
+.table-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  height: 100%;
+}
+
+#grid {
+  flex: 1;
+  min-height: 0;
+}
+
+/* About/help block body should scroll, not the page. */
+.help-block-body {
+  max-height: 240px;
+  overflow: auto;
+  padding: 10px;
+  display: grid;
+  gap: 12px;
+}
+
+/* Tabulator: make it feel like Calcite surfaces/tokens. */
+.tabulator {
+  font-family: var(--calcite-font-family, system-ui);
+  background: var(--calcite-color-foreground-1);
+  border: 1px solid var(--calcite-color-border-1);
+  border-radius: var(--calcite-border-radius, 4px);
+  box-shadow: none;
+}
+
+.tabulator .tabulator-header {
+  background: var(--calcite-color-foreground-2);
+  border-bottom: 1px solid var(--calcite-color-border-1);
+  color: var(--calcite-color-text-1);
+}
+
+.tabulator .tabulator-header .tabulator-col {
+  background: transparent;
+  border-right: 1px solid var(--calcite-color-border-1);
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  padding: 10px 10px;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+  font-size: 14px;
+  font-weight: var(--calcite-font-weight-medium, 500);
+  line-height: 1.1;
+}
+
+.tabulator .tabulator-row {
+  background: transparent;
+  color: var(--calcite-color-text-1);
+  border-bottom: 1px solid var(--calcite-color-border-1);
+}
+
+.tabulator .tabulator-row:hover {
+  background: var(--calcite-color-foreground-2);
+}
+
+.tabulator .tabulator-cell {
+  border-right: 1px solid var(--calcite-color-border-1);
+}
+
+
+/* Row actions in table use Calcite icon-only actions. */
+.row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.tabulator .tabulator-footer {
+  background: var(--calcite-color-foreground-2);
+  border-top: 1px solid var(--calcite-color-border-1);
+  color: var(--calcite-color-text-2);
+}
+
+/* Tabulator pagination buttons: Calcite-like tokens (no heavy styling). */
+.tabulator .tabulator-footer .tabulator-page {
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--calcite-color-border-1);
+  border-radius: var(--calcite-border-radius, 4px);
+  background: var(--calcite-color-foreground-1);
+  color: var(--calcite-color-text-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tabulator .tabulator-footer .tabulator-page:hover {
+  background: var(--calcite-color-foreground-2);
+  color: var(--calcite-color-text-1);
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+  background: var(--calcite-color-foreground-2);
+  border-color: var(--calcite-color-brand);
+  color: var(--calcite-color-brand);
+  font-weight: var(--calcite-font-weight-medium, 600);
+}
+
+.tabulator .tabulator-footer .tabulator-page:focus-visible {
+  outline: 2px solid var(--calcite-color-brand);
+  outline-offset: 2px;
+}
+
+/* Lightweight critical badges used inside the grid. */
+.crit-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: var(--calcite-font-weight-medium, 500);
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--calcite-color-border-1);
+  background: var(--calcite-color-foreground-1);
+}
+
+.crit-badge--security {
+  border-color: var(--calcite-color-status-warning);
+  color: var(--calcite-color-status-warning);
+}
+
+.crit-badge--critical {
+  border-color: var(--calcite-color-status-danger);
+  color: var(--calcite-color-status-danger);
+}
+
+.crit-badge--standard {
+  border-color: var(--calcite-color-status-info);
+  color: var(--calcite-color-status-info);
+}
+
+/* Patch dialog formatting (keep neutral, token-based). */
+.dlg-wrap {
+  display: grid;
+  gap: 10px;
+}
+
+.dlg-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+@media (max-width: 650px) {
+  .dlg-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dlg-fact {
+  padding: 8px;
+  border-radius: var(--calcite-border-radius, 4px);
+  background: var(--calcite-color-foreground-2);
+  border: 1px solid var(--calcite-color-border-1);
+}
+
+.dlg-fact .k {
+  font-size: 12px;
+  color: var(--calcite-color-text-3);
+  margin-bottom: 2px;
+}
+
+.dlg-fact .v {
+  font-weight: var(--calcite-font-weight-medium, 600);
+}
+
+.about-h {
+  font-size: var(--calcite-font-size-sm, 12px);
+  color: var(--calcite-color-text-3);
+  font-weight: var(--calcite-font-weight-medium, 500);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.about-b {
+  color: var(--calcite-color-text-1);
+  line-height: var(--calcite-font-line-height-relative-snug, 1.375);
+}
+
+.about-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--calcite-color-text-2);
+}
+
+.about-list li {
+  margin: 4px 0;
+}
+
+.rss-copy {
+  margin-bottom: 8px;
+}
+
+.rss-list {
+  display: grid;
+  gap: 8px;
+}
+
+.mono {
+  font-family: var(
+    --calcite-font-family-code,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  );
+}
+
+.dim {
+  color: var(--calcite-color-text-2);
+}
+
+.url-full {
+  overflow-wrap: anywhere;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.patch-name {
+  display: grid;
+  gap: 2px;
+}
+
+.patch-name > div:first-child {
+  font-weight: 600;
+}
+
+.patch-meta {
+  font-size: 12px;
+  color: var(--calcite-color-text-2);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.patch-link { color: inherit; text-decoration: none; }
+.patch-link:hover { text-decoration: underline; }
+.patch-link:focus-visible {
+  outline: 2px solid var(--calcite-color-brand);
+  outline-offset: 2px;
+}

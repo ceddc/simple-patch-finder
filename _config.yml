@@ -1,0 +1,11 @@
+title: Simple Patch Finder
+description: Unofficial ArcGIS Patch Download Search
+url: "https://simplepatchfinder.ceddc.dev"
+exclude:
+  - AGENTS.md
+  - README.md
+  - RELEASE_PLAN.md
+  - LICENSE
+  - scripts
+  - tests
+  - output

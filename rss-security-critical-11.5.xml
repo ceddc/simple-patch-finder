@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simple Patch Finder - Security and Critical RSS - 11.5</title>
+    <description>Latest security and critical patches for version 11.5 from Simple Patch Finder.</description>
+    <link>https://simplepatchfinder.ceddc.dev/?v=11.5</link>
+    <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical-11.5.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
+    <lastBuildDate>Mon, 31 Aug 2026 21:20:15 +0000</lastBuildDate>
+    <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-115-P-1496)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1496&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:110ddf524555341873dc6e7af9eb6dfbd66ffba3dd7663d172e1cfa2c27af73f</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 08/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-3-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 2 Patch (PFA-115-P-1488)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1488&amp;pn=portal-for-arcgis-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:b42074470782e833241aac624ee1e8e7bdb35ad1f604e3202e2dffaf40528476</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 06/23/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 1 Patch (PFA-115-P-1416D)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1416D&amp;pn=portal-for-arcgis-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:2de2f45d04d7dab3dcaa41f353c539275dc780f672416b842339ccef851a432b</guid>
+      <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 06/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 2 Patch (S-115-P-1455)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1455&amp;pn=arcgis-server-security-2026-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:dfe5f0d6212cbc0051c83721453bdf53c1056a6b550e6261a03dcc3e685bf063</guid>
+      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 05/27/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-2-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 1 Patch (S-115-P-1421)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1421&amp;pn=arcgis-server-security-2026-update-1-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:a9ab04cfac518970d6e4dca83b6ef9376d2d51a2b1b098486bc5a218a0c8c141</guid>
+      <pubDate>Mon, 04 May 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 05/04/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-1-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Security 2025 Update 2 Patch (S-115-P-1360)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1360&amp;pn=arcgis-server-security-2025-update-2-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:bb0b3480d687750966e44bb754dd1dd5aca8cc075dc4aea6bf6fe9e60fb9f68e</guid>
+      <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 12/09/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-security-2025-update-2-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Server Feature Services Security Patch (S-115-P-1330)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1330&amp;pn=arcgis-server-feature-services-security-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:f9c8f4ce8fa76be8439e07d6a70889bf004536f0e296bc803b0e9606a88321a2</guid>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 10/07/2025 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/arcgis-server-feature-services-security-patch</description>
+    </item>
+  </channel>
+</rss>

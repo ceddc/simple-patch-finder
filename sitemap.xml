@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-08-31T21:20:15Z</lastmod>
+    <lastmod>2026-09-14T21:19:30Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -138,6 +138,9 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=workflow-manager</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1529&amp;pn=arcgis-server-12-1-custom-data-feeds-patch</loc>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411D&amp;pn=arcgis-server-data-management-2026-update-1-patch</loc>
@@ -285,8 +288,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1405&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1404&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
   </url>
 </urlset>

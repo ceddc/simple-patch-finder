@@ -6,8 +6,15 @@
     <link>https://simplepatchfinder.ceddc.dev/?v=11.3</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise-11.3.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 21 Sep 2026 21:21:23 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 21:21:52 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-113-P-1542)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1542&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:9515da3a04c075af2e9f8e518e8e1c00835fb20f252461c3a2e118151ccb623e</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Data Management 2026 Update 1 Patch (S-113-P-1411D)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411D&amp;pn=arcgis-server-data-management-2026-update-1-patch</link>

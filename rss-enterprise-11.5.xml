@@ -6,8 +6,15 @@
     <link>https://simplepatchfinder.ceddc.dev/?v=11.5</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise-11.5.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 31 Aug 2026 21:20:15 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 21:21:52 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-115-P-1541)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1541&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:7e068335f7dc638abc0119e2fb203edd6e6a16298b9cae1f773d608f51fe2090</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server 11.5 ArcGIS Pipeline Referencing/ArcGIS Roads and Highways Patch 4 (S-115-P-1519)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1519&amp;pn=arcgis-server-11-5-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</link>

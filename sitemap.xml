@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-09-21T21:21:23Z</lastmod>
+    <lastmod>2026-09-24T21:21:52Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -140,6 +140,24 @@
     <loc>https://simplepatchfinder.ceddc.dev/?p=workflow-manager</loc>
   </url>
   <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1539&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1540&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1541&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1542&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1543&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=ESDK-121-P-1528&amp;pn=arcgis-enterprise-sdk-12-1-custom-data-feeds-patch</loc>
+  </url>
+  <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1411D&amp;pn=arcgis-server-data-management-2026-update-1-patch</loc>
   </url>
   <url>
@@ -270,23 +288,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1419&amp;pn=arcgis-server-security-2026-update-1-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1418&amp;pn=arcgis-server-security-2026-update-1-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1351&amp;pn=arcgis-server-11-1-branch-versioning-sap-hana-general-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1425&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1424&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1423&amp;pn=arcgis-server-reconcile-and-post-consistency-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1406&amp;pn=portal-for-arcgis-web-app-embedded-element-patch</loc>
   </url>
 </urlset>

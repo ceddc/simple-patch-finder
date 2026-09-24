@@ -6,8 +6,43 @@
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 31 Aug 2026 21:20:15 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 21:21:52 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-111-P-1543)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1543&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:3ffeeed682e34e67b0aee474ef3abac53657468d85f4da60946e9d06056d124c</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.1 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-113-P-1542)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1542&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:9515da3a04c075af2e9f8e518e8e1c00835fb20f252461c3a2e118151ccb623e</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-115-P-1541)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1541&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:7e068335f7dc638abc0119e2fb203edd6e6a16298b9cae1f773d608f51fe2090</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-120-P-1540)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1540&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:5e0f16e2b75ed345c0d5c20d4c4a55bf258b983a4b6a37061b63dd8c5cfbd8bd</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.0 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
+    <item>
+      <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-121-P-1539)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1539&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:cab1d89de559316026747657131a2e0d2d78aa5aa7327d62605ca77061a8d956</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Criticality: Security | Release date: 09/24/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-4-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 3 Patch (PFA-111-P-1494)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1494&amp;pn=portal-for-arcgis-security-2026-update-3-patch</link>
@@ -322,41 +357,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:51eaa22907ff86f77046a30ed3e4c3c6ab0f2efca6c67034632750dbd451869a</guid>
       <pubDate>Tue, 14 Jan 2025 00:00:00 +0000</pubDate>
       <description>Version: 10.8.1 | Criticality: Security | Release date: 01/14/2025 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2024/portal-for-arcgis-security-2024-update-2-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security Patch (PFA-1081-P-930B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1081-P-930B&amp;pn=portal-for-arcgis-enterprise-sites-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:02342b5e9952635b686549e7a8fb9023b5b080a69b50fba0008a1d4881d31bfc</guid>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <description>Version: 10.8.1 | Criticality: Security | Release date: 03/21/2024 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2023/portal-for-arcgis-enterprise-sites-security-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security Patch (PFA-1091-P-931B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-1091-P-931B&amp;pn=portal-for-arcgis-enterprise-sites-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:1f6a1b51113b1a18a4992ea684fd5367068d4979f7ba92c14db40936255f3e2b</guid>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Criticality: Security | Release date: 03/21/2024 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2023/portal-for-arcgis-enterprise-sites-security-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security Patch (PFA-111-P-932C)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-932C&amp;pn=portal-for-arcgis-enterprise-sites-security-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:6206e8a5ab101f1a5a250974bb6649b0a04f9c6941efe13eaea1cae5ed22c08d</guid>
-      <pubDate>Thu, 21 Mar 2024 00:00:00 +0000</pubDate>
-      <description>Version: 11.1 | Criticality: Security | Release date: 03/21/2024 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2023/portal-for-arcgis-enterprise-sites-security-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Map and Feature Service Security 2023 Update 1 Patch (S-1081-P-945B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-1081-P-945B&amp;pn=arcgis-server-map-and-feature-service-security-2023-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:26b5a508a1b6cd22d5a60671ede2b291ca0c91961ed151d73e8bdf8286d55da7</guid>
-      <pubDate>Mon, 20 Nov 2023 00:00:00 +0000</pubDate>
-      <description>Version: 10.8.1 | Criticality: Security | Release date: 11/20/2023 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2023/arcgis-server-map-and-feature-service-security-2023-update-1-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Map and Feature Service Security 2023 Update 1 Patch (S-1091-P-944B)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-1091-P-944B&amp;pn=arcgis-server-map-and-feature-service-security-2023-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:5cae66d1f2d83498453ce1e8a7b1776194a93f40fd8f2d121397f5050ca2d1da</guid>
-      <pubDate>Mon, 20 Nov 2023 00:00:00 +0000</pubDate>
-      <description>Version: 10.9.1 | Criticality: Security | Release date: 11/20/2023 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2023/arcgis-server-map-and-feature-service-security-2023-update-1-patch</description>
     </item>
   </channel>
 </rss>

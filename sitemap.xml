@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-10-03T09:24:26Z</lastmod>
+    <lastmod>2026-10-12T21:22:00Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -140,6 +140,21 @@
     <loc>https://simplepatchfinder.ceddc.dev/?p=workflow-manager</loc>
   </url>
   <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1553&amp;pn=arcgis-server-security-2026-update-3-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-120-P-1552&amp;pn=arcgis-server-security-2026-update-3-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1551&amp;pn=arcgis-server-security-2026-update-3-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1550&amp;pn=arcgis-server-security-2026-update-3-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1549&amp;pn=arcgis-server-security-2026-update-3-patch</loc>
+  </url>
+  <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1539&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
   </url>
   <url>
@@ -273,20 +288,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1396&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=QFE-GeoEvent-11.5.56810&amp;pn=arcgis-geoevent-server-11-5-patch-1-windows-linux</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-120-P-1422&amp;pn=arcgis-server-security-2026-update-1-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1421&amp;pn=arcgis-server-security-2026-update-1-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1420B&amp;pn=arcgis-server-security-2026-update-1-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1419&amp;pn=arcgis-server-security-2026-update-1-patch</loc>
   </url>
 </urlset>

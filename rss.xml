@@ -6,8 +6,15 @@
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Mon, 12 Oct 2026 21:22:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 21:19:50 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 11.3 Branch Versioning SAP HANA General Patch (S-113-P-1352)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1352&amp;pn=arcgis-server-11-3-branch-versioning-sap-hana-general-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:b37e87378e8ca442a33baf2d5dbe0d2af2f01a0a7d56363d4cc7ec05430f35a9</guid>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.3 | Release date: 10/13/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-branch-versioning-sap-hana-general-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 3 Patch (S-111-P-1549)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1549&amp;pn=arcgis-server-security-2026-update-3-patch</link>
@@ -350,13 +357,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:be555f66e6276787ae435cb95a97dc25bc1f8b319eaf2202133eb935076f065e</guid>
       <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.1 | Release date: 05/07/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-parcel-fabric-build-extent-patch-2</description>
-    </item>
-    <item>
-      <title>ArcGIS Server Parcel Fabric Build Extent Patch 2 (S-113-P-1397)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1397&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:670bfe1f9d09a9a9258c5a9e75f1bb73d428088341880dc94c969a40538f0d09</guid>
-      <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 05/07/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-parcel-fabric-build-extent-patch-2</description>
     </item>
   </channel>
 </rss>

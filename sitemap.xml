@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-10-22T18:27:37Z</lastmod>
+    <lastmod>2026-10-27T15:26:54Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -138,6 +138,9 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=workflow-manager</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1558&amp;pn=arcgis-server-11-5-geocoding-capability-patch</loc>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=VS-121-P-1520&amp;pn=arcgis-video-server-12-1-quality-and-upgrade-patch</loc>
@@ -285,8 +288,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1353&amp;pn=arcgis-server-11-5-branch-versioning-sap-hana-general-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1398B&amp;pn=arcgis-server-parcel-fabric-build-extent-patch-2</loc>
   </url>
 </urlset>

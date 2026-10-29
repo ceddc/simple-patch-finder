@@ -1,7 +1,7 @@
 {
-  "bytes": 811731,
-  "checked_at_utc": "2026-10-28T21:16:17Z",
-  "patches_sha256": "236b12a10ad1695ce00f30a94d3aabdc3c7f743e4f6991413ea29a9a3d54ae90",
+  "bytes": 812511,
+  "checked_at_utc": "2026-10-29T00:42:11Z",
+  "patches_sha256": "0bbc0bcb289b67edcae78ca736572226003a986252ccd46fe9fdb934a502a45f",
   "source_url": "https://downloads.esri.com/patch_notification/patches.json",
-  "updated_at_utc": "2026-10-27T15:26:54Z"
+  "updated_at_utc": "2026-10-29T00:42:11Z"
 }

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-10-27T15:26:54Z</lastmod>
+    <lastmod>2026-10-29T00:42:11Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -101,6 +101,9 @@
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-server</loc>
   </url>
   <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-velocity</loc>
+  </url>
+  <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-video-server</loc>
   </url>
   <url>
@@ -144,6 +147,9 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=VS-121-P-1520&amp;pn=arcgis-video-server-12-1-quality-and-upgrade-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=QFE_VelocityEnterprise-12.1.810&amp;pn=arcgis-velocity-for-arcgis-enterprise-12-1-patch-1-windows-linux</loc>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1352&amp;pn=arcgis-server-11-3-branch-versioning-sap-hana-general-patch</loc>
@@ -285,8 +291,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1381&amp;pn=arcgis-server-11-5-utility-network-patch-2</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1353&amp;pn=arcgis-server-11-5-branch-versioning-sap-hana-general-patch</loc>
   </url>
 </urlset>

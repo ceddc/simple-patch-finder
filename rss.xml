@@ -6,7 +6,7 @@
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 27 Oct 2026 15:26:54 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2026 00:42:11 +0000</lastBuildDate>
     <language>en-us</language>
     <item>
       <title>ArcGIS Server 11.5 Geocoding Capability Patch (S-115-P-1558)</title>
@@ -21,6 +21,13 @@
       <guid isPermaLink="false">urn:simple-patch-finder:936ba354a294f77005f2135f119e075f32f169b1789110cc519bb233e598ac1b</guid>
       <pubDate>Tue, 20 Oct 2026 00:00:00 +0000</pubDate>
       <description>Version: 12.1 | Release date: 10/20/2026 | Products: ArcGIS Enterprise, ArcGIS Video Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-video-server-12-1-quality-and-upgrade-patch</description>
+    </item>
+    <item>
+      <title>ArcGIS Velocity for ArcGIS Enterprise 12.1 Patch 1 (Windows | Linux) (QFE_VelocityEnterprise-12.1.810)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=QFE_VelocityEnterprise-12.1.810&amp;pn=arcgis-velocity-for-arcgis-enterprise-12-1-patch-1-windows-linux</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:ad69145b9330ae5f85c3a0fbe1e553a6e22c01c375317eab761c825eb58ab237</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Release date: 10/16/2026 | Products: ArcGIS Enterprise, ArcGIS Velocity | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-velocity-for-arcgis-enterprise-12-1-patch-1</description>
     </item>
     <item>
       <title>ArcGIS Server 11.3 Branch Versioning SAP HANA General Patch (S-113-P-1352)</title>
@@ -350,13 +357,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:3d1ee83cec2fb80b9bc9ba6e5bc1ad1eb5ec2022d39b2ea0b694fb9f6eca303b</guid>
       <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.5 | Release date: 05/21/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-5-utility-network-patch-2</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.5 Branch Versioning SAP HANA General Patch (S-115-P-1353)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1353&amp;pn=arcgis-server-11-5-branch-versioning-sap-hana-general-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:6c2cadff097a960ad74cfd362713656f4d92372499a1e7ce6f9d6781ed85c8b4</guid>
-      <pubDate>Mon, 11 May 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.5 | Release date: 05/11/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-5-branch-versioning-sap-hana-general-patch</description>
     </item>
   </channel>
 </rss>

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-10-29T00:42:11Z</lastmod>
+    <lastmod>2026-10-29T21:16:43Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -143,6 +143,21 @@
     <loc>https://simplepatchfinder.ceddc.dev/?p=workflow-manager</loc>
   </url>
   <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1539B&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1540B&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1541B&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1542B&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1543B&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
+  </url>
+  <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1558&amp;pn=arcgis-server-11-5-geocoding-capability-patch</loc>
   </url>
   <url>
@@ -168,21 +183,6 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1549&amp;pn=arcgis-server-security-2026-update-3-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-121-P-1539&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1540&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-115-P-1541&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-113-P-1542&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1543&amp;pn=portal-for-arcgis-security-2026-update-4-patch</loc>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=ESDK-121-P-1528&amp;pn=arcgis-enterprise-sdk-12-1-custom-data-feeds-patch</loc>

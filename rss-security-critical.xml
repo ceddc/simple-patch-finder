@@ -6,8 +6,15 @@
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-security-critical.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Thu, 29 Oct 2026 21:16:43 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 01:18:43 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 4 Patch (S-121-P-1562)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1562&amp;pn=arcgis-server-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:e409148e9030e1962356a971a9a6536073cfd1005cbfa8cccfd84d25ebdd90a6</guid>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Criticality: Security | Release date: 11/03/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-4-patch</description>
+    </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-111-P-1543B)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-111-P-1543B&amp;pn=portal-for-arcgis-security-2026-update-4-patch</link>
@@ -350,13 +357,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:482bf8b522c259f8f159abb1db1a7902d6124277f315937e4c50548f9ab3c1d6</guid>
       <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
       <description>Version: 11.3 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS Enterprise Sites Security 2025 Update 1 Patch (PFA-114-P-1266)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-114-P-1266&amp;pn=portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:0f1c89cbd0119ff469575b894370b6a44930d3d63aa8cf5af8a2e9ff15818a4f</guid>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <description>Version: 11.4 | Criticality: Security | Release date: 08/07/2025 | Products: Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2025/portal-for-arcgis-enterprise-sites-security-2025-update-1-patch</description>
     </item>
   </channel>
 </rss>

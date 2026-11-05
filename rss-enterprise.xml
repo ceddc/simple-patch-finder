@@ -6,14 +6,21 @@
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss-enterprise.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Wed, 04 Nov 2026 01:18:43 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 19:54:40 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server Security 2026 Update 4 Patch (S-115-P-1564)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1564&amp;pn=arcgis-server-security-2026-update-4-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:eb0d2e584b345ef30bf99cbd3bf69612f71a73a09e50f09851c9fece95e28159</guid>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate>
+      <description>Version: 11.5 | Criticality: Security | Release date: 11/05/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-4-patch</description>
+    </item>
     <item>
       <title>ArcGIS Server Security 2026 Update 4 Patch (S-121-P-1562)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1562&amp;pn=arcgis-server-security-2026-update-4-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:e409148e9030e1962356a971a9a6536073cfd1005cbfa8cccfd84d25ebdd90a6</guid>
-      <pubDate>Tue, 03 Nov 2026 00:00:00 +0000</pubDate>
-      <description>Version: 12.1 | Criticality: Security | Release date: 11/03/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-4-patch</description>
+      <guid isPermaLink="false">urn:simple-patch-finder:773d073b195cd147050478135bce730d723e282930bc553efcdd878af6eecd14</guid>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Criticality: Security | Release date: 11/05/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-security-2026-update-4-patch</description>
     </item>
     <item>
       <title>Portal for ArcGIS Security 2026 Update 4 Patch (PFA-111-P-1543B)</title>
@@ -350,13 +357,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:da85557fe9ed6c195492285923907df8604a3d4106a73a29348a8710a54bf96a</guid>
       <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
       <description>Version: 11.3 | Release date: 05/26/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</description>
-    </item>
-    <item>
-      <title>Portal for ArcGIS 12.0 Mission Manager Presence and Template Patch (PFA-120-P-1407)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=PFA-120-P-1407&amp;pn=portal-for-arcgis-12-0-mission-manager-presence-and-template-patch</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:b2715996e154593be6e1fbfa5aa846a82787c76b24e9c5aa4335d42725f93119</guid>
-      <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
-      <description>Version: 12.0 | Release date: 05/26/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-12-0-mission-manager-presence-and-template-patch</description>
     </item>
   </channel>
 </rss>

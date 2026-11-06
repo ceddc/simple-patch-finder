@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-11-05T19:54:40Z</lastmod>
+    <lastmod>2026-11-06T01:30:41Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -144,6 +144,9 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1562&amp;pn=arcgis-server-security-2026-update-4-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-120-P-1563&amp;pn=arcgis-server-security-2026-update-4-patch</loc>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1564&amp;pn=arcgis-server-security-2026-update-4-patch</loc>
@@ -288,8 +291,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1458&amp;pn=arcgis-server-security-2026-update-2-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1439&amp;pn=arcgis-server-11-3-arcgis-pipeline-referencing-arcgis-roads-and-highways-patch-4</loc>
   </url>
 </urlset>

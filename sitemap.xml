@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/</loc>
-    <lastmod>2026-11-06T01:30:41Z</lastmod>
+    <lastmod>2026-11-09T22:17:54Z</lastmod>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=arcgis-aviation-airports</loc>
@@ -141,6 +141,15 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?p=workflow-manager</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=MS-121-P-1575&amp;pn=arcgis-mission-server-security-2026-update-1-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=MS-120-P-1574&amp;pn=arcgis-mission-server-security-2026-update-1-patch</loc>
+  </url>
+  <url>
+    <loc>https://simplepatchfinder.ceddc.dev/?pid=MS-115-P-1573&amp;pn=arcgis-mission-server-security-2026-update-1-patch</loc>
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1562&amp;pn=arcgis-server-security-2026-update-4-patch</loc>
@@ -282,14 +291,5 @@
   </url>
   <url>
     <loc>https://simplepatchfinder.ceddc.dev/?pid=S-115-P-1455&amp;pn=arcgis-server-security-2026-update-2-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-114-P-1456&amp;pn=arcgis-server-security-2026-update-2-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1457&amp;pn=arcgis-server-security-2026-update-2-patch</loc>
-  </url>
-  <url>
-    <loc>https://simplepatchfinder.ceddc.dev/?pid=S-111-P-1458&amp;pn=arcgis-server-security-2026-update-2-patch</loc>
   </url>
 </urlset>

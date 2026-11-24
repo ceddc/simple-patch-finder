@@ -6,8 +6,15 @@
     <link>https://simplepatchfinder.ceddc.dev/</link>
     <atom:link href="https://simplepatchfinder.ceddc.dev/rss.xml" rel="self" type="application/rss+xml" />
     <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
-    <lastBuildDate>Tue, 24 Nov 2026 02:10:28 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 23:52:27 +0000</lastBuildDate>
     <language>en-us</language>
+    <item>
+      <title>ArcGIS Server 12.1 Map, Feature and Print Service Patch (S-121-P-1566)</title>
+      <link>https://simplepatchfinder.ceddc.dev/?pid=S-121-P-1566&amp;pn=arcgis-server-12-1-map-feature-and-print-service-patch</link>
+      <guid isPermaLink="false">urn:simple-patch-finder:837721eca5937e6970cde0acd11c3919becfe36c3586e2e3d5b52c1d56addf5d</guid>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
+      <description>Version: 12.1 | Release date: 11/24/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-12-1-map-feature-and-print-service-patch</description>
+    </item>
     <item>
       <title>ArcGIS Mission Server Security 2026 Update 1 Patch (MS-113-P-1582)</title>
       <link>https://simplepatchfinder.ceddc.dev/?pid=MS-113-P-1582&amp;pn=arcgis-mission-server-security-2026-update-1-patch</link>
@@ -350,13 +357,6 @@
       <guid isPermaLink="false">urn:simple-patch-finder:e882999060420e221734f9370abdd3a80670a2ac0ebf411c35d1da2d8c7bd571</guid>
       <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
       <description>Version: 12.0 | Criticality: Security | Release date: 06/04/2026 | Products: ArcGIS Enterprise, Portal for ArcGIS | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/portal-for-arcgis-security-2026-update-1-patch</description>
-    </item>
-    <item>
-      <title>ArcGIS Server 11.3 Utility Network Patch 3 (S-113-P-1473)</title>
-      <link>https://simplepatchfinder.ceddc.dev/?pid=S-113-P-1473&amp;pn=arcgis-server-11-3-utility-network-patch-3</link>
-      <guid isPermaLink="false">urn:simple-patch-finder:6003d015ccdd21fe7ef56bdd806d2e012a3c6b8a2dcf186880facce0a8df13ec</guid>
-      <pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate>
-      <description>Version: 11.3 | Release date: 06/01/2026 | Products: ArcGIS Enterprise, ArcGIS Server | Esri patch page: https://support.esri.com/en-us/patches-updates/2026/arcgis-server-11-3-utility-network-patch-3</description>
     </item>
   </channel>
 </rss>
